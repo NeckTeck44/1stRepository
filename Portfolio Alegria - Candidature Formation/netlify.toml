@@ -1,0 +1,13 @@
+[build]
+  base = "client"
+  command = "npm ci && npm run build"
+  publish = "dist/public"
+
+[build.environment]
+  NODE_VERSION = "22.19.0"
+  NPM_FLAGS = "--no-audit --no-fund"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
