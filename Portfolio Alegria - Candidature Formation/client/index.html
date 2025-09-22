@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio Alegria - Version statique</title>
+  <meta name="description" content="Portfolio professionnel - Candidature Formation Alegria" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./static-styles.css?v=7" />
+</head>
+<body>
+  <!-- En-tête -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">Portfolio</div>
+      <nav class="nav">
+        <a href="#hero" class="active">Accueil</a>
+        <a href="#about">À Propos</a>
+        <a href="#projects">Projets</a>
+        <a href="#skills">Compétences</a>
+        <a href="#contact">Contact</a>
+        <span class="theme-dot" id="themeToggle" title="Thème">☼</span>
+      </nav>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <!-- Section Hero -->
+  <section id="hero" class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Bonjour, je suis<br />
+          <span class="title-accent serif">Candidat Alegria</span>
+        </h1>
+        <p class="hero-subtitle">
+          Développeur passionné par la création d'expériences numériques innovantes, candidat motivé pour rejoindre la formation Alegria et développer mes compétences en développement moderne.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary btn-caret">Découvrir mon parcours</a>
+          <a href="#contact" class="btn btn-outline">Me contacter</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="card">
+          <div class="card-badge">Disponible</div>
+          <div class="avatar-wrap">
+            <img class="avatar" src="./attached_assets/Avatar_NeckTeck.jpg" alt="Portrait du candidat" />
+          </div>
+          <div class="profile-name">Candidat Formation</div>
+          <div class="profile-meta">Alegria - Promotion 2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">À propos</h2>
+      <p class="muted">
+        Passionné par le web, j'aime créer des interfaces utiles et raffinées. Mon objectif: transformer des idées en produits conviviaux, accessibles et durables. J'apprends vite et j'apprécie le travail collaboratif.
+      </p>
+      <ul class="tags">
+        <li>HTML/CSS</li>
+        <li>JavaScript/TypeScript</li>
+        <li>React (bases)</li>
+        <li>Accessibilité</li>
+        <li>Design system</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projets -->
+  <section id="projects" class="section alt">
+    <div class="container">
+      <h2 class="section-title">Projets</h2>
+      <div class="grid">
+        <article class="project">
+          <div class="project-thumb"></div>
+          <div class="project-body">
+            <h3 class="project-title">Tableau de bord Analytics</h3>
+            <p class="project-desc">Dashboard responsive avec graphiques, filtres et thèmes clair/sombre.</p>
+            <div class="project-meta">
+              <span>TypeScript</span><span>Charting</span><span>Dark mode</span>
+            </div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-thumb"></div>
+          <div class="project-body">
+            <h3 class="project-title">Site vitrine créatif</h3>
+            <p class="project-desc">Landing page animée, focalisée sur la lisibilité et la conversion.</p>
+            <div class="project-meta">
+              <span>SEO</span><span>Animations</span><span>Performance</span>
+            </div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-thumb"></div>
+          <div class="project-body">
+            <h3 class="project-title">Composants UI</h3>
+            <p class="project-desc">Bibliothèque de composants réutilisables (boutons, cartes, modales…).</p>
+            <div class="project-meta">
+              <span>Design system</span><span>Accessibilité</span><span>Docs</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Merci ! Je vous réponds au plus vite.');">
+        <div class="form-row">
+          <label for="name">Nom</label>
+          <input id="name" name="name" type="text" required placeholder="Votre nom" />
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="vous@example.com" />
+        </div>
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required placeholder="Votre message..."></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Envoyer</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Portfolio — Tous droits réservés</p>
+      <div class="socials">
+        <a href="#" aria-label="GitHub">GitHub</a>
+        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        <a href="#" aria-label="Email">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.nav');
+    toggle?.addEventListener('click', () => {
+      const isOpen = nav?.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(!!isOpen));
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme handling
+    const htmlEl = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+
+    function systemPrefersLight(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    }
+
+    function applyTheme(theme){
+      if(theme === 'light'){
+        htmlEl.setAttribute('data-theme','light');
+        if(btn) btn.textContent = '☾'; // moon icon when light is active (click to go dark)
+      } else {
+        htmlEl.removeAttribute('data-theme'); // default dark
+        if(btn) btn.textContent = '☼'; // sun icon when dark is active (click to go light)
+      }
+    }
+
+    // Initialize theme from localStorage or system preference
+    (function initTheme(){
+      const saved = localStorage.getItem('theme');
+      const theme = saved || (systemPrefersLight() ? 'light' : 'dark');
+      applyTheme(theme);
+    })();
+
+    // Listen to system changes if user hasn't explicitly chosen
+    const media = window.matchMedia('(prefers-color-scheme: light)');
+    media.addEventListener?.('change', e => {
+      const saved = localStorage.getItem('theme');
+      if(!saved){
+        applyTheme(e.matches ? 'light' : 'dark');
+      }
+    });
+
+    // Toggle on click
+    btn?.addEventListener('click', () => {
+      const isLight = htmlEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+  </script>
+</body>
+</html>
