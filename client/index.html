@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,19 +8,23 @@
   <meta name="description" content="Portfolio professionnel - Candidature Formation Alegria" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./static-styles.css?v=7" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./static-styles.css?v=8" />
+  <!-- html2canvas for thumbnail capture -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
+
 <body>
   <!-- En-tête -->
   <header class="site-header">
     <div class="container header-inner">
-      <div class="brand">Portfolio</div>
+      <div class="brand">Portfolio de NeckTeck</div>
       <nav class="nav">
         <a href="#hero" class="active">Accueil</a>
         <a href="#about">À Propos</a>
         <a href="#projects">Projets</a>
-        <a href="#skills">Compétences</a>
         <a href="#contact">Contact</a>
         <span class="theme-dot" id="themeToggle" title="Thème">☼</span>
       </nav>
@@ -36,8 +41,12 @@
           <span class="title-accent serif">Candidat Alegria</span>
         </h1>
         <p class="hero-subtitle">
-          Développeur passionné par la création d'expériences numériques innovantes, candidat motivé pour rejoindre la formation Alegria et développer mes compétences en développement moderne.
+          <br>Développeur Junior passionné par la tech, je suis animé par la volonté d'inventer et d'améliorer
+          les expériences numériques de demain tout en optimisant l'efficacité utilisant l'IA et les automatisations
+          <br />
+          <br />
         </p>
+
         <div class="hero-actions">
           <a href="#projects" class="btn btn-primary btn-caret">Découvrir mon parcours</a>
           <a href="#contact" class="btn btn-outline">Me contacter</a>
@@ -61,8 +70,19 @@
     <div class="container">
       <h2 class="section-title">À propos</h2>
       <p class="muted">
-        Passionné par le web, j'aime créer des interfaces utiles et raffinées. Mon objectif: transformer des idées en produits conviviaux, accessibles et durables. J'apprends vite et j'apprécie le travail collaboratif.
+        <br>
+        L’IA et les automatisations sont pour moi des leviers puissants pour libérer la créativité et fluidifier
+        les processus métier.
+        <br /><br>
+        Intégrer la formation Alegria représente une opportunité précieuse pour approfondir mes compétences
+        et contribuer activement à une dynamique collaborative en entreprise,
+        fondée sur le partage, l’innovation et la montée en compétences mutuelle.<br />
+        <br />
+        J'apprends vite et j'apprécie le travail collaboratif.
+        <br />
+        <br />
       </p>
+
       <ul class="tags">
         <li>HTML/CSS</li>
         <li>JavaScript/TypeScript</li>
@@ -88,8 +108,11 @@
             </div>
           </div>
         </article>
-        <article class="project">
-          <div class="project-thumb"></div>
+        <article class="project vitrine">
+          <div class="project-thumb">
+            <div class="mini"><img id="thumb-light" alt="Miniature thème clair" /></div>
+            <div class="mini"><img id="thumb-dark" alt="Miniature thème sombre" /></div>
+          </div>
           <div class="project-body">
             <h3 class="project-title">Site vitrine créatif</h3>
             <p class="project-desc">Landing page animée, focalisée sur la lisibilité et la conversion.</p>
@@ -132,18 +155,18 @@
         <button class="btn btn-primary" type="submit">Envoyer</button>
       </form>
     </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Portfolio — Tous droits réservés</p>
-      <div class="socials">
-        <a href="#" aria-label="GitHub">GitHub</a>
-        <a href="#" aria-label="LinkedIn">LinkedIn</a>
-        <a href="#" aria-label="Email">Email</a>
+    <!-- Footer intégré à la page Contact pour qu'il s'affiche en bas de cette page -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> Portfolio de NeckTeck — Tous droits réservés</p>
+        <div class="socials">
+          <a href="#" aria-label="GitHub">GitHub</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" aria-label="Email">Email</a>
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </section>
 
   <script>
     // Mobile nav
@@ -161,35 +184,29 @@
     const htmlEl = document.documentElement;
     const btn = document.getElementById('themeToggle');
 
-    function systemPrefersLight(){
+    function systemPrefersLight() {
       return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
     }
 
-    function applyTheme(theme){
-      if(theme === 'light'){
-        htmlEl.setAttribute('data-theme','light');
-        if(btn) btn.textContent = '☾'; // moon icon when light is active (click to go dark)
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        htmlEl.setAttribute('data-theme', 'light');
+        if (btn) btn.textContent = '☾'; // moon icon when light is active (click to go dark)
       } else {
         htmlEl.removeAttribute('data-theme'); // default dark
-        if(btn) btn.textContent = '☼'; // sun icon when dark is active (click to go light)
+        if (btn) btn.textContent = '☼'; // sun icon when dark is active (click to go light)
       }
     }
 
-    // Initialize theme from localStorage or system preference
-    (function initTheme(){
+    // Initialize theme from localStorage (default: dark, ignoring system)
+    (function initTheme() {
       const saved = localStorage.getItem('theme');
-      const theme = saved || (systemPrefersLight() ? 'light' : 'dark');
+      const theme = saved || 'dark';
       applyTheme(theme);
     })();
 
-    // Listen to system changes if user hasn't explicitly chosen
-    const media = window.matchMedia('(prefers-color-scheme: light)');
-    media.addEventListener?.('change', e => {
-      const saved = localStorage.getItem('theme');
-      if(!saved){
-        applyTheme(e.matches ? 'light' : 'dark');
-      }
-    });
+    // Do not auto-switch theme on system changes when no choice is saved
+    // (disabled listener to keep default dark unless user toggles explicitly)
 
     // Toggle on click
     btn?.addEventListener('click', () => {
@@ -198,6 +215,105 @@
       localStorage.setItem('theme', next);
       applyTheme(next);
     });
+
+    // Active nav link by section on scroll and click
+    const navLinks = Array.from(document.querySelectorAll('.nav a[href^="#"]'));
+    const sections = navLinks
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    function setActiveById(id) {
+      navLinks.forEach(a => {
+        if (a.getAttribute('href') === '#' + id) {
+          a.classList.add('active');
+        } else {
+          a.classList.remove('active');
+        }
+      });
+    }
+
+    // Observe sections to update active link when a section is centered in viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveById(entry.target.id);
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.6 });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    // Smooth scroll on click and update active immediately
+    navLinks.forEach(a => {
+      a.addEventListener('click', (e) => {
+        const hash = a.getAttribute('href');
+        if (hash && hash.startsWith('#')) {
+          const target = document.querySelector(hash);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setActiveById(target.id);
+            // Close mobile nav if open
+            nav?.classList.remove('open');
+            toggle?.setAttribute('aria-expanded', 'false');
+          }
+        }
+      });
+    });
+
+    // Initialize active state on load based on hash, if present
+    if (location.hash) {
+      const initial = document.querySelector(location.hash);
+      if (initial) { setActiveById(initial.id); }
+    }
+
+    // ----- Thumbnails capture for light/dark themes -----
+    async function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    async function captureTheme(theme) {
+      // switch theme without persisting (temporary)
+      const prev = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      if (theme === 'light') htmlEl.setAttribute('data-theme', 'light');
+      else htmlEl.removeAttribute('data-theme');
+      await wait(150); // let layout/paint settle
+      const canvas = await html2canvas(document.body, { useCORS: true, backgroundColor: null });
+      // scale down to thumbnail size (aspect ~ 16:9)
+      const targetW = 300, targetH = 170;
+      const out = document.createElement('canvas');
+      out.width = targetW; out.height = targetH;
+      const ctx = out.getContext('2d');
+      // cover strategy
+      const sW = canvas.width; const sH = canvas.height;
+      const scale = Math.max(targetW / sW, targetH / sH);
+      const dW = sW * scale; const dH = sH * scale;
+      const dx = (targetW - dW) / 2; const dy = (targetH - dH) / 2;
+      ctx.drawImage(canvas, 0, 0, sW, sH, dx, dy, dW, dH);
+      // restore previous theme
+      if (prev === 'light') htmlEl.setAttribute('data-theme', 'light');
+      else htmlEl.removeAttribute('data-theme');
+      return out.toDataURL('image/png');
+    }
+
+    async function generateThumbnails() {
+      const imgLight = document.getElementById('thumb-light');
+      const imgDark = document.getElementById('thumb-dark');
+      if (!imgLight || !imgDark || !window.html2canvas) return;
+      imgLight.alt = 'Miniature thème clair';
+      imgDark.alt = 'Miniature thème sombre';
+      imgLight.src = await captureTheme('light');
+      imgDark.src = await captureTheme('dark');
+    }
+
+    // Shortcut: Ctrl+Shift+S to refresh thumbnails
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        generateThumbnails();
+      }
+    });
+
+    // Removed auto-generation on load to avoid theme flicker
   </script>
 </body>
+
 </html>

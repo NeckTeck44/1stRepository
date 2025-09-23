@@ -6,7 +6,8 @@
   --accent: 268 92% 74%; /* purple */
   --accent-contrast: 260 15% 10%;
   --primary: var(--accent);
-  --primary-foreground: var(--accent-contrast);
+  /* Texte des boutons primaires en blanc pour un meilleur contraste */
+  --primary-foreground: 0 0% 100%;
   --card: 220 35% 10%;
   --border: 220 16% 20%;
   --ring: var(--accent);
@@ -43,21 +44,61 @@ body {
   background: hsl(var(--bg));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-top: 60px; /* espace réservé pour l'en-tête fixé */
+}
+
+/* Défilement fluide + snap par section pleine hauteur */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  /* compense l'en-tête sticky afin que l'ancre ne soit pas masquée */
+  scroll-padding-top: 70px;
+}
+/* Conserver le snap aussi sur mobile */
+@media (max-width: 640px) {
+  html { scroll-snap-type: y mandatory; }
+}
+
+/* Augmente légèrement la taille de base de la typo sur grands écrans */
+@media (min-width: 1280px) {
+  html {
+    font-size: 17px;
+  }
+}
+@media (min-width: 1440px) {
+  html {
+    font-size: 18px;
+  }
 }
 
 .serif {
   font-family: "Playfair Display", Georgia, serif;
 }
 .container {
-  max-width: 1100px;
+  width: 100%;
+  max-width: 1280px;
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: clamp(1rem, 2vw, 2rem);
+}
+
+/* Étend le conteneur sur très grands écrans tout en restant centré */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+@media (min-width: 1800px) {
+  .container {
+    max-width: 1600px;
+  }
 }
 
 /* Header */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
   backdrop-filter: saturate(1.2) blur(10px);
   background: color-mix(in oklab, hsl(var(--bg)), transparent 10%);
@@ -121,7 +162,7 @@ body {
   font-size: 1.25rem;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 768px) {
   .nav {
     display: none;
     position: absolute;
@@ -147,6 +188,7 @@ body {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
+  justify-items: center; /* centre horizontalement les colonnes */
   gap: 3rem;
 }
 .hero-eyebrow {
@@ -155,7 +197,7 @@ body {
   margin: 0 0 6px;
 }
 .hero-title {
-  font-size: clamp(34px, 4vw, 56px);
+  font-size: clamp(36px, 6vw, 72px);
   margin: 0 0 14px;
   line-height: 1.05;
 }
@@ -165,11 +207,13 @@ body {
 .hero-subtitle {
   color: hsl(var(--muted-foreground));
   max-width: 65ch;
+  margin-inline: auto; /* centre le paragraphe sous le titre */
 }
 .hero-actions {
   display: flex;
   gap: 0.75rem;
   margin-top: 18px;
+  justify-content: center; /* centre les boutons */
 }
 .hero-card {
   display: flex;
@@ -232,22 +276,105 @@ body {
   font-size: 0.9rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .hero-inner {
     grid-template-columns: 1fr;
   }
+}
+
+/* Sur mobile/tablette: avatar (carte) au-dessus du texte dans le hero */
+@media (max-width: 768px) {
+  .hero-card { order: -1; margin-bottom: 16px; }
+  .hero-content { order: 0; }
 }
 
 /* Sections */
 .section {
   padding-block: 64px;
 }
+.section .container {
+  text-align: center; /* contenu centré par défaut dans chaque page */
+}
+
+/* Centre le bloc texte de la hero */
+.hero-content { text-align: center; }
+.hero, .section {
+  /* Chaque section occupe l'écran et s'aligne au début pour le scroll-snap */
+  min-height: 100vh;
+  scroll-margin-top: 80px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centre aussi horizontalement le bloc interne */
+}
+
+/* À propos: pleine hauteur avec texte aligné à gauche (page complète) */
+section#about {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 64px;
+}
+section#about .container { text-align: left; }
+
+/* Contact: contenu + footer dans la même page, footer collé en bas */
+section#contact {
+  min-height: 100vh;
+  /* Aligne la fin de la section avec le bas du viewport pour garantir que le footer soit visible sans scroll supplémentaire */
+  scroll-snap-align: end;
+  scroll-snap-stop: always;
+  display: grid; /* grille: contenu prend la hauteur dispo, footer en bas */
+  grid-template-rows: 1fr auto;
+  align-items: stretch;
+  justify-items: center;
+  padding-block: 12px; /* compact */
+}
+section#contact .container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* centre verticalement le contenu de contact */
+  gap: 8px;
+}
+/* Footer intégré: réduire les espacements pour tenir dans la même page */
+section#contact .site-footer {
+  margin-top: 8px; /* au lieu de 40px globalement */
+  padding-block: 10px; /* au lieu de 22px */
+}
+/* Compactage du contenu de Contact pour garantir la présence du footer sans scroll */
+section#contact .section-title { margin-bottom: 6px; font-size: clamp(20px, 2.5vw, 28px); }
+section#contact .contact-form { margin-top: 8px; }
+section#contact .contact-form .form-row { margin: 8px 0; }
+section#contact .contact-form button { margin-top: 8px; }
+section#contact label { font-size: 0.9rem; }
+section#contact .contact-form { max-width: 560px; width: 100%; }
+section#contact .contact-form input,
+section#contact .contact-form textarea { padding: 0.55rem 0.7rem; }
+
+/* Écrans plus courts: compresser davantage la mise en page de Contact */
+@media (max-height: 740px) {
+  section#contact { padding-block: 12px; }
+  section#contact .site-footer { padding-block: 8px; }
+  section#contact .contact-form input,
+  section#contact .contact-form textarea {
+    padding: 0.55rem 0.7rem;
+  }
+}
+
+/* Dans la page Contact, empiler le contenu du footer pour tout voir sans scroll */
+section#contact .footer-inner { flex-direction: column; gap: 6px; }
+section#contact .footer-inner p { margin: 0; }
 .section.alt {
   background: color-mix(in oklab, hsl(var(--card)), transparent 60%);
   border-block: 1px solid hsl(var(--border));
 }
 .section-title {
-  font-size: clamp(22px, 2.2vw, 32px);
+  font-size: clamp(24px, 3vw, 40px);
   margin: 0 0 12px;
 }
 .muted {
@@ -294,6 +421,28 @@ body {
   );
   border-bottom: 1px solid hsl(var(--border));
 }
+
+/* Mise en page spéciale pour la carte "Site vitrine créatif" avec 2 miniatures incrustées */
+.project.vitrine .project-thumb {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px;
+}
+.project.vitrine .project-thumb .mini {
+  border-radius: 10px;
+  border: 1px solid hsl(var(--border));
+  background: linear-gradient(135deg, rgba(180,160,255,0.25), rgba(180,160,255,0.05));
+}
+
+/* Miniatures en image: remplissage et cadre */
+.project.vitrine .project-thumb .mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
 .project-body {
   padding: 14px;
 }
@@ -320,12 +469,12 @@ body {
   border-radius: 999px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr 1fr;
   }
 }
-@media (max-width: 560px) {
+@media (max-width: 480px) {
   .grid {
     grid-template-columns: 1fr;
   }
@@ -334,6 +483,7 @@ body {
 /* Contact */
 .contact-form {
   max-width: 640px;
+  margin-inline: auto; /* centre le formulaire */
 }
 .form-row {
   display: flex;
@@ -377,7 +527,7 @@ input[type="submit"] {
   background: transparent;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, filter 0.2s;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s ease, color 0.2s;
 }
 .btn:hover {
   background: color-mix(in oklab, hsl(var(--muted)), transparent 75%);
@@ -388,7 +538,28 @@ input[type="submit"] {
   border-color: hsl(var(--ring));
 }
 .btn-primary:hover {
-  filter: brightness(1.06);
+  /* Assombrit davantage + halo d'accent pour un hover plus visible */
+  background: color-mix(in oklab, hsl(var(--primary)), black 16%);
+  color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--ring));
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 2px hsl(var(--ring) / 0.5);
+  transform: translateY(-1px);
+}
+/* Prend en compte l’accessibilité (réduction des animations) */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover {
+    transform: none;
+  }
+}
+/* État focus visible clavier: anneau net d’accessibilité */
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px hsl(var(--bg)), 0 0 0 5px hsl(var(--ring));
+}
+/* État actif bien marqué */
+.btn-primary:active {
+  background: color-mix(in oklab, hsl(var(--primary)), black 22%);
+  transform: translateY(0);
 }
 .btn-outline {
   background: transparent;
@@ -412,8 +583,10 @@ input[type="submit"] {
 .footer-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap; /* permet d'afficher tous les éléments sans déborder */
+  text-align: center;
 }
 .footer-inner a {
   color: hsl(var(--muted-foreground));
