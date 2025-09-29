@@ -3,7 +3,7 @@
   --fg: 210 40% 98%;
   --muted: 220 15% 15%;
   --muted-foreground: 215 16% 75%;
-  --accent: 268 92% 74%; /* purple */
+  --accent: 268 85% 65%; /* purple - moins flashy */
   --accent-contrast: 260 15% 10%;
   --primary: var(--accent);
   /* Texte des boutons primaires en blanc pour un meilleur contraste */
@@ -13,19 +13,116 @@
   --ring: var(--accent);
   /* Avatar crop defaults */
   --avatar-x: 88%;
-  --avatar-y: 120%;
+  --avatar-y: -50%;
   --avatar-scale: 1.9;
 }
 
 /* Light theme palette */
 html[data-theme="light"] {
-  --bg: 0 0% 100%;
+  --bg: 0 0% 100%; /* Blanc pur qui arrivera progressivement en fondu */
   --fg: 222 47% 11%;
   --muted: 220 14% 96%;
   --muted-foreground: 221 15% 35%;
-  --card: 0 0% 100%;
+  --card: 0 0% 100%; /* Cartes blanches qui arriveront progressivement en fondu */
   --border: 220 13% 91%;
   --ring: var(--accent);
+}
+
+/* Transition synchronisée pour tous les éléments du thème */
+.theme-transition body,
+.theme-transition .site-header,
+.theme-transition .header-inner,
+.theme-transition .nav-menu,
+.theme-transition .card,
+.theme-transition .project-card,
+.theme-transition .chatbot-container,
+.theme-transition button,
+.theme-transition input,
+.theme-transition textarea {
+  transition: background-color 3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Bloquer complètement toute transition sur les éléments textuels spécifiques */
+.theme-transition .profile-name,
+.theme-transition .profile-meta,
+.theme-transition .btn-outline,
+.theme-transition .bot-message p,
+.theme-transition .hero-title {
+  transition: none !important;
+  color: inherit !important;
+}
+
+/* Bloquer toutes les transitions de couleur sur TOUS les éléments textuels */
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition-property: background-color, border-color, box-shadow !important;
+  transition-duration: 2s !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Garantir un contraste élevé pendant la transition */
+.theme-transition body {
+  color: hsl(
+    0,
+    0%,
+    100%
+  ) !important; /* Forcer blanc absolu pendant la transition */
+}
+
+.theme-transition .site-header,
+.theme-transition .header-inner,
+.theme-transition .nav-menu {
+  color: hsl(
+    0,
+    0%,
+    100%
+  ) !important; /* Forcer blanc absolu pendant la transition */
+}
+
+.theme-transition .card,
+.theme-transition .project-card {
+  color: hsl(
+    0,
+    0%,
+    100%
+  ) !important; /* Forcer blanc absolu pendant la transition */
+}
+
+/* Forcer les couleurs fixes pour les éléments spécifiques */
+.theme-transition .profile-name {
+  color: hsl(210, 40%, 98%) !important;
+}
+
+.theme-transition .profile-meta {
+  color: hsl(215, 16%, 75%) !important;
+}
+
+.theme-transition .btn-outline {
+  color: hsl(210, 40%, 98%) !important;
+  border-color: hsl(268, 92%, 74%) !important;
+}
+
+.theme-transition .bot-message p {
+  color: hsl(210, 40%, 98%) !important;
+}
+
+.theme-transition .hero-title {
+  color: hsl(210, 40%, 98%) !important;
+}
+
+.theme-transition .title-accent {
+  color: hsl(268, 92%, 74%) !important;
+}
+
+.theme-transition body {
+  background-color: hsl(220, 20%, 8%) !important;
+}
+
+.theme-transition.active body {
+  background-color: hsl(0, 0%, 100%) !important;
 }
 
 * {
@@ -34,6 +131,7 @@ html[data-theme="light"] {
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
@@ -45,18 +143,145 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-top: 60px; /* espace réservé pour l'en-tête fixé */
+  overflow-y: auto;
 }
 
-/* Défilement fluide + snap par section pleine hauteur */
+/* Défilement ultra-fluide avec effet de roulement progressif */
 html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  /* compense l'en-tête sticky afin que l'ancre ne soit pas masquée */
+  /* scroll-behavior: smooth; - D�sactiv� pour laisser JavaScript g�rer le scroll fluide */
+  scroll-snap-type: none;
+  scroll-snap-points-y: none;
   scroll-padding-top: 70px;
+
+  /* Animation high-tech pour la scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--accent)) transparent;
+
+  /* Effet de parallaxe subtil pour le background */
+  background-attachment: fixed;
+
+  /* Optimisation pour le scroll fluide */
+  scroll-snap-stop: always;
+  scroll-padding: 70px 0 0 0;
 }
-/* Conserver le snap aussi sur mobile */
+
+/* Scroll ultra-fluide pour tous les éléments */
+/* Scroll ultra-fluide pour tous les �l�ments - g�r� par JavaScript */
+
+/* Animation de transition fluide pour les sections */
+.hero,
+.section,
+section#vision-motivation,
+section#contact {
+  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+
+  /* Effet de parallaxe fluide */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Configuration du body pour un scroll de roulement */
+body {
+  scroll-snap-type: none;
+  overflow-y: scroll;
+  scroll-snap-stop: normal;
+
+  /* Effet de motion blur subtil pendant le scroll */
+  transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Optimisation pour le scroll fluide */
+  -webkit-overflow-scrolling: touch;
+  /* overscroll-behavior: contain; */ /* Commenté pour ne pas bloquer le scroll natif */
+}
+
+/* Effet de roulement pour le contenu */
+.content-wrapper {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Scrollbar personnalisée high-tech */
+html::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--accent)), hsl(268, 92%, 60%));
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+  transition: all 0.3s ease;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(268, 92%, 80%), hsl(var(--accent)));
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  transform: scale(1.1);
+}
+
+/* Animation de scroll fluide avec effet d'inertie */
+body {
+  scroll-snap-type: none;
+  overflow-y: scroll;
+  scroll-snap-stop: normal;
+
+  /* Effet de motion blur plus visible pendant le scroll */
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+body.scrolling {
+  filter: blur(1px) brightness(1.05);
+  transform: scale(1.001);
+}
+
+/* Effet de particules de scroll high-tech */
+.scroll-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(45deg, hsl(var(--accent)), hsl(268, 92%, 80%));
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9999;
+  box-shadow: 0 0 8px hsl(var(--accent));
+}
+
+@keyframes scrollParticle {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.2) rotate(90deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-25px) scale(1) rotate(180deg);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateY(-35px) scale(0.8) rotate(270deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0) rotate(360deg);
+  }
+}
+
+/* Ajuster les hauteurs sur mobile pour éviter les débordements */
 @media (max-width: 640px) {
-  html { scroll-snap-type: y mandatory; }
+  .hero,
+  .section,
+  section#vision-motivation,
+  section#contact {
+    min-height: calc(100vh - 60px);
+  }
 }
 
 /* Augmente légèrement la taille de base de la typo sur grands écrans */
@@ -124,32 +349,53 @@ html {
 .nav a {
   color: hsl(var(--muted-foreground));
   text-decoration: none;
-  padding: 0.5rem 0.9rem;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
-  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
 }
+
 .nav a:hover {
   color: hsl(var(--fg));
-  background: color-mix(in oklab, hsl(var(--muted)), transparent 70%);
+  background: hsl(var(--muted));
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15),
+    0 4px 15px rgba(0, 0, 0, 0.08), 0 0 20px rgba(59, 130, 246, 0.06);
+  border-color: hsl(var(--accent));
+  animation: menuGlow 2s ease-in-out infinite;
 }
-.nav a.active {
-  color: hsl(var(--fg));
-  background: hsl(var(--bg));
-  border: 1px solid hsl(var(--border));
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+@keyframes menuGlow {
+  0%,
+  100% {
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15),
+      0 4px 15px rgba(0, 0, 0, 0.08), 0 0 20px rgba(59, 130, 246, 0.06);
+  }
+  50% {
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2),
+      0 6px 20px rgba(0, 0, 0, 0.15), 0 0 30px rgba(59, 130, 246, 0.1);
+  }
 }
 .nav .theme-dot {
-  width: 28px;
-  height: 28px;
-  display: inline-grid;
-  place-items: center;
-  border-radius: 999px;
-  border: 1px solid hsl(var(--border));
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid hsl(var(--border));
+  background: hsl(var(--background));
   color: hsl(var(--muted-foreground));
   cursor: pointer;
+  transition: all 0.2s ease;
 }
+
 .nav .theme-dot:hover {
-  background: color-mix(in oklab, hsl(var(--muted)), transparent 70%);
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+  transform: scale(1.1);
 }
 .nav.open {
   display: block;
@@ -157,9 +403,23 @@ html {
 .nav-toggle {
   display: none;
   background: none;
-  border: none;
+  border: 2px solid hsl(var(--border));
   color: hsl(var(--fg));
-  font-size: 1.25rem;
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-toggle:hover {
+  border-color: hsl(var(--primary));
+  background: hsl(var(--muted));
+}
+
+.nav-toggle:active {
+  transform: scale(0.95);
 }
 
 @media (max-width: 768px) {
@@ -183,7 +443,10 @@ html {
 .hero {
   padding-block: 120px 60px;
   border-bottom: 1px solid hsl(var(--border));
+  position: relative;
+  overflow: hidden;
 }
+
 .hero-inner {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -215,6 +478,31 @@ html {
   margin-top: 18px;
   justify-content: center; /* centre les boutons */
 }
+
+.hero-actions .btn {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: smoothButtonAppear 0.8s ease-out forwards;
+}
+
+.hero-actions .btn:nth-child(1) {
+  animation-delay: 0.6s;
+}
+
+.hero-actions .btn:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+@keyframes smoothButtonAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .hero-card {
   display: flex;
   justify-content: center;
@@ -224,20 +512,28 @@ html {
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
   border-radius: 16px;
-  padding: 24px;
-  max-width: 360px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  padding: 28.8px;
+  max-width: 432px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideInFade 0.8s ease-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
 }
 .card-badge {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  padding: 0.25rem 0.5rem;
+  background: hsl(142, 76%, 36%);
+  color: white;
+  padding: 0.3rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 600;
+  animation: subtlePulse 2s infinite;
 }
 .card-title {
   margin: 4px 0 8px;
@@ -247,33 +543,42 @@ html {
   color: hsl(var(--muted-foreground));
 }
 .avatar-wrap {
-  width: 124px;
-  height: 124px;
+  width: 240px;
+  height: 240px;
   border-radius: 999px;
   display: block;
   margin-inline: auto;
   overflow: hidden;
   box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.08),
     0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.avatar-wrap:hover {
+  transform: scale(1.05);
 }
 .avatar {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: var(--avatar-x) var(--avatar-y);
-  transform: scale(var(--avatar-scale));
+  transform: scale(1.442) translateY(-3%);
   transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.avatar-wrap:hover .avatar {
+  transform: scale(1.52) translateY(-3%);
 }
 .profile-name {
   text-align: center;
   font-weight: 600;
-  margin: 14px 0 4px;
+  margin: 16.8px 0 4.8px;
 }
 .profile-meta {
   text-align: center;
   color: hsl(var(--muted-foreground));
-  font-size: 0.9rem;
+  font-size: 1.08rem;
 }
 
 @media (max-width: 768px) {
@@ -284,8 +589,55 @@ html {
 
 /* Sur mobile/tablette: avatar (carte) au-dessus du texte dans le hero */
 @media (max-width: 768px) {
-  .hero-card { order: -1; margin-bottom: 16px; }
-  .hero-content { order: 0; }
+  .hero-card {
+    order: -1;
+    margin-bottom: 16px;
+  }
+  .hero-content {
+    order: 0;
+  }
+}
+
+/* Styles pour l'animation du texte dans Vision & Motivation */
+.char {
+  opacity: 0;
+  animation: fadeInChar 0.3s ease forwards;
+}
+
+.word {
+  display: inline-block;
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: currentColor;
+  animation: blink 1s infinite;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+}
+
+@keyframes fadeInChar {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Sections */
@@ -297,42 +649,684 @@ html {
 }
 
 /* Centre le bloc texte de la hero */
-.hero-content { text-align: center; }
-.hero, .section {
-  /* Chaque section occupe l'écran et s'aligne au début pour le scroll-snap */
-  min-height: 100vh;
+.hero-content {
+  text-align: center;
+}
+
+/* Animations uniques pour chaque section */
+.hero,
+.section {
+  min-height: calc(100vh - 60px); /* Compense le padding-top du body */
   scroll-margin-top: 80px;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-align: none;
   display: flex;
   align-items: center;
   justify-content: center; /* centre aussi horizontalement le bloc interne */
 }
 
-/* À propos: pleine hauteur avec texte aligné à gauche (page complète) */
-section#about {
-  min-height: 100vh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+/* ===== ANIMATION HERO - ACCUEIL : FADE IN ZOOM FLUIDE ===== */
+#hero {
+  opacity: 0;
+  transform: scale(0.8) translateY(50px);
+  transition: all 1.2s ease;
+}
+
+#hero.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* ===== ANIMATION VISION - DIAPORAMA LATÉRAL FLUIDE ===== */
+#vision-motivation {
+  opacity: 0;
+  transform: translateX(-150px);
+  transition: all 1s ease;
+}
+
+#vision-motivation.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== ANIMATION PROJETS - EFFET DE RÉVÉLATION SPECTACULAIRE ===== */
+#projects {
+  opacity: 0;
+  transform: translateY(50px) scale(0.9);
+  transform-origin: center bottom;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+#projects::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.08) 0%,
+    rgba(59, 130, 246, 0.04) 30%,
+    rgba(59, 130, 246, 0.02) 60%,
+    transparent 100%
+  );
+  animation: rotateGlow 8s linear infinite;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+#projects.visible::before {
+  opacity: 1;
+}
+
+#projects.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Particules flottantes pour l'arrière-plan */
+#projects::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      2px 2px at 20px 30px,
+      rgba(59, 130, 246, 0.2),
+      transparent
+    ),
+    radial-gradient(2px 2px at 40px 70px, rgba(59, 130, 246, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(147, 51, 234, 0.3), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(99, 102, 241, 0.3), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(168, 85, 247, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: floatParticles 20s linear infinite;
+  opacity: 0;
+  transition: opacity 1.5s ease 0.5s;
+  pointer-events: none;
+}
+
+#projects.visible::after {
+  opacity: 1;
+}
+
+/* Effet de brillance sur les bords */
+#projects .edge-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-image: linear-gradient(
+      45deg,
+      rgba(59, 130, 246, 0.6),
+      rgba(59, 130, 246, 0.6),
+      rgba(147, 51, 234, 0.8),
+      rgba(59, 130, 246, 0.6)
+    )
+    1;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 1s ease 1s;
+  pointer-events: none;
+  animation: edgePulse 2s ease-in-out infinite;
+}
+
+#projects.visible .edge-glow {
+  opacity: 1;
+}
+
+/* Cercles concentriques qui apparaissent en cascade */
+#projects .concentric-circles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  pointer-events: none;
+}
+
+#projects .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+#projects .circle:nth-child(1) {
+  width: 100px;
+  height: 100px;
+  border-color: rgba(59, 130, 246, 0.6);
+  animation: expandCircle 2s ease-out 0.3s forwards;
+}
+
+#projects .circle:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  border-color: rgba(59, 130, 246, 0.6);
+  animation: expandCircle 2s ease-out 0.6s forwards;
+}
+
+#projects .circle:nth-child(3) {
+  width: 300px;
+  height: 300px;
+  border-color: rgba(147, 51, 234, 0.4);
+  animation: expandCircle 2s ease-out 0.9s forwards;
+}
+
+#projects .circle:nth-child(4) {
+  width: 400px;
+  height: 400px;
+  border-color: rgba(99, 102, 241, 0.3);
+  animation: expandCircle 2s ease-out 1.2s forwards;
+}
+
+#projects .circle:nth-child(5) {
+  width: 500px;
+  height: 500px;
+  border-color: rgba(168, 85, 247, 0.2);
+  animation: expandCircle 2s ease-out 1.5s forwards;
+}
+
+#projects.visible .circle {
+  opacity: 1;
+}
+
+/* Étoiles scintillantes aléatoires */
+#projects .stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#projects .star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+#projects .star:nth-child(1) {
+  top: 10%;
+  left: 15%;
+  animation-delay: 0s;
+}
+#projects .star:nth-child(2) {
+  top: 20%;
+  left: 80%;
+  animation-delay: 0.5s;
+}
+#projects .star:nth-child(3) {
+  top: 35%;
+  left: 25%;
+  animation-delay: 1s;
+}
+#projects .star:nth-child(4) {
+  top: 45%;
+  left: 70%;
+  animation-delay: 1.5s;
+}
+#projects .star:nth-child(5) {
+  top: 60%;
+  left: 10%;
+  animation-delay: 2s;
+}
+#projects .star:nth-child(6) {
+  top: 75%;
+  left: 85%;
+  animation-delay: 2.5s;
+}
+#projects .star:nth-child(7) {
+  top: 85%;
+  left: 40%;
+  animation-delay: 0.8s;
+}
+#projects .star:nth-child(8) {
+  top: 15%;
+  left: 55%;
+  animation-delay: 1.8s;
+}
+#projects .star:nth-child(9) {
+  top: 50%;
+  left: 90%;
+  animation-delay: 1.2s;
+}
+#projects .star:nth-child(10) {
+  top: 90%;
+  left: 20%;
+  animation-delay: 2.2s;
+}
+
+#projects.visible .star {
+  opacity: 1;
+}
+
+/* Animation de scintillement pour les étoiles */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Animation de pulsation des bords */
+@keyframes edgePulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* Animation d'expansion des cercles concentriques */
+@keyframes expandCircle {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ===== ANIMATION CONTACT - EFFET VAGUE FLUIDE ===== */
+#contact {
+  opacity: 0;
+  transform: translateY(100px) skewY(-2deg);
+  transition: all 0.9s ease;
+}
+
+#contact.visible {
+  opacity: 1;
+  transform: translateY(0) skewY(0deg);
+}
+
+/* Animations pour les titres - différentes par section */
+.section-title,
+h1,
+h2,
+h3 {
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+/* Hero - Titre avec fade fluide */
+#hero h1 {
+  transform: translateY(-30px) scale(0.9);
+  transition: all 0.8s ease;
+}
+
+#hero.visible h1 {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Vision - Titre avec slide gauche */
+#vision-motivation h2 {
+  transform: translateX(-50px);
+  transition: all 0.7s ease 0.2s;
+}
+
+#vision-motivation.visible h2 {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/*Projets - Titre avec effet de révélation dynamique */
+#projects h2 {
+  transform: translateY(-30px) scale(0.8) rotateX(-10deg);
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-shadow: 0 0 15px rgba(139, 92, 246, 0.2),
+    0 0 25px rgba(59, 130, 246, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: hsl(var(--fg));
+  position: relative;
+  z-index: 10;
+  margin: -0.5em 0 0.8em 0;
+  padding-top: 0;
+  padding-bottom: 0.4em;
+}
+
+#projects h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.08),
+    rgba(59, 130, 246, 0.05),
+    rgba(139, 92, 246, 0.08)
+  );
+  border-radius: 12px;
+  opacity: 0.6;
+  z-index: -1;
+  filter: blur(12px);
+  animation: subtleGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes subtleGlow {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+}
+
+#projects.visible h2 {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotateX(0deg);
+  color: hsl(var(--fg));
+  text-shadow: 0 0 25px rgba(139, 92, 246, 0.4),
+    0 0 40px rgba(59, 130, 246, 0.2), 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Contact - Titre avec effet vague */
+#contact h2 {
+  transform: translateY(20px) rotate(2deg);
+  transition: all 0.7s ease 0.2s;
+}
+
+#contact.visible h2 {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+/* Animations pour les paragraphes */
+.section p,
+.section .text-content {
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+/* Hero - Texte avec fade delay */
+#hero p,
+#hero .text-content {
+  transform: translateY(20px);
+  transition: all 0.8s ease 0.3s;
+}
+
+#hero.visible p,
+#hero.visible .text-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#vision-motivation.visible p,
+#vision-motivation.visible .text-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Projets - Texte avec fade simple */
+#projects p,
+#projects .text-content {
+  transform: translateY(15px);
+  transition: all 0.6s ease 0.5s;
+}
+
+#projects.visible p,
+#projects.visible .text-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Contact - Texte avec skew */
+#contact p,
+#contact .text-content {
+  transform: skewY(1deg) translateY(15px);
+  transition: all 0.7s ease 0.4s;
+}
+
+#contact.visible p,
+#contact.visible .text-content {
+  opacity: 1;
+  transform: skewY(0deg) translateY(0);
+}
+
+/* Animation pour les cartes de projets - effet simple et élégant */
+.project {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+#projects.visible .project:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+#projects.visible .project:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+#projects.visible .project:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+#projects.visible .project:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+#projects.visible .project {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation pour les boutons - effet très fluide */
+.btn {
+  opacity: 0;
+  transform: translateY(15px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#hero.visible .btn {
+  transition-delay: 0.4s;
+}
+
+#vision-motivation.visible .btn {
+  transition-delay: 0.6s;
+}
+
+#projects.visible .btn {
+  transition-delay: 0.5s;
+}
+
+#contact.visible .btn {
+  transition-delay: 0.3s;
+}
+
+.btn.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Contrôle de musique discret */
+.music-control {
+  position: fixed;
+  top: 20px;
+  right: 80px;
+  z-index: 1000;
+  background: hsla(var(--muted), 0.3);
+  border: 1px solid hsla(var(--border), 0.3);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px hsla(var(--muted), 0.2);
+  backdrop-filter: blur(5px);
+  opacity: 0.6;
+}
+
+.music-control:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px hsla(var(--muted), 0.4);
+  background: hsla(var(--muted), 0.5);
+  opacity: 0.8;
+}
+
+.music-control:active {
+  transform: scale(0.9);
+}
+
+.music-icon {
+  font-size: 16px;
+  transition: all 0.3s ease;
+  filter: none;
+  color: hsl(var(--muted-foreground));
+}
+
+.music-control.playing .music-icon {
+  animation: subtlePulse 3s infinite;
+  color: hsl(var(--accent));
+  opacity: 0.8;
+}
+
+@keyframes subtlePulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideInFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Adaptation pour mobile */
+@media (max-width: 768px) {
+  .music-control {
+    top: 15px;
+    right: 60px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .music-icon {
+    font-size: 14px;
+  }
+}
+
+/* À propos: pleine hauteur avec texte centré (page complète) */
+section#vision-motivation {
+  min-height: calc(100vh - 60px); /* Compense le padding-top du body */
   display: flex;
   align-items: center;
   justify-content: center;
   padding-block: 64px;
+  text-align: center; /* Centrage horizontal du texte */
+  scroll-snap-align: none;
 }
-section#about .container { text-align: left; }
+
+section#vision-motivation .container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Small-height viewports: compress spacing to avoid scroll */
+@media (max-height: 740px) {
+  section#vision-motivation {
+    padding-block: 36px;
+    min-height: calc(100vh - 60px); /* S'assurer que la hauteur est correcte */
+  }
+  section#vision-motivation .section-title {
+    margin-bottom: 8px;
+  }
+  section#vision-motivation #animated-text {
+    line-height: 1.5;
+  }
+  section#vision-motivation .tags {
+    margin-top: 10px;
+  }
+  section#vision-motivation .tags li {
+    font-size: 0.8rem;
+  }
+  /* Ajuster aussi les autres sections pour les petits écrans */
+  .hero,
+  .section {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+/* Very small widths: tighten measure for readability */
+@media (max-width: 400px) {
+  section#vision-motivation #animated-text {
+    max-width: 60ch;
+    line-height: 1.5;
+  }
+}
+@media (max-width: 340px) {
+  section#vision-motivation #animated-text {
+    max-width: 56ch;
+    line-height: 1.45;
+  }
+}
 
 /* Contact: contenu + footer dans la même page, footer collé en bas */
 section#contact {
-  min-height: 100vh;
-  /* Aligne la fin de la section avec le bas du viewport pour garantir que le footer soit visible sans scroll supplémentaire */
-  scroll-snap-align: end;
-  scroll-snap-stop: always;
-  display: grid; /* grille: contenu prend la hauteur dispo, footer en bas */
+  min-height: calc(100vh - 60px); /* Compense le padding-top du body */
+  display: grid;
   grid-template-rows: 1fr auto;
   align-items: stretch;
   justify-items: center;
-  padding-block: 12px; /* compact */
+  padding-block: 12px;
+  scroll-snap-align: none;
 }
+
 section#contact .container {
   width: 100%;
   display: flex;
@@ -347,19 +1341,40 @@ section#contact .site-footer {
   padding-block: 10px; /* au lieu de 22px */
 }
 /* Compactage du contenu de Contact pour garantir la présence du footer sans scroll */
-section#contact .section-title { margin-bottom: 6px; font-size: clamp(20px, 2.5vw, 28px); }
-section#contact .contact-form { margin-top: 8px; }
-section#contact .contact-form .form-row { margin: 8px 0; }
-section#contact .contact-form button { margin-top: 8px; }
-section#contact label { font-size: 0.9rem; }
-section#contact .contact-form { max-width: 560px; width: 100%; }
+section#contact .section-title {
+  margin-bottom: 6px;
+  font-size: clamp(20px, 2.5vw, 28px);
+}
+section#contact .contact-form {
+  margin-top: 8px;
+}
+section#contact .contact-form .form-row {
+  margin: 8px 0;
+}
+section#contact .contact-form button {
+  margin-top: 8px;
+}
+section#contact label {
+  font-size: 0.9rem;
+}
+section#contact .contact-form {
+  max-width: 560px;
+  width: 100%;
+}
 section#contact .contact-form input,
-section#contact .contact-form textarea { padding: 0.55rem 0.7rem; }
+section#contact .contact-form textarea {
+  padding: 0.55rem 0.7rem;
+}
 
 /* Écrans plus courts: compresser davantage la mise en page de Contact */
 @media (max-height: 740px) {
-  section#contact { padding-block: 12px; }
-  section#contact .site-footer { padding-block: 8px; }
+  section#contact {
+    padding-block: 12px;
+    min-height: calc(100vh - 60px); /* S'assurer que la hauteur est correcte */
+  }
+  section#contact .site-footer {
+    padding-block: 8px;
+  }
   section#contact .contact-form input,
   section#contact .contact-form textarea {
     padding: 0.55rem 0.7rem;
@@ -367,8 +1382,13 @@ section#contact .contact-form textarea { padding: 0.55rem 0.7rem; }
 }
 
 /* Dans la page Contact, empiler le contenu du footer pour tout voir sans scroll */
-section#contact .footer-inner { flex-direction: column; gap: 6px; }
-section#contact .footer-inner p { margin: 0; }
+section#contact .footer-inner {
+  flex-direction: column;
+  gap: 6px;
+}
+section#contact .footer-inner p {
+  margin: 0;
+}
 .section.alt {
   background: color-mix(in oklab, hsl(var(--card)), transparent 60%);
   border-block: 1px solid hsl(var(--border));
@@ -407,19 +1427,20 @@ section#contact .footer-inner p { margin: 0; }
 .project {
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  border-radius: 14px;
+  border-radius: 4px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
 }
+
+/* Style de survol simple supprimé - remplacé par l'effet avancé ci-dessous */
 .project-thumb {
-  height: 150px;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 121, 242, 0.35),
-    rgba(0, 121, 242, 0.08)
-  );
+  height: 120px;
+  background: hsl(var(--muted));
   border-bottom: 1px solid hsl(var(--border));
+  position: relative;
 }
 
 /* Mise en page spéciale pour la carte "Site vitrine créatif" avec 2 miniatures incrustées */
@@ -432,7 +1453,11 @@ section#contact .footer-inner p { margin: 0; }
 .project.vitrine .project-thumb .mini {
   border-radius: 10px;
   border: 1px solid hsl(var(--border));
-  background: linear-gradient(135deg, rgba(180,160,255,0.25), rgba(180,160,255,0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(96, 165, 250, 0.2),
+    rgba(96, 165, 250, 0.04)
+  );
 }
 
 /* Miniatures en image: remplissage et cadre */
@@ -444,12 +1469,13 @@ section#contact .footer-inner p { margin: 0; }
   border-radius: 10px;
 }
 .project-body {
-  padding: 14px;
+  padding: 8px;
 }
 .project-title {
-  margin: 4px 0 6px;
-  font-size: 1.05rem;
+  margin: 0 0 4px 0;
+  font-size: 0.85rem;
   font-weight: 600;
+  color: hsl(var(--fg));
 }
 .project-desc {
   margin: 0;
@@ -457,16 +1483,16 @@ section#contact .footer-inner p { margin: 0; }
 }
 .project-meta {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 10px;
+  gap: 0.3rem;
+  margin-top: 6px;
   flex-wrap: wrap;
 }
 .project-meta span {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: hsl(var(--muted-foreground));
   border: 1px solid hsl(var(--border));
-  padding: 0.25rem 0.5rem;
-  border-radius: 999px;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
 }
 
 @media (max-width: 768px) {
@@ -527,10 +1553,12 @@ input[type="submit"] {
   background: transparent;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s ease, color 0.2s;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .btn:hover {
   background: color-mix(in oklab, hsl(var(--muted)), transparent 75%);
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .btn-primary {
   background: hsl(var(--primary));
@@ -538,12 +1566,12 @@ input[type="submit"] {
   border-color: hsl(var(--ring));
 }
 .btn-primary:hover {
-  /* Assombrit davantage + halo d'accent pour un hover plus visible */
-  background: color-mix(in oklab, hsl(var(--primary)), black 16%);
+  /* Transition fluide avec léger effet de profondeur */
+  background: color-mix(in oklab, hsl(var(--primary)), black 12%);
   color: hsl(var(--primary-foreground));
   border-color: hsl(var(--ring));
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 2px hsl(var(--ring) / 0.5);
-  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 1px hsl(var(--ring) / 0.3);
+  transform: translateY(-1px) scale(1.02);
 }
 /* Prend en compte l’accessibilité (réduction des animations) */
 @media (prefers-reduced-motion: reduce) {
@@ -556,10 +1584,11 @@ input[type="submit"] {
   outline: none;
   box-shadow: 0 0 0 3px hsl(var(--bg)), 0 0 0 5px hsl(var(--ring));
 }
-/* État actif bien marqué */
+/* État actif fluide */
 .btn-primary:active {
-  background: color-mix(in oklab, hsl(var(--primary)), black 22%);
-  transform: translateY(0);
+  background: color-mix(in oklab, hsl(var(--primary)), black 18%);
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 .btn-outline {
   background: transparent;
@@ -572,6 +1601,51 @@ input[type="submit"] {
 .btn-caret::after {
   content: "\25BE"; /* small down triangle */
   font-size: 0.9em;
+}
+
+/* Style pour le bouton Découvrir mes projets */
+.hero-actions .btn-primary.btn-caret {
+  transition: all 0.1s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-actions .btn-primary.btn-caret::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: sweep 3s linear infinite;
+}
+
+@keyframes sweep {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.hero-actions .btn-primary.btn-caret:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+}
+
+/* Style pour le bouton Me contacter */
+.hero-actions .btn-outline {
+  transition: all 0.1s ease !important;
+}
+
+.hero-actions .btn-outline:hover {
+  transform: translateY(-2px) scale(1.05) !important;
 }
 
 /* Footer */
@@ -618,4 +1692,1280 @@ input[type="submit"] {
   line-clamp: 1;
   -webkit-line-clamp: 1;
   overflow: hidden;
+}
+
+/* Chatbot Styles */
+.chatbot-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 380px;
+  height: 520px;
+  max-height: 75vh;
+  background: color-mix(in oklab, hsl(var(--card)), transparent 5%);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid hsl(var(--border));
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(59, 130, 246, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+  transform: scale(0.9) translateY(20px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chatbot-container[style*="display: block"] {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Effet de lueur autour du chatbot */
+.chatbot-container::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    hsl(var(--accent)),
+    hsl(var(--primary)),
+    hsl(var(--accent))
+  );
+  border-radius: 22px;
+  opacity: 0.6;
+  z-index: -1;
+  /* animation: glowRotate 4s linear infinite; */ /* Animation supprimée pour garder la lueur statique */
+}
+
+/* @keyframes glowRotate supprimée - animation plus utilisée */
+
+.chatbot-header {
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+  color: hsl(var(--accent-contrast));
+  padding: 18px 20px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.chatbot-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.chatbot-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.chatbot-header h3::before {
+  content: "🤖";
+  font-size: 24px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: hsl(var(--accent-contrast));
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn:active {
+  transform: scale(0.95) rotate(90deg);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-height: 0;
+  /* Forcer le défilement */
+  max-height: calc(500px - 120px);
+  /* Enlever le scroll-behavior qui peut causer des problèmes */
+  /* Enlever le scroll-snap-type */
+  background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.02));
+  position: relative;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: rgba(59, 130, 246, 0.08);
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--accent)), hsl(var(--primary)));
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--accent)));
+}
+
+.message {
+  max-width: 85%;
+  padding: 14px 18px;
+  border-radius: 20px;
+  margin: 5px 0;
+  word-wrap: break-word;
+  line-height: 1.5;
+  animation: messageSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.message p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.bot-message {
+  background: color-mix(in oklab, hsl(var(--muted)), transparent 10%);
+  color: hsl(var(--muted-foreground));
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid hsl(var(--border));
+}
+
+.bot-message::before {
+  content: "🤖";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  font-size: 16px;
+  background: hsl(var(--card));
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid hsl(var(--border));
+}
+
+.bot-message p {
+  font-weight: 500;
+}
+
+.user-message {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  color: hsl(var(--primary-contrast));
+  align-self: flex-end;
+  border-bottom-right-radius: 6px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-message::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.user-message p {
+  font-weight: 600;
+}
+
+.chat-input {
+  padding: 16px 20px;
+  border-top: 1px solid hsl(var(--border));
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.015));
+  position: relative;
+}
+
+.chat-input::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--border)),
+    transparent
+  );
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 2px solid hsl(var(--border));
+  border-radius: 25px;
+  background: color-mix(in oklab, hsl(var(--bg)), transparent 20%);
+  color: hsl(var(--fg));
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+.chat-input input::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.7;
+}
+
+.chat-input input:focus {
+  border-color: hsl(var(--accent));
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08),
+    0 4px 20px rgba(59, 130, 246, 0.12);
+  background: color-mix(in oklab, hsl(var(--bg)), transparent 10%);
+  transform: translateY(-1px);
+}
+
+.send-btn {
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+  color: hsl(var(--accent-contrast));
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.send-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.send-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.3), 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.send-btn:hover::before {
+  opacity: 1;
+}
+
+.send-btn:active {
+  transform: scale(0.98) translateY(0);
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive chatbot */
+@media (max-width: 768px) {
+  .chatbot-container {
+    width: 90vw;
+    height: 70vh;
+    bottom: 10px;
+    right: 5vw;
+    left: 5vw;
+  }
+}
+
+/* Add cursor pointer to chatbot project */
+.project[onclick] {
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Système de pulsation holographique pour les projets cliquables - Option 2 */
+.project[onclick]::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  border: 2px solid hsl(var(--accent));
+  box-shadow: 0 0 20px hsl(var(--accent)), inset 0 0 20px hsl(var(--accent));
+  animation: holographicPulse 2.5s ease-out infinite;
+}
+
+/* Deuxième anneau pour effet 3D plus profond */
+.project[onclick]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid hsl(var(--primary));
+  box-shadow: 0 0 15px hsl(var(--primary)), inset 0 0 15px hsl(var(--primary));
+  animation: holographicPulse2 2.5s ease-out infinite 0.3s;
+}
+
+/* Troisième anneau pour effet holographique complet */
+.project[onclick] .holographic-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -3;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(96, 165, 250, 0.8);
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.8),
+    inset 0 0 10px rgba(96, 165, 250, 0.8);
+  animation: holographicPulse3 2.5s ease-out infinite 0.6s;
+}
+
+/* Animation principale de pulsation holographique */
+@keyframes holographicPulse {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border-width: 3px;
+  }
+  20% {
+    opacity: 1;
+    border-width: 3px;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+/* Animation secondaire décalée */
+@keyframes holographicPulse2 {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border-width: 2px;
+  }
+  20% {
+    opacity: 0.8;
+    border-width: 2px;
+  }
+  100% {
+    width: 250px;
+    height: 250px;
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+/* Animation tertiaire pour effet 3D */
+@keyframes holographicPulse3 {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border-width: 1px;
+  }
+  20% {
+    opacity: 0.6;
+    border-width: 1px;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    border-width: 0.5px;
+  }
+}
+
+.project[onclick]:hover {
+  transform: translateY(-20px) scale(1.02) rotateX(2deg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+    0 15px 35px rgba(139, 92, 246, 0.2), 0 0 50px rgba(139, 92, 246, 0.15);
+  border-color: hsl(var(--accent));
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Déclenchement de la pulsation holographique au hover */
+.project[onclick]:hover::before,
+.project[onclick]:hover::after,
+.project[onclick]:hover .holographic-ring {
+  opacity: 1;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.25),
+      0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 20px 50px rgba(59, 130, 246, 0.35),
+      0 15px 40px rgba(0, 0, 0, 0.25), 0 0 60px rgba(59, 130, 246, 0.2);
+  }
+}
+
+.project[onclick]:hover::before {
+  opacity: 0.15;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(59, 130, 246, 0.05) 100%
+  );
+}
+
+.project[onclick]:active {
+  transform: translateY(-1px) scale(0.99) rotateX(1deg);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15),
+    0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Style spécial pour le projet Assistant IA */
+.project.vitrine {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, hsl(var(--card)), transparent 5%),
+    color-mix(in oklab, hsl(var(--card)), transparent 10%)
+  );
+  border: 2px solid hsl(var(--border));
+  position: relative;
+}
+
+.project.vitrine::after {
+  content: "🤖";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  animation: float 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.project.vitrine .project-title {
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: hsl(var(--fg)); /* Couleur de secours */
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.project.vitrine .project-thumb {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, hsl(var(--accent)), transparent 30%),
+    color-mix(in oklab, hsl(var(--primary)), transparent 30%)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.project.vitrine .project-thumb::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Indicateur de chargement animé pour le chatbot */
+.typing {
+  background: color-mix(
+    in oklab,
+    hsl(var(--muted)),
+    transparent 10%
+  ) !important;
+  color: hsl(var(--muted-foreground)) !important;
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid hsl(var(--border));
+  backdrop-filter: blur(10px);
+  animation: typingPulse 2s ease-in-out infinite;
+}
+
+@keyframes typingPulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15),
+      0 1px 8px rgba(59, 130, 246, 0.08);
+  }
+}
+
+.typing::before {
+  content: "🤖";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  font-size: 16px;
+  background: hsl(var(--card));
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid hsl(var(--border));
+}
+
+.typing-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 0;
+  position: relative;
+}
+
+.typing-dot {
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+  border-radius: 50%;
+  animation: typingWave 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typingWave {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  40% {
+    transform: translateY(-12px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Texte d'indication de frappe */
+.typing-text {
+  font-size: 13px;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+  margin-left: 8px;
+  opacity: 0.8;
+  animation: textFade 2s ease-in-out infinite;
+}
+
+@keyframes textFade {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Animation d'apparition des messages */
+.message {
+  animation: messageSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: bottom left;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Effet de lueur subtile pour les messages du bot */
+.bot-message {
+  position: relative;
+}
+
+.bot-message::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.08) 0%,
+    transparent 70%
+  );
+  border-radius: inherit;
+  pointer-events: none;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 0.6;
+  }
+}
+
+/* Animation pour le curseur de frappe */
+.message p::after {
+  content: "|";
+  color: hsl(var(--accent));
+  animation: blink 1s infinite;
+  font-weight: bold;
+}
+
+.message p.typing-complete::after {
+  display: none;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Animations d'ouverture et de fermeture du chatbot */
+.chatbot-container {
+  transform-origin: bottom right;
+}
+
+.chatbot-container.opening {
+  animation: chatbotOpen 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.chatbot-container.closing {
+  animation: chatbotClose 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes chatbotOpen {
+  0% {
+    transform: scale(0.3) translateY(100px) rotate(-10deg);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  50% {
+    transform: scale(1.1) translateY(-10px) rotate(2deg);
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes chatbotClose {
+  0% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
+    filter: blur(0);
+  }
+  50% {
+    transform: scale(0.9) translateY(20px) rotate(-5deg);
+    opacity: 0.6;
+    filter: blur(3px);
+  }
+  100% {
+    transform: scale(0.2) translateY(150px) rotate(-15deg);
+    opacity: 0;
+    filter: blur(15px);
+  }
+}
+
+/* Animation de l'header à l'ouverture */
+.chatbot-header {
+  animation: headerSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+
+@keyframes headerSlideIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animation des messages à l'ouverture */
+.chat-messages {
+  animation: messagesFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+@keyframes messagesFadeIn {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animation de l'input à l'ouverture */
+.chat-input {
+  animation: inputSlideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+@keyframes inputSlideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Effet de particules à l'ouverture */
+.chatbot-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.6) 0%,
+    rgba(59, 130, 246, 0.3) 30%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chatbot-container.opening::after {
+  animation: particleBurst 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+}
+
+@keyframes particleBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+/* Styles pour la section Compétences */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.skill-category {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-category:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.12);
+  border-color: hsl(var(--accent));
+}
+
+.skill-category-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: hsl(var(--fg));
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skill-category-title::before {
+  content: "💡";
+  font-size: 1.1rem;
+}
+
+.skill-category:nth-child(1) .skill-category-title::before {
+  content: "🎨";
+}
+
+.skill-category:nth-child(2) .skill-category-title::before {
+  content: "⚙️";
+}
+
+.skill-category:nth-child(3) .skill-category-title::before {
+  content: "🗄️";
+}
+
+.skill-category:nth-child(4) .skill-category-title::before {
+  content: "🛠️";
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skill-name {
+  flex: 1;
+  font-weight: 500;
+  color: hsl(var(--fg));
+  min-width: 120px;
+}
+
+.skill-bar {
+  flex: 2;
+  height: 8px;
+  background: hsl(var(--muted));
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-progress {
+  height: 100%;
+  background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)));
+  border-radius: 4px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-progress::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+.skill-level {
+  font-weight: 600;
+  color: hsl(var(--accent));
+  min-width: 45px;
+  text-align: right;
+}
+
+/* Animation pour les barres de progression */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Animation d'apparition des compétences */
+.skill-category {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: skillFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.skill-category:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.skill-category:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.skill-category:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.skill-category:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes skillFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design pour les compétences */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .skill-category {
+    padding: 1.25rem;
+  }
+
+  .skill-name {
+    min-width: 100px;
+    font-size: 0.9rem;
+  }
+
+  .skill-bar {
+    height: 6px;
+  }
+
+  .skill-level {
+    font-size: 0.85rem;
+    min-width: 40px;
+  }
+}
+
+/* Animation des barres de progression au scroll */
+.skill-progress {
+  width: 0%;
+}
+
+.skill-category.visible .skill-progress {
+  width: var(--target-width, 0%);
+}
+
+/* Thème clair pour les compétences */
+html[data-theme="light"] .skill-category {
+  background: hsl(var(--card));
+  border-color: hsl(var(--border));
+}
+
+html[data-theme="light"] .skill-category:hover {
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.08);
+}
+
+/* =====================================
+   PARTICULES DYNAMIQUES POUR LES PROJETS
+   ===================================== */
+
+/* Particules dynamiques - double couche pour effet riche */
+.project[onclick] {
+  position: relative;
+  overflow: visible;
+}
+
+.project[onclick]::before,
+.project[onclick]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Particule principale - couleur accent (violet) */
+.project[onclick]::before {
+  background: hsl(var(--accent));
+  box-shadow: 0 0 20px hsl(var(--accent));
+  animation: particleFloat 3s ease-in-out infinite;
+}
+
+/* Particule secondaire - couleur primaire */
+.project[onclick]::after {
+  background: hsl(var(--primary));
+  box-shadow: 0 0 15px hsl(var(--primary));
+  animation: particleFloat2 4s ease-in-out infinite reverse;
+}
+
+/* Animation principale des particules */
+@keyframes particleFloat {
+  0% {
+    top: -20%;
+    left: -20%;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  25% {
+    top: 30%;
+    left: 120%;
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  50% {
+    top: 120%;
+    left: 80%;
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  75% {
+    top: 80%;
+    left: -10%;
+    transform: scale(1.5);
+    opacity: 0.4;
+  }
+  100% {
+    top: -20%;
+    left: -20%;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Animation secondaire des particules */
+@keyframes particleFloat2 {
+  0% {
+    top: -10%;
+    left: 120%;
+    transform: scale(1);
+    opacity: 0;
+  }
+  25% {
+    top: 120%;
+    left: -20%;
+    transform: scale(0.7);
+    opacity: 0.7;
+  }
+  50% {
+    top: -20%;
+    left: 30%;
+    transform: scale(1.3);
+    opacity: 0.5;
+  }
+  75% {
+    top: 60%;
+    left: 110%;
+    transform: scale(0.9);
+    opacity: 0.3;
+  }
+  100% {
+    top: -10%;
+    left: 120%;
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Déclenchement des particules au survol */
+.project[onclick]:hover::before,
+.project[onclick]:hover::after {
+  opacity: 1;
+}
+
+/* Appliquer aussi au chatbot pour cohérence visuelle */
+.chatbot-container::before,
+.chatbot-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.chatbot-container::before {
+  background: hsl(var(--accent));
+  box-shadow: 0 0 15px hsl(var(--accent));
+  animation: particleFloat 3s ease-in-out infinite;
+}
+
+.chatbot-container::after {
+  background: hsl(var(--primary));
+  box-shadow: 0 0 12px hsl(var(--primary));
+  animation: particleFloat2 4s ease-in-out infinite reverse;
+}
+
+.chatbot-container:hover::before,
+.chatbot-container:hover::after {
+  opacity: 1;
 }
