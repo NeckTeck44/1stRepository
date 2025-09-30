@@ -2,7 +2,7 @@ node_modules
 dist
 .DS_Store
 server/public
-vite.config.ts.*
+config/vite.config.ts.*
 *.tar.gz
 
 # Local Netlify folder

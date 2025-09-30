@@ -134,12 +134,30 @@ portfolio-alegria/
 │   │   └── utils/         # Utilitaires
 │   ├── public/            # Fichiers statiques
 │   ├── index.html         # Point d'entrée HTML
-│   ├── vite.config.ts     # Configuration Vite
 │   └── package.json       # Dépendances client
 ├── server/               # Serveur Express
 │   ├── src/              # Code source serveur
 │   ├── vite.ts           # Configuration Vite serveur
 │   └── package.json      # Dépendances serveur
+├── config/               # Fichiers de configuration
+│   ├── vite.config.ts    # Configuration Vite
+│   ├── tailwind.config.cjs # Configuration Tailwind
+│   ├── postcss.config.js # Configuration PostCSS
+│   ├── tsconfig.json     # Configuration TypeScript
+│   ├── drizzle.config.ts # Configuration Drizzle
+│   └── netlify.toml      # Configuration Netlify
+├── scripts/              # Scripts d'automatisation
+│   ├── launch-dev.ps1    # Lancement développement
+│   ├── launch-prod.ps1   # Lancement production
+│   ├── git-auto.ps1      # Git automatique
+│   ├── git-push.ps1      # Git interactif
+│   ├── git-snapshot.ps1  # Git avec snapshot
+│   ├── netlify-deploy.ps1 # Déploiement Netlify
+│   ├── netlify-clean-deploys.ps1 # Nettoyage déploiements Netlify
+│   ├── netlify-delete-sites.ps1 # Suppression sites Netlify
+│   ├── cleanup-temp-files.ps1 # Nettoyage fichiers temporaires
+│   ├── rotate-logs.ps1   # Rotation des logs
+│   └── show-urls.ps1     # Affichage URLs
 ├── README.md             # Documentation
 └── package.json          # Scripts du projet
 ```
@@ -175,7 +193,7 @@ Pour faciliter le développement et le déploiement, plusieurs scripts PowerShel
 
 #### Déploiement en Production
 ```bash
-./launch-prod.ps1
+./scripts/launch-prod.ps1
 ```
 - Nettoie et reconstruit tout le projet
 - Installe les dépendances si nécessaires
@@ -184,7 +202,7 @@ Pour faciliter le développement et le déploiement, plusieurs scripts PowerShel
 
 #### Git Automatique
 ```bash
-./git-auto.ps1
+./scripts/git-auto.ps1
 ```
 - Ajoute tous les fichiers modifiés (`git add .`)
 - Crée un commit avec message automatique
@@ -193,7 +211,7 @@ Pour faciliter le développement et le déploiement, plusieurs scripts PowerShel
 
 #### Git Interactif
 ```bash
-./git-push.ps1
+./scripts/git-push.ps1
 ```
 - Permet de personnaliser le message de commit
 - Affiche l'état Git avant de commit

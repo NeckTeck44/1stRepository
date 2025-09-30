@@ -9,7 +9,7 @@ export default {
     tailwindcss: {
       // Absolute path so it works regardless of current working directory
       // Use CJS config to avoid ESM interop issues with PostCSS/Tailwind v3
-      config: path.resolve(__dirname, "tailwind.config.cjs"),
+      config: path.resolve(__dirname, "../config/tailwind.config.cjs"),
     },
     autoprefixer: {},
   },

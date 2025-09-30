@@ -23,7 +23,7 @@ export async function setupVite(app: Express, server: Server) {
   
   // Créer le serveur Vite avec le hot reload
   const vite = await createViteServer({
-    configFile: path.resolve(clientPath, "vite.config.ts"),
+    configFile: path.resolve(__dirname, "../config/vite.config.ts"),
     server: {
       middlewareMode: true,
       hmr: {

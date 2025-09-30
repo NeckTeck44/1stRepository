@@ -25,7 +25,7 @@ cd ..
 
 # Deployer sur Netlify
 Write-Host "Deploiement sur Netlify..." -ForegroundColor Yellow
-netlify deploy --prod
+netlify deploy --prod --config ../config/netlify.toml
 
 Write-Host "Deploiement termine !" -ForegroundColor Green
 Read-Host "`nAppuyez sur Entree pour fermer..."
