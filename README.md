@@ -5,7 +5,7 @@ Un portfolio moderne et interactif développé avec HTML, CSS, JavaScript et Exp
 ## 🚀 Fonctionnalités
 
 ### Correction de Build Netlify
-- **Fix du build Netlify** : Création des fichiers `scroll-fix.js` et `scroll-diagnostic.js` pour résoudre les erreurs de build
+- **Fix du build Netlify** : Les fichiers `scroll-fix.js` et `scroll-diagnostic.js` qui causaient des erreurs ont été supprimés, ainsi que leurs références
 - **Configuration Vite optimisée** : Correction de la configuration pour un build réussi
 - **Scripts PowerShell améliorés** : Scripts de développement et production avec logging unique et gestion d'erreurs
 
