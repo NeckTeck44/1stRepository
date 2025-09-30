@@ -147,6 +147,7 @@ portfolio-alegria/
 │   ├── drizzle.config.ts # Configuration Drizzle
 │   └── netlify.toml      # Configuration Netlify
 ├── scripts/              # Scripts d'automatisation
+│   ├── setup-aliases.ps1 # Configuration des alias PowerShell
 │   ├── launch-dev.ps1    # Lancement développement
 │   ├── launch-prod.ps1   # Lancement production
 │   ├── git-auto.ps1      # Git automatique
@@ -190,6 +191,46 @@ npm run start        # Lance le projet en production
 
 ### Scripts PowerShell
 Pour faciliter le développement et le déploiement, plusieurs scripts PowerShell sont disponibles :
+
+### Raccourcis de lancement
+Vous avez plusieurs options pour lancer les scripts facilement :
+
+#### Option 1: Script rapide (recommandé)
+```bash
+./r.ps1 git-auto      # Git automatique
+./r.ps1 launch-dev    # Lancement développement
+./r.ps1 launch-prod   # Lancement production
+./r.ps1 cleanup       # Nettoyage fichiers
+./r.ps1 show-urls     # Afficher URLs
+```
+
+#### Option 2: Alias permanents (déjà configurés)
+Les alias sont maintenant permanents et fonctionnent depuis n'importe quel dossier :
+```bash
+git-auto                     # Git automatique
+launch-dev                   # Lancement développement
+launch-prod                  # Lancement production
+cleanup                      # Nettoyage fichiers
+show-urls                    # Afficher URLs
+git-push                     # Git interactif
+git-snapshot                 # Git avec snapshot
+netlify-deploy               # Déploiement Netlify
+```
+
+> **Note** : Les alias sont configurés dans votre profil PowerShell et s'activent automatiquement à chaque nouvelle session.
+
+#### Option 2bis: Configuration manuelle (si nécessaire)
+```bash
+./scripts/setup-aliases.ps1   # Configure les alias pour la session actuelle
+./r.ps1 setup-aliases         # Ou avec le script rapide
+```
+
+#### Option 3: Chemin complet
+```bash
+./scripts/git-auto.ps1
+./scripts/launch-dev.ps1
+./scripts/launch-prod.ps1
+```
 
 #### Déploiement en Production
 ```bash
