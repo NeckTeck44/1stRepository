@@ -621,3 +621,204 @@ d’instruction valide.
     + FullyQualifiedErrorId : InvalidEndOfLine
 
 ]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cserverPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\server> ]633;B
+PS>cd 'c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation'
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>del scroll-test.html, client\scroll-test.html, audio-fix.js, client\audio-fix.js, typing-sound-fix.js, client\typing-sound-fix.js, natural-typing-fix.js, client\natural-typing-fix.js
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>del scroll-clean-fix.js, client\scroll-clean-fix.js, scroll-emergency-fix.js, client\scroll-emergency-fix.js, scroll-nuke-fix.js, client\scroll-nuke-fix.js, paragraph-pause-fix.js, client\paragraph-pause-fix.js
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>del paragraph-sound-control.js, client\paragraph-sound-control.js, preload-typing-sound.js, client\preload-typing-sound.js
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>del fix-typing-sound.ps1, client\fix-typing-sound.ps1, fix-typing-sound-simple.ps1, client\fix-typing-sound-simple.ps1, temp_replace.ps1
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>del footer-correct.txt, client\footer-correct.txt, log.txt, log-prod.txt, fix_audio_conflict.cjs
+del : Impossible de supprimer l'élément C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log.txt: Le 
+processus ne peut pas accéder au fichier 'C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log.txt', 
+car il est en cours d'utilisation par un autre processus.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt, client\footer-correct.txt, log.txt, log-prod. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Users\catel\...rmation\log.txt:FileInfo) [Remove-Item], IOException
+    + FullyQualifiedErrorId : RemoveFileSystemItemIOError,Microsoft.PowerShell.Commands.RemoveItemCommand
+del : Impossible de supprimer l'élément
+C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\log.txt: Le processus ne
+peut pas accéder au fichier
+'C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\log.txt', car il est en
+cours d'utilisation par un autre processus.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt,
+client\footer-correct.txt, log.txt, log-prod. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Us
+   ers\catel\...rmation\log.txt:FileInfo) [Remo
+  ve-Item], IOException
+    + FullyQualifiedErrorId : RemoveFileSystemIt
+   emIOError,Microsoft.PowerShell.Commands.Remo
+  veItemCommand
+del : Impossible de supprimer l'élément C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+: Le processus ne peut pas accéder au fichier 'C:\Users\catel\Downloads\Portfolio Alegria - Candidature 
+Formation\log-prod.txt', car il est en cours d'utilisation par un autre processus.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt, client\footer-correct.txt, log.txt, log-prod. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Users\catel\...on\log-prod.txt:FileInfo) [Remove-Item], IOException
+    + FullyQualifiedErrorId : RemoveFileSystemItemIOError,Microsoft.PowerShell.Commands.RemoveItemCommand
+del : Impossible de supprimer l'élément
+C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\log-prod.txt: Le processus
+ne peut pas accéder au fichier
+'C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\log-prod.txt', car il est
+en cours d'utilisation par un autre processus.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt,
+client\footer-correct.txt, log.txt, log-prod. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Us
+   ers\catel\...on\log-prod.txt:FileInfo) [Remo
+  ve-Item], IOException
+    + FullyQualifiedErrorId : RemoveFileSystemIt
+   emIOError,Microsoft.PowerShell.Commands.Remo
+  veItemCommand
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>del footer-correct.txt, client\footer-correct.txt, fix_audio_conflict.cjs
+del : Impossible de trouver le chemin d'accès «C:\Users\catel\Downloads\Portfolio Alegria - Candidature 
+Formation\footer-correct.txt», car il n'existe pas.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt, client\footer-correct.txt, fix_audio_conflict ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\catel\...ter-correct.txt:String) [Remove-Item], 
+ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.RemoveItemCommand
+del : Impossible de trouver le chemin d'accès «
+C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\footer-correct.txt», car
+il n'existe pas.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt,
+client\footer-correct.txt, fix_audio_conflict ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C
+   :\Users\catel\...ter-correct.txt:String) [Re
+  move-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Micro
+   soft.PowerShell.Commands.RemoveItemCommand
+
+del : Impossible de trouver le chemin d'accès «C:\Users\catel\Downloads\Portfolio Alegria - Candidature 
+Formation\client\footer-correct.txt», car il n'existe pas.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt, client\footer-correct.txt, fix_audio_conflict ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\catel\...ter-correct.txt:String) [Remove-Item], 
+ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.RemoveItemCommand
+del : Impossible de trouver le chemin d'accès «
+C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\client\footer-correct.txt
+», car il n'existe pas.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt,
+client\footer-correct.txt, fix_audio_conflict ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C
+   :\Users\catel\...ter-correct.txt:String) [Re
+  move-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Micro
+   soft.PowerShell.Commands.RemoveItemCommand
+
+del : Impossible de trouver le chemin d'accès «C:\Users\catel\Downloads\Portfolio Alegria - Candidature 
+Formation\fix_audio_conflict.cjs», car il n'existe pas.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt, client\footer-correct.txt, fix_audio_conflict ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\catel\...io_conflict.cjs:String) [Remove-Item], 
+ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.RemoveItemCommand
+del : Impossible de trouver le chemin d'accès «
+C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\fix_audio_conflict.cjs»,
+car il n'existe pas.
+Au caractère Ligne:1 : 1
++ del footer-correct.txt,
+client\footer-correct.txt, fix_audio_conflict ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C
+   :\Users\catel\...io_conflict.cjs:String) [Re
+  move-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Micro
+   soft.PowerShell.Commands.RemoveItemCommand
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>del index.html, animation-manager.js, theme-manager.js, navigation-manager.js, chatbot-manager.js, config.js, audio-manager.js
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>del scroll-diagnostic.js, client\scroll-diagnostic.js, scroll-fix.js, client\scroll-fix.js
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>Remove-Item log.txt, log-prod.txt -Force
+Remove-Item : Impossible de supprimer l'élément C:\Users\catel\Downloads\Portfolio Alegria - Candidature 
+Formation\log.txt: Le processus ne peut pas accéder au fichier 'C:\Users\catel\Downloads\Portfolio Alegria - 
+Candidature Formation\log.txt', car il est en cours d'utilisation par un autre processus.
+Au caractère Ligne:1 : 1
++ Remove-Item log.txt, log-prod.txt -Force
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Users\catel\...rmation\log.txt:FileInfo) [Remove-Item], IOException
+    + FullyQualifiedErrorId : RemoveFileSystemItemIOError,Microsoft.PowerShell.Commands.RemoveItemCommand
+Remove-Item : Impossible de supprimer l'élément
+C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\log.txt: Le processus ne
+peut pas accéder au fichier
+'C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\log.txt', car il est en
+cours d'utilisation par un autre processus.
+Au caractère Ligne:1 : 1
++ Remove-Item log.txt, log-prod.txt -Force
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Us
+   ers\catel\...rmation\log.txt:FileInfo) [Remo
+  ve-Item], IOException
+    + FullyQualifiedErrorId : RemoveFileSystemIt
+   emIOError,Microsoft.PowerShell.Commands.Remo
+  veItemCommand
+Remove-Item : Impossible de supprimer l'élément C:\Users\catel\Downloads\Portfolio Alegria - Candidature 
+Formation\log-prod.txt: Le processus ne peut pas accéder au fichier 'C:\Users\catel\Downloads\Portfolio Alegria - 
+Candidature Formation\log-prod.txt', car il est en cours d'utilisation par un autre processus.
+Au caractère Ligne:1 : 1
++ Remove-Item log.txt, log-prod.txt -Force
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Users\catel\...on\log-prod.txt:FileInfo) [Remove-Item], IOException
+    + FullyQualifiedErrorId : RemoveFileSystemItemIOError,Microsoft.PowerShell.Commands.RemoveItemCommand
+Remove-Item : Impossible de supprimer l'élément
+C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\log-prod.txt: Le processus
+ne peut pas accéder au fichier
+'C:\Users\catel\Downloads\Portfolio Alegria -
+Candidature Formation\log-prod.txt', car il est
+en cours d'utilisation par un autre processus.
+Au caractère Ligne:1 : 1
++ Remove-Item log.txt, log-prod.txt -Force
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Us
+   ers\catel\...on\log-prod.txt:FileInfo) [Remo
+  ve-Item], IOException
+    + FullyQualifiedErrorId : RemoveFileSystemIt
+   emIOError,Microsoft.PowerShell.Commands.Remo
+  veItemCommand
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>cd 'c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client'
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cclientPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client> ]633;B
+PS>del static-styles.css.backup, static-styles.css.backup_20250929_185446, static-styles.css.backup_20250929_185457, vite.config.ts.bak
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cclientPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client> ]633;B
+PS>cd 'c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation'
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>del test-api.js
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>cd 'c:\Users\catel\Downloads'
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloadsPS C:\Users\catel\Downloads> ]633;B
+PS>cd "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B

@@ -1,6 +1,0 @@
-console.log('🎵 Système de vraie musique prêt');
-  </script>
-  <script src="debug-animation.js"></script>
-</body>
-
-</html>
