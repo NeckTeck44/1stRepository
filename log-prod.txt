@@ -822,3 +822,43 @@ PS>cd 'c:\Users\catel\Downloads'
 ]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloadsPS C:\Users\catel\Downloads> ]633;B
 PS>cd "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation"
 ]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>.\git-auto.ps1
+ðŸš€ Git automatique en cours...
+Message: mise a jour portfolio - 30/09/2025 15:01
+
+
+
+âœ… TerminÃ© !
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>sed -i "s|<h3>NeckBot - Assistant IA</h3>|<div class=\"chatbot-avatar\">\n                <img src=\"../attached_assets/NeckBot.jpg\" alt=\"NeckBot Assistant\" class=\"avatar-image\">\n                <div class=\"avatar-status\"></div>\n            </div>\n            <div class=\"chatbot-title\">\n                <h3>NeckBot</h3>\n                <span class=\"chatbot-subtitle\">Assistant IA</span>\n            </div>|g" "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"
+sed : Le terme «sed» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme 
+exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct 
+et réessayez.
+Au caractère Ligne:1 : 1
++ sed -i "s|<h3>NeckBot - Assistant IA</h3>|<div class=\"chatbot-avatar ...
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (sed:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+sed : Le terme «sed» n'est pas reconnu comme nom
+d'applet de commande, fonction, fichier de
+script ou programme exécutable. Vérifiez
+l'orthographe du nom, ou si un chemin d'accès
+existe, vérifiez que le chemin d'accès est
+correct et réessayez.
+Au caractère Ligne:1 : 1
++ sed -i "s|<h3>NeckBot - Assistant IA</h3>|<div
+class=\"chatbot-avatar ...
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (s
+   ed:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundExc
+   eption
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>powershell -Command "(Get-Content 'c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html') -replace '<h3>NeckBot - Assistant IA</h3>', '<div class=\"chatbot-avatar\">`n                <img src=\"../attached_assets/NeckBot.jpg\" alt=\"NeckBot Assistant\" class=\"avatar-image\">`n                <div class=\"avatar-status\"></div>`n            </div>`n            <div class=\"chatbot-title\">`n                <h3>NeckBot</h3>`n                <span class=\"chatbot-subtitle\">Assistant IA</span>`n            </div>' | Set-Content 'c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html'"
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B

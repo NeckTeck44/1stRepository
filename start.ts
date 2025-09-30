@@ -12,4 +12,5 @@ spawn("npx", ["tsx", "-r", "tsconfig-paths/register", "index.ts"], {
   cwd: path.resolve(__dirname, "server"),
   stdio: "inherit",
   shell: true,
+  env: { ...process.env, NODE_ENV: "development", PYTHONIOENCODING: "utf-8" },
 });

@@ -1,21 +1,37 @@
 # Lancer le projet Alegria en mode PRODUCTION
-Start-Transcript -Path "$PSScriptRoot\log-prod.txt" -Append
+# Configuration de l'environnement
+$env:PYTHONIOENCODING = "utf-8"
+$env:NODE_ENV = "production"
+
+# Creer le repertoire de logs si necessaire
+if (-not (Test-Path "logs")) {
+    New-Item -ItemType Directory -Path "logs" | Out-Null
+}
+
+# Utiliser un fichier de log unique avec timestamp
+$timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$logFile = "$PSScriptRoot\logs\prod_$timestamp.txt"
+
+Write-Host "Transcription demarree, le fichier de sortie est $logFile"
+Add-Content -Path $logFile -Value "===== Lancement du projet Alegria en PRODUCTION - $(Get-Date) ====="
 
 Set-Location -Path "$PSScriptRoot"
 
 Write-Host " Lancement du projet Alegria en mode PRODUCTION..." -ForegroundColor Green
+Add-Content -Path $logFile -Value "Lancement du projet Alegria en mode PRODUCTION..."
 
-# Vérifier et installer les dépendances backend si nécessaire
+# Verifier et installer les dependances backend si necessaire
 if (Test-Path ".\package.json") {
     $shouldInstallBackend = $false
     
-    # Vérifier si node_modules existe
+    # Verifier si node_modules existe
     if (!(Test-Path ".\node_modules")) {
-        Write-Host " Dossier node_modules manquant, installation des dépendances backend..." -ForegroundColor Yellow
+        Write-Host " Dossier node_modules manquant, installation des dependances backend..." -ForegroundColor Yellow
+        Add-Content -Path $logFile -Value "Dossier node_modules manquant, installation des dependances backend..."
         $shouldInstallBackend = $true
     }
     else {
-        # Vérifier si les dépendances principales sont installées
+        # Verifier si les dependances principales sont installees
         try {
             $packageJson = Get-Content ".\package.json" | ConvertFrom-Json
             $missingDeps = @()
@@ -29,13 +45,16 @@ if (Test-Path ".\package.json") {
             }
             
             if ($missingDeps.Count -gt 0) {
-                Write-Host " Dépendances manquantes détectées : $($missingDeps -join ', ')" -ForegroundColor Yellow
-                Write-Host " Installation des dépendances backend..." -ForegroundColor Yellow
+                Write-Host " Dependance manquantes detectees : $($missingDeps -join ', ')" -ForegroundColor Yellow
+                Write-Host " Installation des dependances backend..." -ForegroundColor Yellow
+                Add-Content -Path $logFile -Value "Dependance manquantes detectees : $($missingDeps -join ', ')"
+                Add-Content -Path $logFile -Value "Installation des dependances backend..."
                 $shouldInstallBackend = $true
             }
         }
         catch {
-            Write-Host " Erreur lors de la lecture du package.json, installation des dépendances..." -ForegroundColor Yellow
+            Write-Host " Erreur lors de la lecture du package.json, installation des dependances..." -ForegroundColor Yellow
+            Add-Content -Path $logFile -Value "Erreur lors de la lecture du package.json, installation des dependances..."
             $shouldInstallBackend = $true
         }
     }
@@ -43,23 +62,27 @@ if (Test-Path ".\package.json") {
     if ($shouldInstallBackend) {
         npm install
         if ($LASTEXITCODE -ne 0) {
-            Write-Host "❌ Erreur lors de l'installation des dépendances backend !" -ForegroundColor Red
-            Stop-Transcript
+            Write-Host " Erreur lors de l'installation des dependances backend !" -ForegroundColor Red
+            Add-Content -Path $logFile -Value "Erreur lors de l'installation des dependances backend !"
             Write-Host "`nAppuyez sur Entree pour fermer..."
             Read-Host
             exit 1
         }
-        Write-Host "✅ Dépendances backend installées avec succès !" -ForegroundColor Green
+        Write-Host " Dependances backend installees avec succes !" -ForegroundColor Green
+        Add-Content -Path $logFile -Value "Dependances backend installees avec succes !"
     }
     else {
-        Write-Host "✅ Dépendances backend déjà à jour" -ForegroundColor Cyan
+        Write-Host " Dependances backend deja a jour" -ForegroundColor Cyan
+        Add-Content -Path $logFile -Value "Dependances backend deja a jour"
     }
 }
 
-# Demander à l'utilisateur s'il veut forcer un rebuild clean
-$forceRebuild = Read-Host "Forcer un rebuild complet ? (O/N) [défaut: N]"
+# Demander a l'utilisateur s'il veut forcer un rebuild clean
+$forceRebuild = Read-Host "Forcer un rebuild complet ? (O/N) [defaut: N]"
+Add-Content -Path $logFile -Value "Rebuild force demande : $forceRebuild"
 if ($forceRebuild -match "^[OoYy]$") {
     Write-Host " Nettoyage complet avant rebuild..." -ForegroundColor Yellow
+    Add-Content -Path $logFile -Value "Nettoyage complet avant rebuild..."
     if (Test-Path ".\client\dist") {
         Remove-Item -Recurse -Force ".\client\dist" -ErrorAction SilentlyContinue
     }
@@ -71,26 +94,29 @@ if ($forceRebuild -match "^[OoYy]$") {
     }
 }
 
-# Vérifier si le build existe déjà
+# Verifier si le build existe deja
 if (!(Test-Path ".\client\dist\index.html")) {
     Write-Host " Build du frontend requis..." -ForegroundColor Yellow
+    Add-Content -Path $logFile -Value "Build du frontend requis..."
     
-    # Installer les dépendances frontend si nécessaire
+    # Installer les dependances frontend si necessaire
     if (!(Test-Path ".\client\node_modules")) {
-        Write-Host " Installation des dépendances frontend..."
+        Write-Host " Installation des dependances frontend..."
+        Add-Content -Path $logFile -Value "Installation des dependances frontend..."
         npm --prefix client install
         if ($LASTEXITCODE -ne 0) {
-            Write-Host " Erreur lors de l'installation des dépendances frontend !" -ForegroundColor Red
-            Stop-Transcript
+            Write-Host " Erreur lors de l'installation des dependances frontend !" -ForegroundColor Red
+            Add-Content -Path $logFile -Value "Erreur lors de l'installation des dependances frontend !"
             Write-Host "`nAppuyez sur Entree pour fermer..."
             Read-Host
             exit 1
         }
     }
     
-    # Vérifier spécifiquement que vite est installé
+    # Verifier specifiquement que vite est installe
     if (!(Test-Path ".\client\node_modules\.bin\vite*")) {
         Write-Host "Vite non detecte, nettoyage du cache et installation specifique..." -ForegroundColor Yellow
+        Add-Content -Path $logFile -Value "Vite non detecte, nettoyage du cache et installation specifique..."
         
         # Nettoyer le cache Vite corrompu
         if (Test-Path ".\client\.vite") {
@@ -100,51 +126,57 @@ if (!(Test-Path ".\client\dist\index.html")) {
             Remove-Item -Recurse -Force ".\client\node_modules\.vite-temp" -ErrorAction SilentlyContinue
         }
         
-        # Forcer la réinstallation de Vite
+        # Forcer la reinstallation de Vite
         npm --prefix client install vite@7.1.7 --save-dev --force
         if ($LASTEXITCODE -ne 0) {
             Write-Host "Erreur lors de l'installation de vite !" -ForegroundColor Red
-            Stop-Transcript
+            Add-Content -Path $logFile -Value "Erreur lors de l'installation de vite !"
             Write-Host "`nAppuyez sur Entree pour fermer..."
             Read-Host
             exit 1
         }
         Write-Host "Vite installe avec succes !" -ForegroundColor Green
+        Add-Content -Path $logFile -Value "Vite installe avec succes !"
     }
     
     # Build du frontend
     Write-Host " Build du frontend en cours..."
+    Add-Content -Path $logFile -Value "Build du frontend en cours..."
     Set-Location client
     npm run build
     $buildSuccess = $LASTEXITCODE -eq 0
     Set-Location ..
     
     if ($buildSuccess -and (Test-Path ".\client\dist\index.html")) {
-        Write-Host " Build réussi !" -ForegroundColor Green
+        Write-Host " Build reussi !" -ForegroundColor Green
+        Add-Content -Path $logFile -Value "Build reussi !"
     }
     else {
         Write-Host " Erreur lors du build !" -ForegroundColor Red
-        Stop-Transcript
+        Add-Content -Path $logFile -Value "Erreur lors du build !"
         Write-Host "`nAppuyez sur Entree pour fermer..."
         Read-Host
         exit 1
     }
 }
 else {
-    Write-Host " Build déjà existant, utilisation de la version actuelle" -ForegroundColor Cyan
+    Write-Host " Build deja existant, utilisation de la version actuelle" -ForegroundColor Cyan
+    Add-Content -Path $logFile -Value "Build deja existant, utilisation de la version actuelle"
 }
 
-# Nettoyage du cache si nécessaire
+# Nettoyage du cache si necessaire
 if (Test-Path ".\client\.vite") {
     Write-Host " Nettoyage du cache Vite..."
+    Add-Content -Path $logFile -Value "Nettoyage du cache Vite..."
     Remove-Item -Recurse -Force ".\client\.vite" -ErrorAction SilentlyContinue
 }
 
 # Lancer le serveur en mode production sur le port 5000
 $port = 5000
-Write-Host " Démarrage du serveur PRODUCTION sur le port $port..." -ForegroundColor Green
+Write-Host " Demarrage du serveur PRODUCTION sur le port $port..." -ForegroundColor Green
+Add-Content -Path $logFile -Value "Demarrage du serveur PRODUCTION sur le port $port..."
 
-# Fonction pour arrêter le processus utilisant le port 5000
+# Fonction pour arreter le processus utilisant le port 5000
 function Stop-ProcessOnPort {
     param([int]$port)
     
@@ -155,7 +187,8 @@ function Stop-ProcessOnPort {
                 $processId = $conn.OwningProcess
                 $process = Get-Process -Id $processId -ErrorAction SilentlyContinue
                 if ($process) {
-                    Write-Host " Arrêt du processus $($process.Name) (PID: $($process.Id)) utilisant le port $port..." -ForegroundColor Yellow
+                    Write-Host " Arret du processus $($process.Name) (PID: $($process.Id)) utilisant le port $port..." -ForegroundColor Yellow
+                    Add-Content -Path $logFile -Value "Arret du processus $($process.Name) (PID: $($process.Id)) utilisant le port $port..."
                     Stop-Process -Id $process.Id -Force
                     Start-Sleep -Seconds 1
                     return $true
@@ -164,40 +197,40 @@ function Stop-ProcessOnPort {
         }
     }
     catch {
-        # Erreur silencieuse
+        Add-Content -Path $logFile -Value "Erreur lors de l'arret du processus sur le port $port : $_"
     }
     return $false
 }
 
-# Vérifier si le port est utilisé et tuer le processus si nécessaire
+# Verifier si le port est utilise et tuer le processus si necessaire
 $netstatResult = netstat -ano | findstr ":$port"
 if ($netstatResult -and $netstatResult -match "LISTENING") {
-    Write-Host "  Le port $port est déjà utilisé. Tentative de libération automatique..." -ForegroundColor Yellow
+    Write-Host "  Le port $port est deja utilise. Tentative de liberation automatique..." -ForegroundColor Yellow
+    Add-Content -Path $logFile -Value "Le port $port est deja utilise. Tentative de liberation automatique..."
     $killed = Stop-ProcessOnPort -port $port
     if ($killed) {
-        Write-Host " Port libéré avec succès !" -ForegroundColor Green
+        Write-Host " Port libere avec succes !" -ForegroundColor Green
+        Add-Content -Path $logFile -Value "Port libere avec succes !"
         Start-Sleep -Seconds 2
     }
     else {
-        Write-Host " Impossible de libérer le port automatiquement. Veuillez le faire manuellement." -ForegroundColor Red
-        Stop-Transcript
+        Write-Host " Impossible de liberer le port automatiquement. Veuillez le faire manuellement." -ForegroundColor Red
+        Add-Content -Path $logFile -Value "Impossible de liberer le port automatiquement. Veuillez le faire manuellement."
         Write-Host "`nAppuyez sur Entree pour fermer..."
         Read-Host
         exit 1
     }
 }
 
-$env:NODE_ENV = "production"
 try {
     npx tsx start.ts
 }
 catch {
-    Write-Host " Erreur lors du démarrage du serveur : $_" -ForegroundColor Red
+    Write-Host " Erreur lors du demarrage du serveur : $_" -ForegroundColor Red
+    Add-Content -Path $logFile -Value "Erreur lors du demarrage du serveur : $_"
 }
 
-Stop-Transcript
+Add-Content -Path $logFile -Value "===== Fin de session PRODUCTION - $(Get-Date) ====="
 Write-Host "`nAppuyez sur Entree pour fermer..."
+Add-Content -Path $logFile -Value "Appuyez sur Entree pour fermer..."
 Read-Host
-
-
-

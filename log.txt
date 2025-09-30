@@ -5528,3 +5528,87 @@ Processus trouvÃ©s sur le port 5000 :
 ArrÃªt des processus avec PIDs : 38608
 Processus 38608 arrÃªtÃ©
 Lancement du projet Alegria...
+15:39:12 [vite] (client) Pre-transform error: Failed to load url /scroll-fix.js (resolved id: C:/Users/catel/Downloads/Portfolio Alegria - Candidature Formation/client/scroll-fix.js).
+Does the file exist? (x2)
+15:39:12 [vite] (client) Pre-transform error: Failed to load url /scroll-diagnostic.js (resolved id: C:/Users/catel/Downloads/Portfolio Alegria - Candidature Formation/client/scroll-di
+agnostic.js). Does the file exist?
+**********************
+Fin de la transcription Windows PowerShell
+Heure de fin : 20250930154454
+**********************
+﻿**********************
+Début de la transcription Windows PowerShell
+Heure de début : 20250930154454
+Nom d'utilisateur : PC-NECKTECK-W11\catel
+Utilisateur runAs :  PC-NECKTECK-W11\catel
+Nom de la configuration : 
+Ordinateur : PC-NECKTECK-W11 (Microsoft Windows NT 10.0.26100.0)
+Application hôte : C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\catel\AppData\Local\Programs\Windsurf\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+ID de processus : 38784
+PSVersion: 5.1.26100.6584
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.6584
+BuildVersion: 10.0.26100.6584
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log.txt
+VÃ©rification des processus sur le port 5000...
+Processus trouvÃ©s sur le port 5000 :
+  TCP    0.0.0.0:5000           0.0.0.0:0              LISTENING       29208   TCP    127.0.0.1:5000         127.0.0.1:10933        ESTABLISHED     29208   TCP    127.0.0.1:10933        127.0.0.1:5000         ESTABLISHED     51252
+ArrÃªt des processus avec PIDs : 29208 51252
+Processus 29208 arrÃªtÃ©
+Processus 51252 arrÃªtÃ©
+Lancement du projet Alegria...
+**********************
+Début de la transcription Windows PowerShell
+Heure de début : 20250930155325
+Nom d'utilisateur : PC-NECKTECK-W11\catel
+Utilisateur runAs :  PC-NECKTECK-W11\catel
+Nom de la configuration : 
+Ordinateur : PC-NECKTECK-W11 (Microsoft Windows NT 10.0.26100.0)
+Application hôte : C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\catel\AppData\Local\Programs\Windsurf\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+ID de processus : 74252
+PSVersion: 5.1.26100.6584
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.6584
+BuildVersion: 10.0.26100.6584
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log.txt
+VÃ©rification des processus sur le port 5000...
+Processus trouvÃ©s sur le port 5000 :
+  TCP    127.0.0.1:2582         127.0.0.1:5000         SYN_SENT        39752
+ArrÃªt des processus avec PIDs : 39752
+Processus 39752 arrÃªtÃ©
+Lancement du projet Alegria...
+15:53:32 [vite] (client) Re-optimizing dependencies because vite config has changed
+3:53:32 PM [express] Server running at http://0.0.0.0:5000
+3:53:32 PM [express] Local access: http://127.0.0.1:5000
+3:53:32 PM [express] Network access: http://192.168.1.10:5000
+3:53:32 PM [express] �� For internet access, you need to configure port forwarding on your router
+3:53:32 PM [express] �� Or use a tunnel service like ngrok: ngrok http 5000
+PS>Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-dev
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log.txt
+VÃ©rification des processus sur le port 5000...
+Aucun processus trouvÃ© sur le port 5000
+Lancement du projet Alegria...
+
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+
+===== Lancement du projet Alegria - 09/30/2025 16:31:58 =====
+Verification des processus sur le port 5000...
+Aucun processus trouve sur le port 5000
+Lancement du projet Alegria...

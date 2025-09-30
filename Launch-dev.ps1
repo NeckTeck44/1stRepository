@@ -1,58 +1,115 @@
-# Lancer le projet Alegria (Express + Vite)
-Start-Transcript -Path "$PSScriptRoot\log.txt" -Append
+# Configuration de l'environnement
+$env:PYTHONIOENCODING = "utf-8"
+$env:NODE_ENV = "development"
 
-Set-Location -Path "$PSScriptRoot"
-
-# Installer les dépendances backend
-if ((Test-Path ".\package.json") -and !(Test-Path ".\node_modules")) {
-  Write-Host "Installation des dépendances backend..."
-  npm install
+# Creer le repertoire de logs si necessaire
+if (-not (Test-Path "logs")) {
+    New-Item -ItemType Directory -Path "logs" | Out-Null
 }
 
-# Installer les dépendances frontend
-if (!(Test-Path ".\client\node_modules")) {
-  Write-Host "Installation des dépendances frontend..."
-  npm --prefix client install
+# Utiliser un fichier de log unique avec timestamp
+$timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$logFile = "$PSScriptRoot\logs\log_$timestamp.txt"
+
+Write-Host "Transcription demarree, le fichier de sortie est $logFile"
+Add-Content -Path $logFile -Value "===== Lancement du projet Alegria - $(Get-Date) ====="
+
+# Se deplacer dans le repertoire du script
+Set-Location $PSScriptRoot
+
+# Installer les dependances backend
+if (Test-Path "package.json") {
+    if (-not (Test-Path "node_modules")) {
+        Write-Host "Installation des dependances backend..."
+        Add-Content -Path $logFile -Value "Installation des dependances backend..."
+        npm install
+    }
 }
 
-if (!(Test-Path ".\node_modules\concurrently")) {
-  Write-Host "Installation de concurrently..."
-  npm install concurrently --save-dev
+# Installer les dependances frontend
+if (-not (Test-Path "client\node_modules")) {
+    Write-Host "Installation des dependances frontend..."
+    Add-Content -Path $logFile -Value "Installation des dependances frontend..."
+    npm --prefix client install
+}
+
+# Installer concurrently si necessaire
+if (-not (Test-Path "node_modules\concurrently")) {
+    Write-Host "Installation de concurrently..."
+    Add-Content -Path $logFile -Value "Installation de concurrently..."
+    npm install concurrently --save-dev
 }
 
 # Nettoyage du cache Vite
-if (Test-Path ".\client\.vite") {
-  Write-Host "Nettoyage du cache Vite..."
-  Remove-Item -Recurse -Force ".\client\.vite"
+if (Test-Path "client\.vite") {
+    Write-Host "Nettoyage du cache Vite..."
+    Add-Content -Path $logFile -Value "Nettoyage du cache Vite..."
+    Remove-Item -Path "client\.vite" -Recurse -Force
 }
 
 # Tuer les processus sur le port 5000
-Write-Host "Vérification des processus sur le port 5000..."
-$processes = netstat -ano | findstr ":5000"
+Write-Host "Verification des processus sur le port 5000..."
+Add-Content -Path $logFile -Value "Verification des processus sur le port 5000..."
+
+$found_processes = $false
+$processes = netstat -ano | Select-String ":5000" | Select-String "LISTENING"
 if ($processes) {
-  Write-Host "Processus trouvés sur le port 5000 :"
-  Write-Host $processes
-  $processIds = $processes | ForEach-Object { if ($_ -match '\s+(\d+)\s*$') { $matches[1] } } | Select-Object -Unique
-  if ($processIds) {
-    Write-Host "Arrêt des processus avec PIDs : $processIds"
-    foreach ($processId in $processIds) {
-      try {
-        Stop-Process -Id $processId -Force
-        Write-Host "Processus $processId arrêté"
-      } catch {
-        Write-Host "Impossible d'arrêter le processus $processId"
-      }
+    $found_processes = $true
+    Write-Host "Processus trouves sur le port 5000 :"
+    Add-Content -Path $logFile -Value "Processus trouves sur le port 5000 :"
+    $processes
+    
+    foreach ($line in $processes) {
+        $parts = $line -split '\s+'
+        $pid = $parts[-1]
+        Write-Host "Arret des processus avec PIDs : $pid"
+        Add-Content -Path $logFile -Value "Arret des processus avec PIDs : $pid"
+        
+        try {
+            Stop-Process -Id $pid -Force -ErrorAction Stop
+            Write-Host "Processus $pid arrete"
+            Add-Content -Path $logFile -Value "Processus $pid arrete"
+        } catch {
+            Write-Host "Impossible d'arreter le processus $pid"
+            Add-Content -Path $logFile -Value "Impossible d'arreter le processus $pid"
+        }
     }
-    Start-Sleep -Seconds 2
-  }
-} else {
-  Write-Host "Aucun processus trouvé sur le port 5000"
 }
+
+if (-not $found_processes) {
+    Write-Host "Aucun processus trouve sur le port 5000"
+    Add-Content -Path $logFile -Value "Aucun processus trouve sur le port 5000"
+}
+
+Start-Sleep -Seconds 2
 
 # Lancer Express + Vite
 Write-Host "Lancement du projet Alegria..."
-npx tsx start.ts
+Add-Content -Path $logFile -Value "Lancement du projet Alegria..."
 
-Stop-Transcript
-Write-Host "`nAppuyez sur Entrée pour fermer..."
-Read-Host
+# Executer le serveur et capturer la sortie
+Write-Host "Serveur en cours d'execution..."
+while ($true) {
+    try {
+        npx tsx start.ts
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "Erreur lors du lancement du projet. Nouvelle tentative dans 5 secondes..."
+            Add-Content -Path $logFile -Value "Erreur lors du lancement du projet. Nouvelle tentative dans 5 secondes..."
+            Start-Sleep -Seconds 5
+        } else {
+            break
+        }
+    } catch {
+        Write-Host "Erreur lors du lancement du projet. Nouvelle tentative dans 5 secondes..."
+        Add-Content -Path $logFile -Value "Erreur lors du lancement du projet. Nouvelle tentative dans 5 secondes..."
+        Start-Sleep -Seconds 5
+    }
+}
+
+Write-Host ""
+Write-Host "Appuyez sur une touche pour fermer..."
+Add-Content -Path $logFile -Value "Appuyez sur une touche pour fermer..."
+Read-Host | Out-Null
+
+Add-Content -Path $logFile -Value "===== Fin de session - $(Get-Date) ====="
+Add-Content -Path $logFile -Value "Session terminee."

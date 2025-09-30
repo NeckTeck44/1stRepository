@@ -1184,24 +1184,29 @@
     </section>
 
     <!-- Chatbot Interface -->
-    <div id="chatbot" class="chatbot-container" style="display: none;">
-        <div class="chatbot-header">
-            <h3>NeckBot - Assistant IA</h3>
-            <button onclick="closeChatbot()" class="close-btn">×</button>
+    <div class="chatbot-avatar">
+        <img src="../attached_assets/NeckBot.jpg" alt="NeckBot Assistant" class="avatar-image">
+        <div class="avatar-status"></div>
+    </div>
+    <div class="chatbot-title">
+        <h3>NeckBot</h3>
+        <span class="chatbot-subtitle">Assistant IA</span>
+    </div>
+    <button onclick="closeChatbot()" class="close-btn">×</button>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+        <div class="message bot-message">
+            <p>Bonjour ! Je suis NeckBot, l'IA à votre service. Je suis là pour répondre à toutes vos questions
+                concernant
+                NeckTeck, ses compétences, ses projets ou sa candidature. Comment puis-je vous aider aujourd'hui ?
+            </p>
         </div>
-        <div id="chat-messages" class="chat-messages">
-            <div class="message bot-message">
-                <p>Bonjour ! Je suis NeckBot, l'IA à votre service. Je suis là pour répondre à toutes vos questions
-                    concernant
-                    NeckTeck, ses compétences, ses projets ou sa candidature. Comment puis-je vous aider aujourd'hui ?
-                </p>
-            </div>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="user-input" placeholder="Demandez-moi quoi que ce soit..."
-                onkeypress="handleKeyPress(event)">
-            <button onclick="sendMessage()" class="send-btn">Envoyer</button>
-        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Demandez-moi quoi que ce soit..."
+            onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()" class="send-btn">Envoyer</button>
+    </div>
     </div>
 
     <script>
@@ -1581,26 +1586,34 @@
                 const API_KEY = 'AIzaSyDj5qAn4i7k3y9NdALFGJWzztsl91TkvY8'; // Clé API Google Gemini
                 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
 
-                // System prompt pour des réponses COURTES et SIMPLES
-                const systemPrompt = `Tu es l'assistant IA personnel de NeckTeck, candidat à la formation Alegria.
+                // System prompt pour NeckBot
+                const systemPrompt = `Tu es NeckBot 🤖, l'assistant IA personnel de NeckTeck.
+Tu réponds au personnel de l'Alégria Academy.
 
 RÈGLES :
-1. Réponses TRÈS COURTES : 1-2 phrases maximum
+1. Réponses TRÈS COURTES : 1-2 phrases max
 2. Langage SIMPLE et direct
-3. Sois amical mais professionnel
+3. Ton amical mais professionnel
 4. Un emoji MAX par réponse
 
 SUJETS :
 - Parle de NeckTeck à la 3ème personne
 - Compétences : HTML5, CSS3, JavaScript, TypeScript
 - Projets : Portfolio, dashboard analytics
-- Motivation pour Alegria et le low-code
+- Motivation : Alegria, low-code, innovation
 - Contact : via le portfolio
 
-EXEMPLES :
-"Bonjour ! 👋 Je suis l'assistant de NeckTeck. Il est développeur web passionné par Alegria !"
-"NeckTeck maîtrise HTML5, CSS3, JavaScript et TypeScript. Crée des sites modernes et responsives."
-"Il veut intégrer Alegria pour devenir expert en low-code et créer des solutions innovantes."`;
+EXEMPLES DE RÉPONSES :
+"NeckTeck est développeur front-end passionné." 💡  
+"Il maîtrise HTML5, CSS3, JavaScript et TypeScript." 🧠  
+"Son portfolio montre ses projets web et dashboards." 📊  
+"Il postule à Alegria pour accélérer l'innovation." 🚀  
+"Son style est clair, moderne et orienté utilisateur." 🎯  
+"Il aime automatiser et simplifier les workflows." ⚙️  
+"Son dashboard analytics est élégant et fonctionnel." 📈  
+"NeckTeck croit au pouvoir du collectif et de l'accessibilité." 🤝  
+"Il explore le low-code pour aller plus vite, plus loin." 🛠️  
+"Contactez-le via son portfolio en ligne." 🌐`;
 
                 // Préparer la requête pour l'API (format corrigé)
                 const requestBody = {
@@ -2859,8 +2872,5 @@ EXEMPLES :
         // Lancer le test automatiquement au chargement
         setTimeout(testProjectHoverEffects, 1000);
 
-        // Le raccourci clavier pour le test des effets de survol a été supprimé pour éviter les interférences
     </script>
-    <script type="module" src="scroll-fix.js"></script>
-    <script type="module" src="scroll-diagnostic.js"></script>
 </body>

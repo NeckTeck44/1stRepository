@@ -9,20 +9,15 @@ export default defineConfig({
   plugins: [],
 
   // Configuration pour servir des fichiers statiques
-  root: __dirname,
-  publicDir: ".",
+  root: "client",
+  publicDir: "../",
   base: "/",
-
-  // Activer la transformation CSS
-  esbuild: {
-    loader: "css",
-  },
 
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
     rollupOptions: {
-      input: path.resolve(__dirname, "index.html"),
+      input: path.resolve(__dirname, "client/index.html"),
     },
   },
 
@@ -46,7 +41,7 @@ export default defineConfig({
     },
   },
 
-  // Optimiser les dépendances CSS
+  // Optimiser les dépendances
   optimizeDeps: {
     include: [],
   },

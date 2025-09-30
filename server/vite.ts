@@ -58,7 +58,7 @@ export async function setupVite(app: Express, server: Server) {
       
       template = await vite.transformIndexHtml(url, template);
       
-      res.status(200).set({ "Content-Type": "text/html" }).end(template);
+      res.status(200).set({ "Content-Type": "text/html; charset=utf-8" }).end(template);
     } catch (e) {
       const error = e instanceof Error ? e : new Error(String(e));
       vite.ssrFixStacktrace(error);
@@ -79,6 +79,8 @@ export function serveStatic(app: Express) {
   app.use(express.static(distPath));
 
   app.get("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(path.resolve(distPath, "index.html"), {
+      headers: { "Content-Type": "text/html; charset=utf-8" }
+    });
   });
 }

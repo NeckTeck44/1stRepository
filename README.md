@@ -1,8 +1,13 @@
 # Portfolio Alegria - NeckTeck
 
-Un portfolio moderne et interactif développé avec React, Vite et Express, présentant les compétences, projets et motivations de NeckTeck.
+Un portfolio moderne et interactif développé avec HTML, CSS, JavaScript et Express, présentant les compétences, projets et motivations de NeckTeck.
 
 ## 🚀 Fonctionnalités
+
+### Correction de Build Netlify
+- **Fix du build Netlify** : Création des fichiers `scroll-fix.js` et `scroll-diagnostic.js` pour résoudre les erreurs de build
+- **Configuration Vite optimisée** : Correction de la configuration pour un build réussi
+- **Scripts PowerShell améliorés** : Scripts de développement et production avec logging unique et gestion d'erreurs
 
 ### Design & Animations
 - **Design moderne et épuré** avec une interface utilisateur intuitive
@@ -29,12 +34,12 @@ Un portfolio moderne et interactif développé avec React, Vite et Express, pré
 ## 🛠️ Technologies Utilisées
 
 ### Frontend
-- **React 18** - Bibliothèque JavaScript pour l'interface utilisateur
-- **Vite** - Outil de build rapide et moderne
-- **TypeScript** - Typage statique pour JavaScript
-- **Tailwind CSS** - Framework CSS utilitaire
+- **HTML5** - Structure sémantique du document
 - **CSS3** - Animations et effets visuels avancés
+- **JavaScript (ES6+)** - Logique interactive et animations
+- **Vite** - Outil de build rapide et moderne
 - **Web Audio API** - Génération de sons dynamiques
+- **html2canvas** - Capture d'écran pour les thumbnails
 
 ### Backend
 - **Express.js** - Framework web pour Node.js
