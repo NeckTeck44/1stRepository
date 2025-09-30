@@ -566,3 +566,58 @@ Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portf
 Appuyez sur Entree pour fermer...
 
 ]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>sed -i '1151i\            <form action="mailto:catelaindamien@hotmail.fr" method="post" enctype="text/plain">' "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"
+sed : Le terme «sed» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme 
+exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct 
+et réessayez.
+Au caractère Ligne:1 : 1
++ sed -i '1151i\            <form action="mailto:catelaindamien@hotmail ...
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (sed:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+sed : Le terme «sed» n'est pas reconnu comme nom
+d'applet de commande, fonction, fichier de
+script ou programme exécutable. Vérifiez
+l'orthographe du nom, ou si un chemin d'accès
+existe, vérifiez que le chemin d'accès est
+correct et réessayez.
+Au caractère Ligne:1 : 1
++ sed -i '1151i\            <form
+action="mailto:catelaindamien@hotmail ...
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (s
+   ed:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundExc
+   eption
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>$content = Get-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"; $content[1150] = $content[1150] + "`n            <form action=`"mailto:catelaindamien@hotmail.fr`" method=`"post`" enctype=`"text/plain`">"; $content | Set-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>$content = Get-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"; $content = $content[0..1150] + "            <form action=`"mailto:catelaindamien@hotmail.fr`" method=`"post`" enctype=`"text/plain`">" + $content[1151..($content.Length-1)]; $content | Set-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>$content = Get-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"; $content = $content[0..1151] + $content[1153..($content.Length-1)]; $content | Set-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>$content = Get-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html" -Raw; $content = $content -replace "(            <h2 class=`"section-title title-accent`">Contact</h2>`r`n)(            <div class=`"form-row`">)", "`$1            <form action=`"mailto:catelaindamien@hotmail.fr`" method=`"post`" enctype=`"text/plain`">`r`n`$2"; $content | Set-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>$content = Get-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html" -Raw; $content = $content -replace "(            <div class=`"form-row`">`r`n)(            <form action=`"mailto:catelaindamien@hotmail.fr`" method=`"post`" enctype=`"text/plain`">)", "`$1"; $content | Set-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>$content = Get-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html" -Raw; $content = $content -replace "action=`"mailto:catelaindamien@hotmail.fr`" method=`"post`" enctype=`"text/plain`"", "action=`"https://formspree.io/f/mpwydorr`" method=`"POST`""; $content | Set-Content "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client\index.html"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>cd 'c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\server'
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cserverPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\server> ]633;B
+PS>cd .. && .\git-auto.ps1
+Au caractère Ligne:1 : 7
++ cd .. && .\git-auto.ps1
++       ~~
+Le jeton « && » n’est pas un séparateur d’instruction valide.
+Au caractère Ligne:1 : 7
++ cd .. && .\git-auto.ps1
++       ~~
+Le jeton «&&» n’est pas un séparateur
+d’instruction valide.
+    + CategoryInfo          : ParserError: (:) [
+   ], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidEndOfLine
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cserverPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\server> ]633;B

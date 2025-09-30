@@ -819,10 +819,14 @@
                     }
                 }
 
-                // Fonction de secours avec son synthétique
+                // Fonction de secours avec son synthétique (DÉSACTIVÉ pour éviter le "biip")
                 function playTypingSoundFallback() {
-                    console.log('🔊 Son de frappe synthétique (secours)');
+                    console.log('🔊 Son de frappe synthétique (secours) - DÉSACTIVÉ');
+                    // La fonction est volontairement vide pour éviter le son "biip" lors de la frappe
+                    // dans le formulaire de contact
+                    return;
 
+                    /*
                     try {
                         if (!typingAudioContext) {
                             typingAudioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -850,6 +854,7 @@
                     } catch (error) {
                         console.log('❌ Erreur son de secours:', error);
                     }
+                    */
                 }
 
                 // Utiliser Intersection Observer pour une détection plus fiable
@@ -1148,19 +1153,21 @@
     <section id="contact" class="section">
         <div class="container">
             <h2 class="section-title title-accent">Contact</h2>
-            <div class="form-row">
-                <label for="name">Nom</label>
-                <input id="name" name="name" type="text" required placeholder="Votre nom" />
-            </div>
-            <div class="form-row">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" required placeholder="vous@example.com" />
-            </div>
-            <div class="form-row">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="4" required placeholder="Votre message..."></textarea>
-            </div>
-            <button class="btn btn-primary" type="submit">Envoyer</button>
+            <form action="https://formspree.io/f/mpwydorr" method="POST">
+                <div class="form-row">
+
+                    <label for="name">Nom</label>
+                    <input id="name" name="name" type="text" required placeholder="Votre nom" />
+                </div>
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" required placeholder="vous@example.com" />
+                </div>
+                <div class="form-row">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required placeholder="Votre message..."></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Envoyer</button>
             </form>
         </div>
         <!-- Footer intégré à la page Contact pour qu'il s'affiche en bas de cette page -->
@@ -2561,18 +2568,7 @@ EXEMPLES :
             }
         }, 500);
 
-        // Ajouter des raccourcis clavier pour tester les sons
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 't' || event.key === 'T') {
-                testAnimationSound();
-            } else if (event.key === 'a' || event.key === 'A') {
-                testAudioSystem();
-            } else if (event.key === 'm' || event.key === 'M') {
-                listMP3Suggestions();
-            } else if (event.key === 'l' || event.key === 'L') {
-                testMenuLinks();
-            }
-        });
+        // Les raccourcis clavier pour tester les sons ont été supprimés pour éviter les interférences lors de la frappe
 
         console.log('🎵 Système de son d\'animation prêt !');
         console.log('🎮 Raccourcis clavier :');
@@ -2774,12 +2770,7 @@ EXEMPLES :
         console.log('💡 Pour tester les variations : testAllSoundVariations()');
         console.log('💡 Variation actuelle :', getCurrentSoundVariation());
 
-        // Écouteur pour les raccourcis clavier
-        document.addEventListener('keydown', (e) => {
-            if (e.key.toLowerCase() === 'b') {
-                testBackgroundMusic();
-            }
-        });
+        // Le raccourci clavier pour la musique de fond a été supprimé pour éviter les interférences
 
         // Animation des barres de progression des compétences
         function animateSkillBars() {
@@ -2868,13 +2859,7 @@ EXEMPLES :
         // Lancer le test automatiquement au chargement
         setTimeout(testProjectHoverEffects, 1000);
 
-        // Raccourci clavier pour relancer le test (touche P)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'p' || e.key === 'P') {
-                console.log('🔄 Relancement du test des effets de survol (touche P)');
-                testProjectHoverEffects();
-            }
-        });
+        // Le raccourci clavier pour le test des effets de survol a été supprimé pour éviter les interférences
     </script>
     <script type="module" src="scroll-fix.js"></script>
     <script type="module" src="scroll-diagnostic.js"></script>
