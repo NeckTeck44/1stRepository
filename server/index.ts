@@ -15,12 +15,16 @@ function getLocalIpAddress(): string {
   const nets = networkInterfaces();
   for (const name of Object.keys(nets)) {
     for (const net of nets[name] || []) {
-      if (net.family === 'IPv4' && !net.internal && net.address !== '127.0.0.1') {
+      if (
+        net.family === "IPv4" &&
+        !net.internal &&
+        net.address !== "127.0.0.1"
+      ) {
         return net.address;
       }
     }
   }
-  return 'localhost';
+  return "localhost";
 }
 
 const app = express();
@@ -143,7 +147,9 @@ app.use((req, res, next) => {
       log(`Server running at http://0.0.0.0:${port}`);
       log(`Local access: http://127.0.0.1:${port}`);
       log(`Network access: http://${localIp}:${port}`);
-      log(`🌐 For internet access, you need to configure port forwarding on your router`);
+      log(
+        `🌐 For internet access, you need to configure port forwarding on your router`
+      );
       log(`🌐 Or use a tunnel service like ngrok: ngrok http ${port}`);
     });
   } catch (error: any) {
@@ -162,7 +168,9 @@ app.use((req, res, next) => {
             log(`Server running at http://0.0.0.0:${port}`);
             log(`Local access: http://127.0.0.1:${port}`);
             log(`Network access: http://${localIp}:${port}`);
-            log(`🌐 For internet access, you need to configure port forwarding on your router`);
+            log(
+              `🌐 For internet access, you need to configure port forwarding on your router`
+            );
             log(`🌐 Or use a tunnel service like ngrok: ngrok http ${port}`);
           });
         } catch (retryError: any) {

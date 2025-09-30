@@ -1,245 +1,215 @@
-# Portfolio Alegria - Candidature Formation
+# Portfolio Alegria - NeckTeck
 
-Portfolio professionnel full-stack moderne avec React, TypeScript et Express.
+Un portfolio moderne et interactif développé avec React, Vite et Express, présentant les compétences, projets et motivations de NeckTeck.
 
-## 🏗️ Architecture du Projet
+## 🚀 Fonctionnalités
 
-### Structure Globale
-```
-Portfolio Alegria/
-├── client/          # Application React/TypeScript (Frontend)
-├── server/          # Serveur Express API (Backend)
-├── shared/          # Code partagé entre frontend et backend
-└── package.json     # Configuration du projet
-```
+### Design & Animations
+- **Design moderne et épuré** avec une interface utilisateur intuitive
+- **Animations fluides** et transitions entre les sections
+- **Effets de particules dynamiques** au survol des éléments interactifs
+- **Système de thème sombre/clair** avec animations de transition
+- **Scroll fluide** avec effet de roulement naturel
+- **Animations d'entrée** pour le header et les éléments de navigation
 
-### Frontend (React/TypeScript)
-- **Framework**: React 19 avec TypeScript
-- **Build Tool**: Vite avec Hot Module Replacement
-- **Routing**: Wouter (router léger)
-- **State Management**: React Query pour la gestion d'état serveur
-- **Forms**: React Hook Form + Zod pour la validation
-- **UI Components**: Radix UI + shadcn/ui
-- **Styling**: Tailwind CSS avec thème clair/sombre
+### Expérience Interactive
+- **Animation de frappe** synchronisée avec son pour la section "Vision & Motivation"
+- **Sons d'animation** futuristes générés avec Web Audio API
+- **Effets de survol** avec soulèvement 3D pour les liens de navigation
+- **Brand animé** qui change selon la section active
+- **Chatbot intégré** pour l'interaction utilisateur
 
-### Backend (Express/TypeScript)
-- **Framework**: Express 5 avec TypeScript
-- **Database**: PostgreSQL avec Drizzle ORM
-- **Authentication**: Prêt pour l'authentification
-- **API**: RESTful API endpoints
-- **Security**: Helmet, CORS configuré
+### Sections du Portfolio
+1. **Accueil** - Introduction avec appel à l'action
+2. **Vision & Motivation** - Présentation des objectifs et aspirations
+3. **Projets** - Showcase des réalisations avec animations interactives
+4. **Compétences** - Présentation des compétences techniques
+5. **Contact** - Formulaire de contact et informations
 
-### Design System
-- **Typography**: Inter (body) + Playfair Display (headlines)
-- **Colors**: Palette HSL avec support thème clair/sombre
-- **Spacing**: Système modulaire (4, 8, 12, 16 units)
-- **Animations**: Effets subtils et smooth scroll
-- **Responsive**: Mobile-first avec container max-width 6xl
+## 🛠️ Technologies Utilisées
 
-## 🚀 Démarrage Rapide
+### Frontend
+- **React 18** - Bibliothèque JavaScript pour l'interface utilisateur
+- **Vite** - Outil de build rapide et moderne
+- **TypeScript** - Typage statique pour JavaScript
+- **Tailwind CSS** - Framework CSS utilitaire
+- **CSS3** - Animations et effets visuels avancés
+- **Web Audio API** - Génération de sons dynamiques
+
+### Backend
+- **Express.js** - Framework web pour Node.js
+- **Node.js** - Environnement d'exécution JavaScript
+- **TypeScript** - Typage statique côté serveur
+
+### Développement
+- **ESLint** - Linting du code
+- **Prettier** - Formatage du code
+- **Git** - Contrôle de version
+
+## 📦 Installation
 
 ### Prérequis
-- Node.js 18+
+- Node.js (version 18 ou supérieure)
 - npm ou yarn
 
-### Installation
+### Cloner le dépôt
 ```bash
-# Cloner le projet
-git clone <votre-repo-url>
-cd "Portfolio Alegria - Candidature Formation"
+git clone https://github.com/votre-nom/portfolio-alegria.git
+cd portfolio-alegria
+```
 
-# Installer les dépendances
+### Installer les dépendances
+```bash
+# Installer les dépendances du client
+cd client
+npm install
+
+# Installer les dépendances du serveur
+cd ../server
 npm install
 ```
 
-### Développement
-```bash
-# Lancer le serveur de développement complet
-npm start
+## 🚀 Lancement du Projet
 
-# Ou utiliser le script PowerShell (recommandé)
-.\launch-dev.ps1
+### Mode Développement
+
+#### Option 1: Serveur complet (Express + Vite)
+```bash
+# Depuis la racine du projet
+npm run dev
 ```
 
-L'application sera disponible à `http://localhost:5000`
+Le projet sera disponible à l'adresse : http://127.0.0.1:5000
 
-### Build Production
+#### Option 2: Serveur statique (Live Server)
 ```bash
-# Build du frontend
+# Depuis le dossier client
 cd client
+npm run dev:static
+```
+
+Le projet sera disponible à l'adresse : http://127.0.0.1:5500/client/
+
+### Mode Production
+```bash
+# Construire le projet
 npm run build
 
-# Retour à la racine pour le serveur production
-cd ..
-npm start
+# Lancer en production
+npm run start
 ```
 
-## 📁 Structure des Dossiers
+## 🎨 Personnalisation
 
-### `/client` - Frontend React
+### Couleurs et Thème
+Les couleurs du thème sont définies dans les variables CSS :
+- `--primary-color`: Couleur principale
+- `--accent-color`: Couleur d'accentuation
+- `--text-color`: Couleur du texte
+- `--bg-color`: Couleur de fond
+
+### Sons d'Animation
+Le projet utilise 4 variations de sons futuristes :
+1. **Bleep futuriste** - Son court et percutant
+2. **Whoosh de transition** - Son doux et progressif
+3. **Pop impactant** - Son court et impactant
+4. **Chime cristallin** - Son élégant et cristallin
+
+Pour changer la variation, modifier la variable `soundVariation` dans le code JavaScript.
+
+## 📁 Structure du Projet
+
 ```
-client/
-├── src/                    # Code source React
-│   ├── components/         # Composants UI
-│   ├── pages/             # Pages de l'application
-│   ├── hooks/             # Custom hooks
-│   ├── assets/            # Images et assets
-│   └── utils/             # Utilitaires
-├── public/                # Fichiers statiques
-├── vite.config.ts         # Configuration Vite
-└── package.json           # Dépendances frontend
+portfolio-alegria/
+├── client/                 # Application React
+│   ├── src/               # Code source
+│   │   ├── components/    # Composants React
+│   │   ├── pages/         # Pages de l'application
+│   │   ├── styles/        # Fichiers CSS
+│   │   └── utils/         # Utilitaires
+│   ├── public/            # Fichiers statiques
+│   ├── index.html         # Point d'entrée HTML
+│   ├── vite.config.ts     # Configuration Vite
+│   └── package.json       # Dépendances client
+├── server/               # Serveur Express
+│   ├── src/              # Code source serveur
+│   ├── vite.ts           # Configuration Vite serveur
+│   └── package.json      # Dépendances serveur
+├── README.md             # Documentation
+└── package.json          # Scripts du projet
 ```
 
-### `/server` - Backend Express
-```
-server/
-├── index.ts              # Point d'entrée du serveur
-├── routes/               # Définition des routes API
-├── middleware/           # Middleware Express
-├── db/                   # Configuration base de données
-└── package.json          # Dépendances backend
-```
+## 🔧 Scripts Disponibles
 
-## 🎨 Fonctionnalités
-
-### Frontend
-- ✅ Thème clair/sombre avec persistance
-- ✅ Animations fluides et interactions
-- ✅ Design responsive mobile-first
-- ✅ Composants accessibles (a11y)
-- ✅ Optimisation des performances
-- ✅ Hot Module Replacement (HMR)
-
-### Backend
-- ✅ API RESTful structurée
-- ✅ Validation des données avec Zod
-- ✅ Gestion des erreurs centralisée
-- ✅ Logging des requêtes API
-- ✅ Sécurité HTTP avec Helmet
-- ✅ Support CORS configuré
-
-### Base de Données
-- ✅ ORM Drizzle avec TypeScript
-- ✅ Migrations structurées
-- ✅ Schéma de validation Zod
-- ✅ Prêt pour PostgreSQL
-
-## 🔧 Dépendances Principales
-
-### Core Framework
-- `react` & `react-dom` - Framework UI
-- `express` - Serveur backend
-- `typescript` - Typage statique
-- `vite` - Build tool et dev server
-
-### Frontend
-- `@tanstack/react-query` - Gestion d'état serveur
-- `wouter` - Routing léger
-- `react-hook-form` - Gestion de formulaires
-- `zod` - Validation de schémas
-- `@radix-ui/*` - Composants UI accessibles
-- `tailwindcss` - Framework CSS
-- `lucide-react` - Icônes modernes
-
-### Backend
-- `drizzle-orm` - ORM TypeScript
-- `helmet` - Sécurité HTTP
-- `cors` - Support Cross-Origin
-- `@neondatabase/serverless` - Driver PostgreSQL
-
-### Development
-- `tsx` - Exécution TypeScript
-- `concurrently` - Exécution parallèle
-- `postcss` - Processing CSS
-
-## 🚀 Déploiement
-
-### Options de Déploiement
-
-#### Frontend Seulement (Statique)
+### Client
 ```bash
-cd client
+npm run dev          # Lance le client en mode développement
+npm run build        # Construit le client pour la production
+npm run preview      # Prévisualise le build de production
+npm run dev:static   # Lance le client en mode statique
+```
+
+### Serveur
+```bash
+npm run dev          # Lance le serveur en mode développement
+npm run build        # Construit le serveur pour la production
+npm run start        # Lance le serveur en production
+```
+
+### Racine
+```bash
+npm run dev          # Lance le projet complet (client + serveur)
+npm run build        # Construit tout le projet
+npm run start        # Lance le projet en production
+```
+
+## 🌐 Déploiement
+
+### Vercel (Recommandé)
+1. Connectez votre dépôt GitHub à Vercel
+2. Configurez les variables d'environnement si nécessaire
+3. Déployez automatiquement à chaque push
+
+### Netlify
+1. Connectez votre dépôt GitHub à Netlify
+2. Configurez la commande de build : `npm run build`
+3. Configurez le dossier de publication : `dist`
+4. Déployez automatiquement
+
+### Serveur Personnalisé
+```bash
+# Construire le projet
 npm run build
-# Deployer le dossier client/dist/
+
+# Lancer le serveur de production
+npm run start
 ```
-- **Netlify**: Pointer vers `client/dist`
-- **Vercel**: Pointer vers `client/dist`
-- **GitHub Pages**: Publier `client/dist`
-
-#### Application Complète (Full-stack)
-- **Render.com**: Déployer avec Docker
-- **Railway**: Platform as a Service
-- **Heroku**: Platform as a Service
-- **Digital Ocean**: Droplet avec Node.js
-
-### Configuration Environment
-Créer un fichier `.env` à la racine :
-```env
-# Database
-DATABASE_URL="postgresql://..."
-
-# Server
-PORT=5000
-NODE_ENV=development
-
-# Frontend
-VITE_API_URL="http://localhost:5000"
-```
-
-## 🛠️ Scripts Utiles
-
-### Depuis la racine
-```bash
-npm start          # Lance le serveur de développement
-npm run build      # Build le projet complet
-npm run dev        # Alias pour npm start
-```
-
-### Depuis le client
-```bash
-npm run dev        # Développement frontend seul
-npm run build      # Build production frontend
-npm run preview    # Prévisualisation du build
-```
-
-### Depuis le server
-```bash
-npm run dev        # Développement backend seul
-npm start          # Production backend
-```
-
-## 📝 Notes de Développement
-
-### Hot Reload
-- Le frontend bénéficie du Hot Module Replacement
-- Les changements sont reflétés instantanément
-- Le backend redémarre automatiquement
-
-### Base de Données
-- Le schéma est géré par Drizzle ORM
-- Les migrations sont automatiques en développement
-- La validation est cohérente entre frontend et backend
-
-### Performance
-- Code splitting automatique avec Vite
-- Optimisation des assets et images
-- Caching intelligent avec React Query
 
 ## 🤝 Contribuer
 
 1. Fork le projet
-2. Créer une branche feature (`git checkout -b feature/amazing-feature`)
-3. Commiter vos changements (`git commit -m 'Add amazing feature'`)
-4. Pusher la branche (`git push origin feature/amazing-feature`)
-5. Ouvrir une Pull Request
+2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/nouvelle-fonctionnalite`)
+3. Committez vos changements (`git commit -m 'Ajout d'une nouvelle fonctionnalité'`)
+4. Push sur la branche (`git push origin feature/nouvelle-fonctionnalite`)
+5. Ouvrez une Pull Request
 
-## 📄 Licence
+## 📝 License
 
-MIT License - voir le fichier [LICENSE](LICENSE) pour les détails
+Ce projet est sous license MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 👤 Auteur
+
+**NeckTeck**
+- Portfolio : [Portfolio Alegria](https://votre-portfolio.com)
+- GitHub : [@votre-nom](https://github.com/votre-nom)
+- LinkedIn : [votre-profil](https://linkedin.com/in/votre-profil)
 
 ## 🙏 Remerciements
 
-- **React Team** pour le framework incroyable
-- **Vite Team** pour l'outil de build ultra-rapide
-- **Tailwind CSS** pour le framework CSS utilitaire
-- **Radix UI** pour les composants accessibles
+- Merci à toute l'équipe qui a contribué à ce projet
+- Inspiré par les meilleurs portfolios modernes
+- Conçu avec passion et attention aux détails
+
+---
+
+**Portfolio Alegria** - Une vitrine numérique moderne et interactive pour présenter votre talent et votre créativité.

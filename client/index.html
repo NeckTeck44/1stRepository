@@ -198,7 +198,7 @@
                 </p>
 
                 <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary btn-caret">Découvrir mes Projets</a>
+                    <a href="#vision-motivation" class="btn btn-primary btn-caret">Continuer</a>
                     <a href="#contact" class="btn btn-outline">Me contacter</a>
                 </div>
             </div>
@@ -929,7 +929,9 @@
                     </div>
                     <div class="project-body">
                         <h3 class="project-title">Naruto Versus Bleach</h3>
-                        <p class="project-desc">Dashboard responsive avec graphiques, filtres et thèmes clair/sombre.
+                        <p class="project-desc">Forum comunautaire créer à mes 14 ans en 2008, Un mode MOBA de Dota
+                            précurseur de ce qui deviendra le jeux compétitif le plus joué au monde, League of Legend.
+                            Mes premiers pas avec les balises html, PHBB et réseaux Hamachi.
                         </p>
                         <div class="project-meta">
                             <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
@@ -989,11 +991,7 @@
                         </iframe>
                     </div>
                     <div class="project-body">
-                        <p class="project-desc">Application web moderne de gestion de tâches avec drag & drop,
-                            notifications en
-                            temps réel,
-                            synchronisation cloud et interface utilisateur intuitive. Fonctionnalités avancées de
-                            productivité.</p>
+                        <p class="project-desc">Intro Créer avec After Effect pour ma chaine YouTube</p>
                         <div class="project-meta">
                             <span>React</span><span>Node.js</span><span>MongoDB</span>
                             <span>WebSocket</span><span>PWA</span>
@@ -1149,7 +1147,7 @@
     <!-- Contact -->
     <section id="contact" class="section">
         <div class="container">
-            <h2 class="section-title">Contact</h2>
+            <h2 class="section-title title-accent">Contact</h2>
             <div class="form-row">
                 <label for="name">Nom</label>
                 <input id="name" name="name" type="text" required placeholder="Votre nom" />
@@ -1288,14 +1286,14 @@
             });
         }
 
-        // Observe sections to update active link when a section is centered in viewport
+        // Observe sections to update active link when a section is 20% visible
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     setActiveById(entry.target.id);
                 }
             });
-        }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.6 });
+        }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
 
         sections.forEach(sec => observer.observe(sec));
 
@@ -2878,6 +2876,6 @@ EXEMPLES :
             }
         });
     </script>
-    <script src="scroll-fix.js"></script>
-    <script src="scroll-diagnostic.js"></script>
+    <script type="module" src="scroll-fix.js"></script>
+    <script type="module" src="scroll-diagnostic.js"></script>
 </body>

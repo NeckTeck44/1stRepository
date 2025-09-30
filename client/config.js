@@ -24,7 +24,7 @@ const AppConfig = {
   // Configuration audio
   audio: {
     enabled: true,
-    volume: 0.3,
+    volume: 0.6,
     typingSoundEnabled: true,
     backgroundMusicEnabled: false,
     soundEffectsEnabled: true,

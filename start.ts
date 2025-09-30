@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Démarre le serveur Express (qui embarque Vite en mode middleware)
-spawn("npm", ["run", "dev"], {
+spawn("npx", ["tsx", "-r", "tsconfig-paths/register", "index.ts"], {
   cwd: path.resolve(__dirname, "server"),
   stdio: "inherit",
   shell: true,

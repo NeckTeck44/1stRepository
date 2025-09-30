@@ -29,16 +29,19 @@ Portfolio Alegria - Candidature Formation/
 ### ✅ Règles importantes à suivre
 
 #### Pour les fichiers JavaScript :
+
 - Utiliser des imports ES6 : `import { func } from './module.js'`
 - Éviter les chemins absolus qui pourraient casser au build
 - Vérifier que les assets sont correctement importés
 
 #### Pour les chemins d'assets :
+
 - Utiliser des chemins relatifs depuis le dossier `client/`
 - S'assurer que les images et sons sont bien dans le dossier `client/`
 - Vérifier que les références dans le HTML sont correctes
 
 #### Pour le build final :
+
 - Toujours penser que Vite va optimiser et bundler le code
 - Vérifier que les modifications fonctionnent en environnement de développement avant le build
 - La version de production est générée par Vite à partir des sources
@@ -65,4 +68,4 @@ npm run preview
 
 ---
 
-*Document généré le 26/09/2025 - Configuration Vite du projet*
+_Document généré le 26/09/2025 - Configuration Vite du projet_

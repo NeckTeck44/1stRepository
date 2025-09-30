@@ -17,6 +17,13 @@ class NavigationManager {
     this.scrollOffset = ConfigUtils.get('navigation.scrollOffset') || 70;
     this.mobileBreakpoint = ConfigUtils.get('navigation.mobileBreakpoint') || 768;
     
+    // Variables pour la détection de scroll améliorée
+    this.lastScrollPosition = 0;
+    this.scrollTimeout = null;
+    this.isScrollingFast = false;
+    this.lastScrollTime = 0;
+    this.scrollCheckInterval = null;
+    
     this.init();
   }
 
@@ -47,6 +54,7 @@ class NavigationManager {
       // Initialiser le scroll spy
       if (this.scrollSpyActive) {
         this.setupScrollSpy();
+        this.setupEnhancedScrollDetection();
       }
       
       // Mettre à jour les liens actifs
@@ -203,23 +211,133 @@ class NavigationManager {
     // Créer un Intersection Observer pour détecter les sections visibles
     const observerOptions = {
       root: null,
-      rootMargin: `-${this.scrollOffset}px 0px -${window.innerHeight - this.scrollOffset - 100}px 0px`,
-      threshold: 0.1
+      rootMargin: `-${this.scrollOffset}px 0px -${window.innerHeight - this.scrollOffset - 150}px 0px`,
+      threshold: [0.44]
     };
     
     const observer = new IntersectionObserver((entries) => {
+      let bestSection = null;
+      let maxVisibility = 0;
+      
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          this.currentSection = entry.target;
-          this.updateActiveLinks();
+          const visibilityRatio = entry.intersectionRatio;
+          const rect = entry.boundingClientRect;
+          const viewportHeight = window.innerHeight;
+          const centerDistance = Math.abs(rect.top + rect.height/2 - viewportHeight/2);
+          const score = visibilityRatio * 2000 - centerDistance;
+          
+          if (score > maxVisibility) {
+            maxVisibility = score;
+            bestSection = entry.target;
+          }
         }
       });
+      
+      if (bestSection && bestSection !== this.currentSection) {
+        this.currentSection = bestSection;
+        this.updateActiveLinks();
+      }
     }, observerOptions);
     
     // Observer toutes les sections
     this.sections.forEach(section => {
       observer.observe(section);
     });
+  }
+
+  /**
+   * Configure un système de détection de scroll amélioré
+   */
+  setupEnhancedScrollDetection() {
+    // Écouteur de scroll avec détection de vitesse
+    window.addEventListener('scroll', () => {
+      const currentTime = Date.now();
+      const currentScrollPosition = window.pageYOffset;
+      const scrollDelta = Math.abs(currentScrollPosition - this.lastScrollPosition);
+      const timeDelta = currentTime - this.lastScrollTime;
+      
+      // Détecter si le scroll est rapide
+      this.isScrollingFast = timeDelta > 0 && scrollDelta / timeDelta > 2;
+      
+      this.lastScrollPosition = currentScrollPosition;
+      this.lastScrollTime = currentTime;
+      
+      // Annuler le timeout précédent
+      if (this.scrollTimeout) {
+        clearTimeout(this.scrollTimeout);
+      }
+      
+      // Si le scroll est rapide, vérifier plus fréquemment
+      if (this.isScrollingFast) {
+        this.forceUpdateActiveSection();
+        this.scrollTimeout = setTimeout(() => {
+          this.forceUpdateActiveSection();
+        }, 50);
+      } else {
+        // Scroll normal - vérifier après un court délai
+        this.scrollTimeout = setTimeout(() => {
+          this.forceUpdateActiveSection();
+        }, 100);
+      }
+    }, { passive: true });
+    
+    // Vérification périodique pendant le scroll rapide
+    this.startScrollCheckInterval();
+  }
+
+  /**
+   * Démarre un intervalle de vérification pendant le scroll
+   */
+  startScrollCheckInterval() {
+    if (this.scrollCheckInterval) {
+      clearInterval(this.scrollCheckInterval);
+    }
+    
+    this.scrollCheckInterval = setInterval(() => {
+      if (this.isScrollingFast) {
+        this.forceUpdateActiveSection();
+      }
+    }, 150);
+    
+    // Arrêter l'intervalle après 2 secondes d'inactivité
+    setTimeout(() => {
+      if (this.scrollCheckInterval) {
+        clearInterval(this.scrollCheckInterval);
+        this.scrollCheckInterval = null;
+      }
+    }, 2000);
+  }
+
+  /**
+   * Force la mise à jour de la section active
+   */
+  forceUpdateActiveSection() {
+    if (this.isScrolling) return;
+    
+    const scrollPosition = window.pageYOffset + this.scrollOffset + 30;
+    const viewportHeight = window.innerHeight;
+    
+    const bestSection = this.sections.reduce((best, section) => {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+      const sectionHeight = section.offsetHeight;
+      
+      if (scrollPosition >= sectionTop - 100 && scrollPosition < sectionBottom + 100) {
+        const centerDistance = Math.abs((sectionTop + sectionHeight/2) - (scrollPosition + viewportHeight/2));
+        const visibilityScore = 2000 - centerDistance;
+        
+        if (!best || visibilityScore > best.score) {
+          return { section, score: visibilityScore };
+        }
+      }
+      return best;
+    }, null)?.section;
+    
+    if (bestSection && bestSection !== this.currentSection) {
+      this.currentSection = bestSection;
+      this.updateActiveLinks();
+    }
   }
 
   /**
@@ -232,13 +350,24 @@ class NavigationManager {
     
     // Si aucune section n'est définie, la déterminer par la position de défilement
     if (!activeSection) {
-      const scrollPosition = window.pageYOffset + this.scrollOffset + 100;
+      const scrollPosition = window.pageYOffset + this.scrollOffset + 50;
+      const viewportHeight = window.innerHeight;
       
-      activeSection = this.sections.find(section => {
+      activeSection = this.sections.reduce((best, section) => {
         const sectionTop = section.offsetTop;
         const sectionBottom = sectionTop + section.offsetHeight;
-        return scrollPosition >= sectionTop && scrollPosition < sectionBottom;
-      });
+        const sectionHeight = section.offsetHeight;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          const centerDistance = Math.abs((sectionTop + sectionHeight/2) - (scrollPosition + viewportHeight/2));
+          const visibilityScore = 1000 - centerDistance;
+          
+          if (!best || visibilityScore > best.score) {
+            return { section, score: visibilityScore };
+          }
+        }
+        return best;
+      }, null)?.section;
     }
     
     // Mettre à jour les classes actives

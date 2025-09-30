@@ -88,7 +88,7 @@ class AudioManager {
     // Créer un son de clic court
     for (let i = 0; i < data.length; i++) {
       const t = i / sampleRate;
-      data[i] = Math.sin(2 * Math.PI * 800 * t) * Math.exp(-t * 50) * 0.1;
+      data[i] = Math.sin(2 * Math.PI * 800 * t) * Math.exp(-t * 50) * 0.3;
     }
     
     return buffer;
@@ -174,7 +174,7 @@ class AudioManager {
     return new Promise((resolve, reject) => {
       const audio = new Audio();
       audio.loop = true;
-      audio.volume = this.volume * 0.3; // Plus faible volume pour la musique de fond
+      audio.volume = this.volume * 1; // Volume maximum pour la musique de fond
       
       // Utiliser une URL par défaut ou charger depuis un fichier
       audio.src = 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE'; // Placeholder
@@ -199,7 +199,7 @@ class AudioManager {
     // Placeholder - dans une vraie implémentation, vous généreriez un son de fond
     audio.src = 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE';
     audio.loop = true;
-    audio.volume = this.volume * 0.1;
+    audio.volume = this.volume * 1;
     return audio;
   }
 
@@ -261,7 +261,7 @@ class AudioManager {
   playTypingSound() {
     if (!this.typingSoundEnabled || !this.typingAudio) return;
     
-    this.playBuffer(this.typingAudio, 0.5);
+    this.playBuffer(this.typingAudio, 0.8);
   }
 
   /**
@@ -363,7 +363,7 @@ class AudioManager {
     this.volume = Math.max(0, Math.min(1, volume));
     
     if (this.backgroundMusic) {
-      this.backgroundMusic.volume = this.volume * 0.3;
+      this.backgroundMusic.volume = this.volume * 1;
     }
     
     console.log(`🔊 Volume défini à ${Math.round(this.volume * 100)}%`);

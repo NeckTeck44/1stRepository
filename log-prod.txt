@@ -1,0 +1,568 @@
+﻿**********************
+Début de la transcription Windows PowerShell
+Heure de début : 20250930093109
+Nom d'utilisateur : PC-NECKTECK-W11\catel
+Utilisateur runAs :  PC-NECKTECK-W11\catel
+Nom de la configuration : 
+Ordinateur : PC-NECKTECK-W11 (Microsoft Windows NT 10.0.26100.0)
+Application hôte : C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\catel\AppData\Local\Programs\Windsurf\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+ID de processus : 48908
+PSVersion: 5.1.26100.6584
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.6584
+BuildVersion: 10.0.26100.6584
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+ Nettoyage complet avant rebuild...
+PS>Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+ Nettoyage complet avant rebuild...
+ Build déjà existant, utilisation de la version actuelle
+ Démarrage du serveur PRODUCTION sur le port 5000...
+
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur Entrée pour fermer...
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+ DÃ©pendances manquantes dÃ©tectÃ©es : drizzle-orm, drizzle-zod, embla-carousel-react, express-session, framer-motion, input-otp, lucide-react, memorystore, next-themes, passport, passport-local, react-day-picker, react-hook-form, react-icons, react-resizable-panels, recharts, tailwind-merge, tailwindcss-animate, tw-animate-css, vaul, wouter, zod-validation-error
+ Installation des dÃ©pendances backend...
+
+ DÃ©pendances backend installÃ©es avec succÃ¨s !
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+PS>Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+ DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:189 : 49
++ Write-Host "`nAppuyez sur EntrÃ©e pour fermer..."
++                                                 ~
+Le terminateur " est manquant dans la chaîne.
+
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:57 : 58
++     if (!(Test-Path ".\client\node_modules\.bin\vite*")) {
++                                                          ~
+Accolade fermante « } » manquante dans le bloc d'instruction ou définition du type manquante.
+
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:9 : 33
++ if (Test-Path ".\package.json") {
++                                 ~
+Accolade fermante « } » manquante dans le bloc d'instruction ou définition du type manquante.
+    + CategoryInfo          : ParserError: (:) [], ParseException
+    + FullyQualifiedErrorId : TerminatorExpectedAtEndOfString
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:189 : 49
++ Write-Host "`nAppuyez sur EntrÃ©e pour fermer..."
++                                                 ~
+Le terminateur " est manquant dans la chaîne.
+
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:57 : 58
++     if (!(Test-Path ".\client\node_modules\.bin\vite*")) {
++                                                          ~
+Accolade fermante « } » manquante dans le bloc d'instruction ou définition du type manquante.
+
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:9 : 33
++ if (Test-Path ".\package.json") {
++                                 ~
+Accolade fermante « } » manquante dans le bloc d'instruction ou définition du type manquante.
+    + CategoryInfo          : ParserError: (:) [], ParseException
+    + FullyQualifiedErrorId : TerminatorExpectedAtEndOfString
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:189 : 49
++ Write-Host "`nAppuyez sur EntrÃ©e pour fermer..."
++                                                 ~
+Le terminateur " est manquant dans la chaîne.
+
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:57 : 58
++     if (!(Test-Path ".\client\node_modules\.bin\vite*")) {
++                                                          ~
+Accolade fermante « } » manquante dans le bloc d'instruction ou définition du type manquante.
+
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:9 : 33
++ if (Test-Path ".\package.json") {
++                                 ~
+Accolade fermante « } » manquante dans le bloc d'instruction ou définition du type manquante.
+    + CategoryInfo          : ParserError: (:) [], ParseException
+    + FullyQualifiedErrorId : TerminatorExpectedAtEndOfString
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:189 : 49
++ Write-Host "`nAppuyez sur EntrÃ©e pour fermer..."
++                                                 ~
+Le terminateur " est manquant dans la chaîne.
+
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:57 : 58
++     if (!(Test-Path ".\client\node_modules\.bin\vite*")) {
++                                                          ~
+Accolade fermante « } » manquante dans le bloc d'instruction ou définition du type manquante.
+
+Au caractère C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\launch-prod.ps1:9 : 33
++ if (Test-Path ".\package.json") {
++                                 ~
+Accolade fermante « } » manquante dans le bloc d'instruction ou définition du type manquante.
+    + CategoryInfo          : ParserError: (:) [], ParseException
+    + FullyQualifiedErrorId : TerminatorExpectedAtEndOfString
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Build du frontend requis...
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, nettoyage du cache et installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur EntrÃ©e pour fermer...
+PS>Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, nettoyage du cache et installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur Entree pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>cd client; npm install autoprefixer --save-dev
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cclientPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client> ]633;B
+PS>./launch-prod
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script 
+ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès 
+est correct et réessayez.
+Au caractère Ligne:1 : 1
++ ./launch-prod
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si
+un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 1
++ ./launch-prod
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cclientPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client> ]633;B
+PS>cd ..
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, nettoyage du cache et installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur Entree pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>cd client && npm install autoprefixer --save-dev
+Au caractère Ligne:1 : 11
++ cd client && npm install autoprefixer --save-dev
++           ~~
+Le jeton « && » n’est pas un séparateur d’instruction valide.
+Au caractère Ligne:1 : 11
++ cd client && npm install autoprefixer --save-dev
++           ~~
+Le jeton « && » n’est pas un séparateur d’instruction valide.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidEndOfLine
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>npm install autoprefixer --save-dev
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>cd ..; ./launch-prod
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script 
+ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès 
+est correct et réessayez.
+Au caractère Ligne:1 : 8
++ cd ..; ./launch-prod
++        ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si
+un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 8
++ cd ..; ./launch-prod
++        ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloadsPS C:\Users\catel\Downloads> ]633;B
+PS>./launch-prod
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script 
+ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès 
+est correct et réessayez.
+Au caractère Ligne:1 : 1
++ ./launch-prod
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si
+un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 1
++ ./launch-prod
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloadsPS C:\Users\catel\Downloads> ]633;B
+PS>./launch-prod
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script 
+ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès 
+est correct et réessayez.
+Au caractère Ligne:1 : 1
++ ./launch-prod
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si
+un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 1
++ ./launch-prod
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloadsPS C:\Users\catel\Downloads> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloadsPS C:\Users\catel\Downloads> ]633;B
+PS>./launch-prod
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script 
+ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès 
+est correct et réessayez.
+Au caractère Ligne:1 : 1
++ ./launch-prod
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+./launch-prod : Le terme «./launch-prod» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si
+un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 1
++ ./launch-prod
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./launch-prod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloadsPS C:\Users\catel\Downloads> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloadsPS C:\Users\catel\Downloads> ]633;B
+PS>cd "c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation"; ./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, nettoyage du cache et installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur Entree pour fermer...
+﻿**********************
+Début de la transcription Windows PowerShell
+Heure de début : 20250930101831
+Nom d'utilisateur : PC-NECKTECK-W11\catel
+Utilisateur runAs :  PC-NECKTECK-W11\catel
+Nom de la configuration : 
+Ordinateur : PC-NECKTECK-W11 (Microsoft Windows NT 10.0.26100.0)
+Application hôte : C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\catel\AppData\Local\Programs\Windsurf\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+ID de processus : 51032
+PSVersion: 5.1.26100.6584
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.6584
+BuildVersion: 10.0.26100.6584
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+PS>Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+>> Erreur de terminaison () : « Le pipeline a été arrêté. »
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>cd 'c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client'
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cclientPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client> ]633;B
+PS>npm install autoprefixer@^10.4.21 --save-dev
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cclientPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client> ]633;B
+PS>cd ..; ./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur Entree pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur Entree pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+ Build du frontend en cours...
+
+ Build rÃ©ussi !
+ DÃ©marrage du serveur PRODUCTION sur le port 5000...
+
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur Entree pour fermer...
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>Get-Content "log-prod.txt" | Select-Object -Last 20
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+ Build du frontend en cours...
+
+ Build rÃ©ussi !
+ DÃ©marrage du serveur PRODUCTION sur le port 5000...
+
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur Entree pour fermer...
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>cd client; npm run build
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature Formation\x5cclientPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\client> ]633;B
+PS>cd 'c:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation'
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B
+PS>./launch-prod
+Transcription démarrée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+ Lancement du projet Alegria en mode PRODUCTION...
+âœ… DÃ©pendances backend dÃ©jÃ  Ã  jour
+ Nettoyage complet avant rebuild...
+ Build du frontend requis...
+ Installation des dÃ©pendances frontend...
+
+Vite non detecte, nettoyage du cache et installation specifique...
+
+Vite installe avec succes !
+ Build du frontend en cours...
+
+ Erreur lors du build !
+Transcription arrêtée, le fichier de sortie est C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation\log-prod.txt
+
+Appuyez sur Entree pour fermer...
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5ccatel\x5cDownloads\x5cPortfolio Alegria - Candidature FormationPS C:\Users\catel\Downloads\Portfolio Alegria - Candidature Formation> ]633;B

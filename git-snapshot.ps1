@@ -1,6 +1,6 @@
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter','', Justification='Script-level parameters are consumed later in the script')]
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseBOMForUnicodeEncodedFile','', Justification='Project uses UTF-8 (no BOM); hosts support it')]
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost','', Justification='Write-Host is used intentionally for colored help examples at the end of the script')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Script-level parameters are consumed later in the script')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseBOMForUnicodeEncodedFile', '', Justification = 'Project uses UTF-8 (no BOM); hosts support it')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Write-Host is used intentionally for colored help examples at the end of the script')]
 param(
     [string]$RepoUrl = "",
     [string]$Branch = "main",
@@ -16,18 +16,18 @@ function Write-Ok($msg) { Write-Information "[OK] $msg" }
 function Write-Warn($msg) { Write-Warning $msg }
 function Write-Err($msg) { Write-Error $msg }
 
-function Invoke-GitCommand([string[]]$GitArgs, [switch]$IgnoreError){
-    if(-not $GitArgs -or $GitArgs.Count -eq 0){
+function Invoke-GitCommand([string[]]$GitArgs, [switch]$IgnoreError) {
+    if (-not $GitArgs -or $GitArgs.Count -eq 0) {
         throw "Invoke-GitCommand called with no arguments"
     }
-    if($GitArgs -contains $null){
-        throw "Invoke-GitCommand arguments contain a null element: " + ($GitArgs | ForEach-Object { if($_){ $_ } else { '<null>' } } | Out-String)
+    if ($GitArgs -contains $null) {
+        throw "Invoke-GitCommand arguments contain a null element: " + ($GitArgs | ForEach-Object { if ($_) { $_ } else { '<null>' } } | Out-String)
     }
     $display = "git " + ($GitArgs -join ' ')
     Write-Info $display
     & git @GitArgs
     $exit = $LASTEXITCODE
-    if($exit -ne 0 -and -not $IgnoreError){
+    if ($exit -ne 0 -and -not $IgnoreError) {
         throw "Command failed ($exit): $display"
     }
 }
@@ -43,7 +43,7 @@ $gitDir = Join-Path (Get-Location) ".git"
 if (!(Test-Path $gitDir)) {
     Write-Info "Initialisation du dépôt git"
     Invoke-GitCommand @('init')
-    Invoke-GitCommand @('branch','-M', $Branch)
+    Invoke-GitCommand @('branch', '-M', $Branch)
 }
 else {
     Write-Info ".git existe déjà - dépôt détecté"
@@ -65,22 +65,22 @@ if ([string]::IsNullOrWhiteSpace($RepoUrl)) {
 }
 else {
     if ($remoteExists) {
-        if ($ForceRemote) { Invoke-GitCommand @('remote','remove','origin') -IgnoreError; Invoke-GitCommand @('remote','add','origin', $RepoUrl) }
+        if ($ForceRemote) { Invoke-GitCommand @('remote', 'remove', 'origin') -IgnoreError; Invoke-GitCommand @('remote', 'add', 'origin', $RepoUrl) }
         else { Write-Info "Remote 'origin' déjà configuré: $currentRemote (utilisez -ForceRemote pour le remplacer)" }
     }
-    else { Invoke-GitCommand @('remote','add','origin', $RepoUrl) }
+    else { Invoke-GitCommand @('remote', 'add', 'origin', $RepoUrl) }
 }
 
 # --- Commit ---
 # Se placer/créer la branche cible puis autoriser un commit vide
-Invoke-GitCommand @('checkout','-B', $Branch)
-Invoke-GitCommand @('add','.')
-Invoke-GitCommand @('commit','-m', $Message, '--allow-empty') -IgnoreError
+Invoke-GitCommand @('checkout', '-B', $Branch)
+Invoke-GitCommand @('add', '.')
+Invoke-GitCommand @('commit', '-m', $Message, '--allow-empty') -IgnoreError
 Write-Ok "Commit effectué (ou aucun changement à committer)"
 
 # --- Push ---
 if (-not [string]::IsNullOrWhiteSpace($RepoUrl) -or $remoteExists) {
-    Invoke-GitCommand @('push','-u','origin', $Branch)
+    Invoke-GitCommand @('push', '-u', 'origin', $Branch)
     Write-Ok "Poussé sur 'origin/$Branch'"
 }
 else {
@@ -94,11 +94,11 @@ if (-not [string]::IsNullOrWhiteSpace($Tag)) {
         Write-Warn "Le tag '$Tag' existe déjà localement. Il ne sera pas recréé."
     }
     else {
-        Invoke-GitCommand @('tag','-a', $Tag, '-m', $Message)
+        Invoke-GitCommand @('tag', '-a', $Tag, '-m', $Message)
         Write-Ok "Tag créé: $Tag"
     }
     if (-not [string]::IsNullOrWhiteSpace($RepoUrl) -or $remoteExists) {
-        Invoke-GitCommand @('push','origin', $Tag)
+        Invoke-GitCommand @('push', 'origin', $Tag)
         Write-Ok "Tag poussé: $Tag"
     }
     else {
