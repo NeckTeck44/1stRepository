@@ -163,6 +163,38 @@ npm run build        # Construit tout le projet
 npm run start        # Lance le projet en production
 ```
 
+## 🚀 Scripts d'Automatisation
+
+### Scripts PowerShell
+Pour faciliter le développement et le déploiement, plusieurs scripts PowerShell sont disponibles :
+
+#### Déploiement en Production
+```bash
+./launch-prod.ps1
+```
+- Nettoie et reconstruit tout le projet
+- Installe les dépendances si nécessaires
+- Lance le serveur de production sur le port 5000
+- Idéal pour le déploiement local
+
+#### Git Automatique
+```bash
+./git-auto.ps1
+```
+- Ajoute tous les fichiers modifiés (`git add .`)
+- Crée un commit avec message automatique
+- Envoie les changements vers le dépôt distant
+- Parfait pour les sauvegardes rapides
+
+#### Git Interactif
+```bash
+./git-push.ps1
+```
+- Permet de personnaliser le message de commit
+- Affiche l'état Git avant de commit
+- Plus sécurisé et descriptif
+- Recommandé pour les commits importants
+
 ## 🌐 Déploiement
 
 ### Vercel (Recommandé)
