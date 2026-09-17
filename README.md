@@ -289,22 +289,12 @@ npm run start
 4. Push sur la branche (`git push origin feature/nouvelle-fonctionnalite`)
 5. Ouvrez une Pull Request
 
-## 📝 License
-
-Ce projet est sous license MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
 ## 👤 Auteur
 
 **NeckTeck**
 - Portfolio : [Portfolio Alegria](https://votre-portfolio.com)
 - GitHub : [@votre-nom](https://github.com/votre-nom)
 - LinkedIn : [votre-profil](https://linkedin.com/in/votre-profil)
-
-## 🙏 Remerciements
-
-- Merci à toute l'équipe qui a contribué à ce projet
-- Inspiré par les meilleurs portfolios modernes
-- Conçu avec passion et attention aux détails
 
 ---
 
