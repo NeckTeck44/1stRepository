@@ -1,0 +1,3222 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Permissions-Policy" content="compute-pressure=()" />
+    <title>Portfolio NeckTeck</title>
+    <meta name="description" content="Portfolio professionnel - Candidature Formation Alegria" />
+    <link rel="icon" href="assets/images/1d341f5fc88320e0745cbad0ae811771.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Merriweather:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.min.css?v=1" />
+    <!-- Styles essentiels pour la section compétences (compatibilité Vite) -->
+    <style>
+        .project {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project.vitrine::after {
+            content: "";
+            z-index: 1;
+            border-radius: 50%;
+            display: none;
+            /* Caché par défaut */
+        }
+
+        .project:not(.has-iframe) .glow-effect {
+            display: block;
+            /* Afficher uniquement pour les cartes sans iframe */
+        }
+
+        .project:not(.has-iframe):hover .glow-effect {
+            opacity: 1;
+        }
+
+        /* Style spécifique pour les cartes avec iframe */
+        .project.has-iframe {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project.has-iframe:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .coming-soon-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(138, 43, 226, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 3;
+        }
+
+        /* Styles pour les cartes de projet */
+        .project {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(0);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project:hover::before {
+            opacity: 1;
+        }
+
+        .project-thumb {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-thumb img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project:hover .project-thumb img {
+            transform: scale(1.05);
+        }
+
+        .project-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            transition: width 0.3s ease;
+        }
+
+        .project:hover .project-title::after {
+            width: 100%;
+        }
+
+        .project-desc {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .project-meta span {
+            background: rgba(79, 172, 254, 0.1);
+            color: #4facfe;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .project:hover .project-meta span {
+            background: rgba(79, 172, 254, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-category-title {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            min-width: 40px;
+        }
+
+        /* Style pour le bouton de contrôle du son dans la barre de navigation */
+        .music-toggle {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 1.2em;
+            cursor: pointer;
+            padding: 0 10px;
+            margin-left: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            opacity: 0.8;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .music-toggle.playing .music-icon::before {
+            content: '🔊';
+        }
+
+        .music-toggle:not(.playing) .music-icon::before {
+            content: '🔇';
+        }
+
+        /* Cacher l'icône par défaut et n'afficher que celle du pseudo-élément */
+        .music-toggle .music-icon {
+            font-size: 0;
+        }
+
+        .music-toggle .music-icon::before {
+            font-size: 1.2rem;
+        }
+    </style>
+    <script src="js/config-utils.js"></script>
+    <script src="js/theme-manager.js"></script>
+    <style>
+        /* Styles pour le bouton de thème */
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid currentColor;
+            background: transparent;
+            color: inherit;
+            font-size: 16px;
+            line-height: 1;
+            padding: 0;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            vertical-align: middle;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(138, 43, 226, 0.1);
+            /* Violet clair au survol */
+            border-color: #8a2be2;
+            /* Violet pour le contour au survol */
+            color: #8a2be2;
+            /* Violet pour l'icône au survol */
+        }
+
+        /* Style spécifique pour le mode clair */
+        [data-theme="light"] .theme-toggle {
+            border-color: #999;
+            color: #555;
+        }
+
+        [data-theme="light"] .theme-toggle:hover {
+            background: rgba(138, 43, 226, 0.1);
+            border-color: #8a2be2;
+            color: #8a2be2;
+        }
+    </style>
+    <script>
+        // Effet de survol qui suit la souris
+        document.addEventListener('DOMContentLoaded', () => {
+            const projects = document.querySelectorAll('.project');
+
+            projects.forEach(project => {
+                // Créer l'élément de lueur
+                const glow = document.createElement('div');
+                glow.className = 'glow-effect';
+                project.prepend(glow);
+
+                // Détecter si la carte contient une iframe
+                const iframe = project.querySelector('iframe');
+                if (iframe) {
+                    project.classList.add('has-iframe');
+                    return; // Ne pas ajouter l'effet de survol pour les cartes avec iframe
+                }
+
+                project.addEventListener('mousemove', (e) => {
+                    if (project.classList.contains('has-iframe')) return;
+
+                    const rect = project.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    project.style.setProperty('--x', `${x}px`);
+                    project.style.setProperty('--y', `${y}px`);
+                });
+
+                project.addEventListener('mouseleave', () => {
+                    project.style.removeProperty('--x');
+                    project.style.removeProperty('--y');
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- Musique d'ambiance très douce -->
+    <audio id="background-music" loop preload="auto">
+        <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+        <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.ogg" type="audio/ogg">
+        Votre navigateur ne supporte pas l'élément audio.
+    </audio>
+
+    <!-- Sons optionnels - Créés dynamiquement si nécessaires -->
+
+    <!-- En-tête -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">Portfolio de NeckTeck</div>
+            <nav class="nav">
+                <a href="#hero" class="active">Accueil</a>
+                <a href="#vision-motivation">Vision & Motivation</a>
+                <a href="#projects">Projets</a>
+                <a href="#skills">Compétences</a>
+                <a href="#contact">Contact</a>
+                <span class="theme-toggle" id="themeToggle" title="Changer de thème">☼</span>
+                <button id="music-toggle" class="music-toggle" aria-label="Activer/Désactiver le son"
+                    title="Activer/Désactiver le son">
+                    <span class="music-icon">🔇</span>
+                </button>
+            </nav>
+            <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+        </div>
+    </header>
+
+    <!-- Section Hero -->
+    <section id="hero" class="hero">
+        <div class="container hero-inner">
+
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Bonjour, je suis<br />
+                    <span class="title-accent serif">NeckTeck</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <br>Développeur Junior passionné par la tech, je suis animé par la volonté d’inventer et d’améliorer
+                    les
+                    expériences numériques de demain, en utilisant les leviers de l’IA et des automatisations.
+                    <br />
+                    <br />
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#vision-motivation" class="btn btn-primary btn-caret">Continuer</a>
+                    <a href="#contact" class="btn btn-outline">Me contacter</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <div class="card">
+                    <div class="card-badge">Disponible</div>
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="assets/images/Avatar_NeckTeck.jpg" alt="Portrait du candidat" />
+                    </div>
+                    <div class="profile-name">NeckTeck</div>
+                    <div class="profile-meta">Candidat Alegria 2027</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Motivation -->
+    <section id="vision-motivation" class="section">
+        <div class="container">
+            <h2 class="section-title">Vision & Motivation</h2>
+            <p id="animated-text" class="muted"><span id="animated-content"></span><span class="caret"
+                    aria-hidden="true"></span></p>
+            <style>
+                #animated-text {
+                    font-family: 'Merriweather', serif;
+                    white-space: pre-wrap;
+                    font-size: 1.0em;
+                    text-align: left;
+                    /* align text to the left */
+                    display: block;
+                    /* block-level so it aligns left in centered containers */
+                    max-width: 65ch;
+                    /* readability width */
+                    letter-spacing: 0.01em;
+                    /* subtle typewriter feel */
+                    line-height: 1.4;
+                    /* improve readability */
+                    margin-inline: auto;
+                    /* center the block while text stays left */
+                }
+
+                /* Very small screens: slightly tighter measure and spacing */
+                @media (max-width: 400px) {
+                    #animated-text {
+                        max-width: 60ch;
+                        line-height: 1.5;
+                    }
+                }
+
+                /* Make each word an atomic inline element to prevent intra-word wrapping */
+                #animated-text .word {
+                    display: inline-flex;
+                    /* keep characters of a word on the same line */
+                    vertical-align: baseline;
+                }
+
+                /* Inline caret that only occupies the current line */
+                #animated-text .caret {
+                    display: inline-block;
+                    width: 0.15em;
+                    /* caret thickness */
+                    height: 1em;
+                    /* match line height */
+                    margin-left: 2px;
+                    background: currentColor;
+                    vertical-align: -0.15em;
+                    /* align with text baseline */
+                    animation: caret-blink 1s steps(1) infinite;
+                }
+
+                @keyframes caret-blink {
+
+                    0%,
+                    50%,
+                    100% {
+                        opacity: 1;
+                    }
+
+                    25%,
+                    75% {
+                        opacity: 0;
+                    }
+                }
+
+                /* Subtle per-character reveal */
+                #animated-text .char {
+                    opacity: 0;
+                    display: inline-block;
+                    animation: char-in 0.22s ease-out forwards;
+                }
+
+                @keyframes char-in {
+                    from {
+                        opacity: 0;
+                        transform: translateY(0.08em);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                /* Respect reduced motion preferences */
+                @media (prefers-reduced-motion: reduce) {
+                    #animated-text .char {
+                        animation: none;
+                        opacity: 1;
+                    }
+
+                    #animated-text .caret {
+                        animation-duration: 1.5s;
+                    }
+                }
+
+                /* Visually hidden, still accessible to screen readers */
+                .sr-only {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                    white-space: nowrap;
+                    border: 0;
+                }
+            </style>
+
+            </p>
+            <script>
+                const text = `   Quel formidable outil qu’est Internet - Si jeune que l’on peut encore rencontrer son créateur vivant !
+ Et pourtant, déjà, une nouvelle ère s’ouvre : celle de l’intelligence artificielle.
+ Une onde de choc qui va bouleverser le monde, transformer nos métiers, nos façons de penser, de créer, de collaborer - avec une créativité décuplée, des process optimisés et une innovation accélérée.
+
+  Intégrer la formation Alegria, c’est pour moi l’opportunité de prendre part à cette révolution technologique, d’en être acteur plutôt que spectateur.
+ Un ticket pour contribuer à façonner le monde de demain, en mettant mes compétences au service de l’innovation, du collectif et du progrès.
+ Rejoindre Alegria, c’est intégrer une dynamique où l’intelligence humaine et artificielle se rencontrent pour créer, partager et grandir ensemble.
+
+      Je monte vite en compétence et je suis animé par l’envie de comprendre, d’innover et de contribuer à des projets porteurs de sens.`;
+                const target = document.getElementById("animated-content");
+                const paragraph = document.getElementById("animated-text");
+                let index = 0;
+                let currentWord = null; // container span for the current word
+                let animationStarted = false; // pour suivre si l'animation a démarré
+
+                // Fit the final paragraph height to the viewport (no scroll)
+                function fitParagraphToViewport() {
+                    const header = document.querySelector('.site-header');
+                    const container = paragraph.closest('.container');
+                    const title = container.querySelector('.section-title');
+                    const tags = container.querySelector('.tags');
+
+                    const headerH = header ? header.offsetHeight : 0;
+                    const vpH = window.innerHeight;
+                    const sectionPadding = 40; // approximate inner paddings/margins
+                    const titleH = title ? title.offsetHeight : 0;
+                    const tagsH = tags ? tags.offsetHeight : 0;
+                    const reserved = headerH + sectionPadding + titleH + tagsH;
+                    const available = Math.max(100, vpH - reserved);
+
+                    // Build measuring probe with same styles and width
+                    const probe = document.createElement('p');
+                    probe.className = paragraph.className;
+                    const baseStyle = getComputedStyle(paragraph);
+                    probe.style.cssText = baseStyle.cssText || '';
+                    probe.style.position = 'absolute';
+                    probe.style.visibility = 'hidden';
+                    probe.style.left = '-9999px';
+                    probe.style.whiteSpace = 'pre-wrap';
+                    probe.style.maxWidth = baseStyle.maxWidth;
+                    probe.textContent = text;
+                    document.body.appendChild(probe);
+
+                    // Binary search scale between 0.7x and 1.0x to fit available height
+                    const baseFontPx = parseFloat(baseStyle.fontSize) || 16;
+                    let lo = 0.6, hi = 1.0, best = 1.0, tries = 0;
+                    while (tries++ < 12) {
+                        const mid = (lo + hi) / 2;
+                        probe.style.fontSize = (baseFontPx * mid) + 'px';
+                        const h = probe.scrollHeight;
+                        if (h <= available) { best = mid; lo = mid; } else { hi = mid; }
+                    }
+
+                    // Apply the best scale and set a stable min-height
+                    paragraph.style.fontSize = (baseFontPx * best) + 'px';
+                    probe.style.fontSize = (baseFontPx * best) + 'px';
+                    const finalH = probe.scrollHeight;
+                    paragraph.style.minHeight = finalH + 'px';
+                    document.body.removeChild(probe);
+                }
+
+                function typeWriter() {
+                    // Indiquer que l'animation est active
+                    window.typewriterAnimationActive = true;
+
+                    if (index < text.length) {
+                        const raw = text.charAt(index);
+
+                        if (raw === '\n') {
+                            // close word and append a line break
+                            if (currentWord) { currentWord = null; }
+                            target.insertAdjacentHTML('beforeend', '<br />');
+                        } else if (raw === ' ') {
+                            // close word and append a real space text node
+                            if (currentWord) { currentWord = null; }
+                            target.insertAdjacentText('beforeend', ' ');
+                        } else {
+                            // ensure a word container exists
+                            if (!currentWord) {
+                                currentWord = document.createElement('span');
+                                currentWord.className = 'word';
+                                target.appendChild(currentWord);
+                            }
+                            // Basic HTML escape for safety and append char with fade-in
+                            const escaped = raw
+                                .replace(/&/g, '&amp;')
+                                .replace(/</g, '&lt;')
+                                .replace(/>/g, '&gt;');
+                            const span = document.createElement('span');
+                            span.className = 'char';
+                            span.innerHTML = escaped;
+                            currentWord.appendChild(span);
+                        }
+
+                        const ch = raw;
+                        index++;
+
+                        // Announce by sentence for screen readers (optionnel - fonctionnalité désactivée)
+                        if (/[.!?]/.test(ch) || index === text.length) {
+                            // Cette fonctionnalité peut être réactivée si nécessaire
+                            // en ajoutant un élément avec id="animated-live" dans le HTML
+                        }
+
+                        // Natural typing rhythm: base + jitter + punctuation pauses
+                        const base = 25;
+                        const jitter = Math.floor(Math.random() * 15) - 7; // -7..+7 ms
+                        let extra = 0;
+                        let shouldPauseAudio = false;
+                        let pauseDuration = 0;
+                        let shouldRestartAudio = false;
+
+                        if (ch === ' ') extra += 10;            // no pause on spaces
+                        if (ch === ',' || ch === ';' || ch === ':' || ch === '-') {
+                            extra += 50;  // Pause Naturelle pour virgules
+                        }
+                        if (ch === '.' || ch === '!' || ch === '?') {
+                            extra += 100;  // Pause plus longue en fin de phrase
+                        }
+                        if (ch === '\n') {
+                            extra += 75;  // Pause pour retour à la ligne
+                        }
+
+                        // Le son continue sans interruption pendant toute l'animation
+
+                        const delay = Math.max(5, base + jitter + extra);
+                        // Gestion des pauses audio pour la ponctuation
+                        if (ch === '.' || ch === '!' || ch === '?') {
+                            shouldRestartAudio = false;
+                        }
+                        if (ch === '\n') {
+                            shouldPauseAudio = true;
+                            // Pause plus longue pour les sauts de ligne après une fin de phrase (transition entre paragraphes)
+                            if (shouldRestartAudio) {
+                                pauseDuration = 50;  // Pause entre paragraphes
+                            } else {
+                                pauseDuration = 75;  // Pause normale pour les autres sauts de ligne
+                            }
+                            // Réinitialiser le flag pour éviter les pauses inutiles
+                            shouldRestartAudio = false;
+                        }
+                        // Appliquer les pauses audio si nécessaire
+                        if (shouldPauseAudio) {
+                            if (window.soundEnabled === true) {
+                                pauseTypingSound();
+                                setTimeout(() => {
+                                    if (window.soundEnabled === true) {
+                                        resumeTypingSound();
+                                    }
+                                    setTimeout(typeWriter, delay);
+                                }, pauseDuration);
+                            } else {
+                                setTimeout(typeWriter, delay);
+                            }
+                        } else if (shouldRestartAudio) {
+                            if (window.soundEnabled === true) {
+                                restartTypingSound();
+                            }
+                            setTimeout(typeWriter, delay);
+                        } else {
+                            setTimeout(typeWriter, delay);
+                        }
+                    } else {
+                        // Animation terminée
+                        window.typewriterAnimationActive = false;
+                        // Arrêter le son quand l'animation est finie
+                        stopTypingSound();
+                    }
+                }
+
+                fitParagraphToViewport();
+                // Refit when web fonts finish loading to account for font metrics changes
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(() => {
+                        fitParagraphToViewport();
+                    });
+                }
+                // Refit on resize/orientation changes
+                window.addEventListener('resize', () => {
+                    fitParagraphToViewport();
+                });
+                window.addEventListener('orientationchange', () => {
+                    fitParagraphToViewport();
+                });
+
+                // Démarrer l'animation quand la section devient visible
+                function startAnimationWhenVisible() {
+                    const section = document.getElementById('vision-motivation');
+                    if (!section) {
+                        console.log('Section vision-motivation non trouvée');
+                        return;
+                    }
+                    const rect = section.getBoundingClientRect();
+                    // Détecter si la section est visible avec une marge plus généreuse
+                    const margin = 100; // 100px de marge
+                    const isVisible = rect.top < (window.innerHeight - margin) && rect.bottom > margin;
+
+                    console.log('Section visible:', isVisible, 'Rect top:', rect.top, 'Rect bottom:', rect.bottom, 'Window height:', window.innerHeight);
+
+                    if (isVisible && !animationStarted) { // Si visible et animation pas encore démarrée
+                        console.log('Démarrage de l\'animation avec délai');
+                        animationStarted = true;
+                        // Ajouter un petit délai avant de démarrer l'animation
+                        setTimeout(() => {
+                            console.log('Démarrage effectif de l\'animation');
+                            typeWriter();
+                        }, 500);
+                    }
+                }
+
+                // Variables pour le contrôle précis du son
+                let typingAudio = null;
+                let typingAudioSource = null;
+                let typingAudioContext = null;
+                let isAudioPaused = false;
+                let audioPausedAt = 0;
+
+                // Son mécanique pour l'animation de la section Vision & Motivation
+                let mechanicalSound = new Audio('assets/sounds/1-mechanical-keyboard-cherry-mx-brown-30628 (x1.15).mp3');
+                mechanicalSound.volume = 0.5; // Volume à 50%
+                mechanicalSound.preload = 'auto'; // Précharger le son
+                window.mechanicalSound = mechanicalSound; // Rendre disponible globalement
+
+                // Gestion des erreurs de chargement
+                mechanicalSound.addEventListener('error', (e) => {
+                    console.error('Erreur de chargement du son mécanique:', e);
+                    console.log('Chemin du fichier:', mechanicalSound.src);
+                });
+
+                // Confirmation que le son est prêt
+                mechanicalSound.addEventListener('canplaythrough', () => {
+                    console.log('🎵 Son mécanique prêt à être joué');
+                });
+
+                // Variables globales pour la gestion du son (anciennement dans paragraph-sound-control.js)
+                window.typingSoundEnabled = true;
+                window.currentTypingAudio = null;
+
+                // Flag pour contrôler l'état de l'animation
+                window.typewriterAnimationActive = false;
+
+                // 🔧 CHANGEZ CE FICHIER POUR TESTER DIFFÉRENTS SONS :
+                // Option 1: 'clicky-keyboard-typing-361367.mp3' (572 KB)
+                // Option 2: 'keyboard-typing-49404.mp3' (5.7 MB)
+                // Option 3: 'keyboard-typing-5997.mp3' (312 KB)
+                // Option 4: 'mechanical-keyboard-typing-treble-version-7055.mp3' (3.7 MB)
+                // Option 5: 'clicky-keyboard-typing-361367.mp3' (nouveau son demandé)
+                const currentTypingSound = '/sounds/1-mechanical-keyboard-cherry-mx-brown-30628.mp3';
+                const playbackRate = 1.15; // Vitesse de lecture 1.15x pour un effet plus doux
+
+                // Fonction pour initialiser l'audio si nécessaire
+                function initAudioIfNeeded() {
+                    // Ne pas initialiser l'audio si le son est désactivé
+                    if (!typingAudio && window.soundEnabled === true) {
+                        try {
+                            typingAudio = new Audio(currentTypingSound);
+                            typingAudio.volume = 0.4;
+                            typingAudio.playbackRate = playbackRate;
+                            typingAudio.preload = 'auto';
+                            typingAudio.load();
+
+                            typingAudio.addEventListener('ended', () => {
+                                console.log('🔇 Son de frappe terminé naturellement');
+                            });
+
+                            // Configurer le contexte audio
+                            typingAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+                            typingAudioSource = typingAudioContext.createMediaElementSource(typingAudio);
+                            typingAudioSource.connect(typingAudioContext.destination);
+
+                            console.log('🔊 Audio initialisé');
+                        } catch (e) {
+                            console.error('Erreur initialisation audio:', e);
+                        }
+                    }
+                }
+
+                // Fonction pour jouer un son de frappe avec MP3 synchronisé
+                function playTypingSound() {
+                    // Vérifier explicitement si le son est activé
+                    if (window.soundEnabled !== true) {
+                        console.log('🔇 Son désactivé, lecture annulée (état:', window.soundEnabled, 'type:', typeof window.soundEnabled, ')');
+                        return;
+                    }
+
+                    console.log('🔊 Tentative de lecture du son (activé)');
+
+                    // Initialiser l'audio si nécessaire
+                    initAudioIfNeeded();
+
+                    // Vérifier si l'audio est prêt
+                    if (!typingAudio) {
+                        return;
+                    }
+
+                    try {
+                        // Réactiver le contexte si nécessaire
+                        if (typingAudioContext && typingAudioContext.state === 'suspended') {
+                            typingAudioContext.resume().catch(console.error);
+                        }
+
+                        // Réinitialiser et jouer le son
+                        typingAudio.currentTime = 0;
+                        typingAudio.play().catch(e => {
+                            // Ignorer les erreurs de lecture quand l'utilisateur a désactivé le son
+                            if (!e.message.includes('play() failed') && !e.message.includes('user gesture')) {
+                                console.error('Erreur lecture son de frappe:', e);
+                            }
+                        });
+                    } catch (error) {
+                        console.log('❌ Erreur création audio:', error);
+                        // Le son de secours est désactivé pour éviter les bruits indésirables
+                    }
+                }
+
+                // Fonction pour mettre en pause le son pendant les ponctuations
+                function pauseTypingSound() {
+                    if (typingAudio && !isAudioPaused && !typingAudio.paused) {
+                        audioPausedAt = typingAudio.currentTime;
+                        typingAudio.pause();
+                        isAudioPaused = true;
+                        console.log('⏸️ Son mis en pause à', audioPausedAt.toFixed(2), 's');
+                    }
+                }
+
+                // Fonction pour reprendre le son après les ponctuations
+                function resumeTypingSound() {
+                    if (typingAudio && isAudioPaused) {
+                        typingAudio.currentTime = audioPausedAt;
+                        typingAudio.play().then(() => {
+                            isAudioPaused = false;
+                            console.log('▶️ Son repris à', audioPausedAt.toFixed(2), 's');
+                        }).catch(error => {
+                            console.log('❌ Erreur reprise son:', error);
+                        });
+                    }
+                }
+
+                // Fonction pour arrêter le son quand l'animation est terminée
+                function stopTypingSound() {
+                    console.log('🛑 Arrêt forcé du son de frappe...');
+
+                    // Arrêter le son local de manière agressive
+                    if (typingAudio) {
+                        try {
+                            // Supprimer tous les event listeners
+                            typingAudio.removeEventListener('ended', null);
+
+                            // Forcer l'arrêt immédiat
+                            typingAudio.pause();
+                            typingAudio.currentTime = 0;
+                            typingAudio.loop = false;
+
+                            // Si le son est toujours en cours, le détruire complètement
+                            if (!typingAudio.paused) {
+                                typingAudio.src = ''; // Vider la source
+                                typingAudio.load(); // Forcer le rechargement (qui arrêtera tout)
+                            }
+
+                            console.log('⏹️ Son local arrêté et détruit - animation terminée');
+                        } catch (e) {
+                            console.log('⚠️ Erreur arrêt son local:', e);
+                        }
+                    }
+
+                    // Arrêter aussi le son global (pour compatibilité)
+                    if (window.typingAudio) {
+                        try {
+                            window.typingAudio.pause();
+                            window.typingAudio.currentTime = 0;
+                            window.typingAudio.loop = false;
+                            window.typingAudio.src = '';
+                            window.typingAudio.load();
+                            console.log('⏹️ Son global arrêté et détruit - animation terminée');
+                        } catch (e) {
+                            console.log(' Erreur arrêt son global:', e);
+                        }
+                    }
+
+                    // Arrêter le son mécanique s'il est défini
+                    if (window.mechanicalSound) {
+                        try {
+                            window.mechanicalSound.pause();
+                            window.mechanicalSound.currentTime = 0;
+                            window.mechanicalSound.loop = false;
+                            console.log(' Son mécanique arrêté - animation terminée');
+                        } catch (e) {
+                            console.log(' Erreur arrêt son mécanique:', e);
+                        }
+                    }
+
+                    // Réinitialiser les états
+                    isAudioPaused = false;
+                    audioPausedAt = 0;
+                    isRestarting = false;
+
+                    // Nettoyer les ressources
+                    if (typingAudioSource) {
+                        try {
+                            typingAudioSource.disconnect();
+                            typingAudioSource = null;
+                        } catch (e) {
+                            console.log('⚠️ Erreur déconnexion source audio:', e);
+                        }
+                    }
+
+                    // Nettoyer le contexte audio
+                    if (typingAudioContext) {
+                        try {
+                            if (typingAudioContext.state !== 'closed') {
+                                typingAudioContext.close().then(() => {
+                                    console.log('🔇 Contexte audio fermé');
+                                }).catch(e => console.log('⚠️ Erreur fermeture contexte:', e));
+                            }
+                            typingAudioContext = null;
+                        } catch (e) {
+                            console.log('⚠️ Erreur nettoyage contexte:', e);
+                        }
+                    }
+
+                    // Réinitialiser complètement les variables
+                    typingAudio = null;
+                    window.typingAudio = null;
+
+                    console.log('✅ Son de frappe complètement arrêté et nettoyé');
+                }
+
+                // Verrou pour éviter les conflits de redémarrage
+                let isRestarting = false;
+
+                // Fonction pour gérer les pauses de son par caractère (intégrée depuis paragraph-sound-control.js)
+                function handleCharacterPause(character, callback) {
+                    let pauseDuration = 0;
+                    let shouldPauseSound = false;
+
+                    switch (character) {
+                        case '\n':
+                            pauseDuration = 150; // Réduit pour animation plus fluide
+                            shouldPauseSound = true;
+                            console.log('📄 Saut de ligne détecté');
+                            break;
+                        case ',':
+                        case ';':
+                        case ':':
+                            pauseDuration = 100; // Réduit pour animation plus fluide
+                            break;
+                        case '.':
+                        case '!':
+                        case '?':
+                            pauseDuration = 200; // Réduit pour animation plus fluide
+                            break;
+                        case ' ':
+                            pauseDuration = 30; // Réduit pour animation plus fluide
+                            break;
+                    }
+
+                    if (shouldPauseSound) {
+                        pauseTypingSound();
+                    }
+
+                    if (pauseDuration > 0) {
+                        setTimeout(() => {
+                            if (shouldPauseSound) {
+                                // Vérifier si l'animation est encore en cours avant de reprendre le son
+                                if (window.typewriterAnimationActive !== false) {
+                                    resumeTypingSound();
+                                } else {
+                                    console.log('🔇 Animation terminée, pas de reprise du son');
+                                }
+                            }
+                            if (callback) callback();
+                        }, pauseDuration);
+                    } else if (callback) {
+                        callback();
+                    }
+                }
+
+                // Exporter la fonction handleCharacterPause globalement
+                window.handleCharacterPause = handleCharacterPause;
+
+                // Fonction pour redémarrer le son depuis le début (pour les fins de phrase)
+                function restartTypingSound() {
+                    // Éviter les redémarrages simultanés
+                    if (isRestarting) {
+                        console.log('⚠️ Redémarrage déjà en cours, ignoré');
+                        return;
+                    }
+
+                    isRestarting = true;
+                    console.log('🔄 Redémarrage du son depuis le début');
+
+                    try {
+                        if (typingAudio) {
+                            // Arrêter proprement le son actuel
+                            typingAudio.pause();
+                            typingAudio.currentTime = 0;
+
+                            // Attendre un peu que l'arrêt soit complet
+                            setTimeout(() => {
+                                // Recréer l'élément audio pour un redémarrage propre
+                                typingAudio = new Audio(currentTypingSound);
+                                typingAudio.volume = 0.4;
+                                typingAudio.playbackRate = playbackRate; // Appliquer la vitesse de lecture 1.35x
+
+                                // Recréer la connexion audio si nécessaire
+                                if (typingAudioContext) {
+                                    typingAudioSource = typingAudioContext.createMediaElementSource(typingAudio);
+                                    typingAudioSource.connect(typingAudioContext.destination);
+                                }
+
+                                // Démarrer le son depuis le début
+                                typingAudio.play().then(() => {
+                                    isAudioPaused = false;
+                                    audioPausedAt = 0;
+                                    isRestarting = false;
+                                    console.log('✅ Son redémarré depuis le début');
+                                }).catch(error => {
+                                    console.log('❌ Erreur redémarrage son:', error);
+                                    isRestarting = false;
+                                    // Le son de secours est désactivé pour éviter les bruits indésirables
+                                });
+                            }, 50); // Petit délai pour éviter les conflits
+                        } else {
+                            // Si pas de son existant, en créer un nouveau
+                            playTypingSound();
+                            isRestarting = false;
+                        }
+                    } catch (error) {
+                        console.log('❌ Erreur redémarrage son:', error);
+                        isRestarting = false;
+                        // Le son de secours est désactivé pour éviter les bruits indésirables
+                    }
+                }
+
+                // Fonction de secours avec son synthétique (DÉSACTIVÉ pour éviter le "biip")
+                function playTypingSoundFallback() {
+                    console.log('🔊 Son de frappe synthétique (secours) - DÉSACTIVÉ');
+                    // La fonction est volontairement vide pour éviter le son "biip" lors de la frappe
+                    // dans le formulaire de contact
+                    return;
+
+                    /*
+                    try {
+                        if (!typingAudioContext) {
+                            typingAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        }
+
+                        if (typingAudioContext.state === 'suspended') {
+                            typingAudioContext.resume();
+                        }
+
+                        const oscillator = typingAudioContext.createOscillator();
+                        const gainNode = typingAudioContext.createGain();
+
+                        oscillator.type = 'triangle';
+                        oscillator.frequency.setValueAtTime(800, typingAudioContext.currentTime);
+                        gainNode.gain.setValueAtTime(0.03, typingAudioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.005, typingAudioContext.currentTime + 0.015);
+
+                        oscillator.connect(gainNode);
+                        gainNode.connect(typingAudioContext.destination);
+
+                        oscillator.start();
+                        oscillator.stop(typingAudioContext.currentTime + 0.03);
+
+                        console.log('✅ Son de secours joué');
+                    } catch (error) {
+                        console.log('❌ Erreur son de secours:', error);
+                    }
+                    */
+                }
+
+                // Configurer l'Intersection Observer pour la section Vision & Motivation
+                const visionSection = document.getElementById('vision-motivation');
+
+                if (visionSection) {
+                    console.log('🔍 Section Vision & Motivation trouvée, configuration de l\'observer...');
+
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            console.log('👀 Intersection Ratio:', entry.intersectionRatio);
+
+                            // Vérifier si la section est visible à au moins 40%
+                            const isVisible = entry.intersectionRatio >= 0.4;
+
+                            if (isVisible) {
+                                console.log('🎯 Section visible à plus de 40% - Démarrage de l\'animation et du son');
+
+                                // Démarrer l'animation de frappe
+                                if (!animationStarted) {
+                                    animationStarted = true;
+                                    setTimeout(() => {
+                                        typeWriter();
+                                    }, 500);
+                                }
+
+                                // Jouer le son mécanique si le son est activé
+                                if (window.mechanicalSound && window.soundEnabled) {
+                                    console.log('▶️ Lecture du son mécanique...');
+                                    window.mechanicalSound.currentTime = 0;
+                                    window.mechanicalSound.play()
+                                        .then(() => console.log('✅ Son mécanique démarré avec succès'))
+                                        .catch(e => console.error('❌ Erreur lecture son:', e));
+                                }
+
+                                // Ne plus observer après avoir tout déclenché
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, {
+                        threshold: [0.4], // Seulement à 40% de visibilité
+                        rootMargin: '0px 0px -10% 0px' // Marge négative en bas pour déclencher plus tôt
+                    });
+
+                    // Démarrer l'observation
+                    observer.observe(visionSection);
+                    console.log('👁️ Observation de la section Vision & Motivation activée');
+                } else {
+                    console.warn('⚠️ Section Vision & Motivation non trouvée');
+                    startAnimationWhenVisible(); // Fallback
+                }
+
+                window.addEventListener('scroll', startAnimationWhenVisible);
+                window.addEventListener('resize', startAnimationWhenVisible);
+            </script>
+        </div>
+    </section>
+
+    <!-- Projets -->
+    <section id="projects" class="section alt">
+
+        </div> -->
+        <div class="container">
+            <h2 class="section-title">Projets</h2>
+            <div class="grid">
+                <article class="project" style="overflow: visible;">
+                    <div class="project-thumb"
+                        style="display: flex; justify-content: space-between; position: relative; height: 200px; padding: 4px; z-index: 1; overflow: visible; background: transparent !important; width: 100%;">
+                        <!-- Image de gauche -->
+                        <div class="dota-image-container left-image"
+                            style="flex: 1; position: relative; z-index: 1; overflow: visible;">
+                            <a href="https://narutoversusbleach.1fr1.net/t59-nvb-c-est-quoi" target="_blank"
+                                style="display: block; width: 100%; height: 100%;">
+                                <img src="assets/images/miniature-dota-naruto-bleach.webp"
+                                    alt="Miniature Dota Naruto vs Bleach" class="dota-image" style="width: 100%; height: 100%; object-fit: cover; object-position: center;
+                                    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                                    transform-origin: left center;
+                                    position: relative;
+                                    border-radius: 4px;
+                                    display: block;">
+                            </a>
+                        </div>
+                        <!-- Image de droite -->
+                        <div class="dota-image-container right-image"
+                            style="flex: 1; position: relative; z-index: 1; overflow: visible;">
+                            <a href="https://narutoversusbleach.1fr1.net/t59-nvb-c-est-quoi" target="_blank"
+                                style="display: block; width: 100%; height: 100%;">
+                                <img src="assets/images/miniature-dota-naruto-bleach-c'est-quoi.webp"
+                                    alt="Miniature Dota Naruto vs Bleach - C'est quoi" class="dota-image" style="width: 100%; height: 100%; object-fit: cover; object-position: center;
+                                    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                                    transform-origin: right center;
+                                    position: relative;
+                                    border-radius: 4px;
+                                    display: block;">
+                            </a>
+                        </div>
+                        <style>
+                            /* Conteneur principal de la carte de projet */
+                            .project {
+                                overflow: visible !important;
+                                position: relative;
+                                margin-bottom: 60px;
+                                /* Marge réduite en bas */
+                                padding-bottom: 20px;
+                                /* Moins d'espace pour l'effet de survol */
+                                min-height: auto;
+                                /* Suppression de la hauteur minimale fixe */
+                            }
+
+                            .project-thumb {
+                                overflow: visible !important;
+                                position: relative;
+                                z-index: 2;
+                                background: transparent !important;
+                                margin-bottom: 20px;
+                                /* Espacement réduit sous les images */
+                                padding-bottom: 0;
+                                /* Suppression du padding en bas inutile */
+                            }
+
+                            .dota-image-container {
+                                position: relative;
+                                transition: all 0.3s ease;
+                                overflow: visible !important;
+                                transform: translateZ(0);
+                                will-change: transform, z-index;
+                                backface-visibility: hidden;
+                                z-index: 1;
+                                isolation: isolate;
+                                width: 48%;
+                                margin: 0 1%;
+                            }
+
+                            /* S'assurer que le conteneur survolé est au-dessus */
+                            .dota-image-container:hover {
+                                z-index: 1000 !important;
+                                /* Valeur très élevée pour le survol */
+                            }
+
+                            /* Force l'image survolée à être au-dessus de tout */
+                            .dota-image-container:hover .dota-image {
+                                z-index: 1001 !important;
+                                position: relative;
+                            }
+
+                            .dota-image-container.left-image {
+                                border-radius: 4px 0 0 4px;
+                                z-index: 2;
+                                /* Valeur de base plus élevée pour l'image de gauche */
+                            }
+
+                            .dota-image-container.right-image {
+                                border-radius: 0 4px 4px 0;
+                                z-index: 1;
+                                /* Valeur de base plus basse pour l'image de droite */
+                            }
+
+                            .dota-image {
+                                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                                will-change: transform;
+                                position: relative;
+                                z-index: 1;
+                                transform: translateZ(0);
+                                /* Force l'accélération matérielle */
+                                backface-visibility: hidden;
+                                -webkit-backface-visibility: hidden;
+                            }
+
+                            .dota-image {
+                                position: relative;
+                                z-index: 1;
+                                /* Valeur de base plus basse */
+                                transition: all 0.3s ease;
+                                will-change: transform, z-index;
+                            }
+
+                            .dota-image-container.left-image .dota-image:hover {
+                                transform: scale(1.5) translateX(10%);
+                                box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+                                z-index: 1001 !important;
+                                position: relative;
+                                max-width: 100%;
+                            }
+
+                            .dota-image-container.right-image .dota-image:hover {
+                                transform: scale(1.5) translateX(-10%);
+                                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+                                z-index: 1001 !important;
+                                position: relative;
+                                max-width: 100%;
+                            }
+
+                            .dota-image-container a {
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                                text-decoration: none;
+                                position: relative;
+                                z-index: 1;
+                            }
+
+                            .project-body {
+                                position: relative;
+                                z-index: 1;
+                                /* Réduit le z-index pour être en dessous des images zoomées */
+                                margin-top: 15px;
+                                /* Espace réduit au-dessus du contenu */
+                                padding-top: 10px;
+                                /* Espacement réduit */
+                                background: inherit;
+                                /* Hérite du fond pour éviter la transparence */
+                            }
+
+                            /* Permettre le débordement dans toute la section */
+                            #projects {
+                                overflow: visible !important;
+                            }
+
+                            #projects .container {
+                                overflow: visible !important;
+                            }
+
+                            .grid {
+                                overflow: visible !important;
+                            }
+                        </style>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Naruto Versus Bleach</h3>
+                        <p class="project-desc">En 2008, à seulement 14 ans, fan de Naruto et Bleach, et passionné par
+                            la compétition en ligne, je découvre Dota — j’y vois immédiatement un immense potentiel.
+                            Poussé par cette flamme, je crée une communauté de joueurs sur un forum phpBB et un réseau
+                            Hamachi, afin de connecter des fans autour d’une version modée de Dota opposant les
+                            personnages de Naruto à ceux de Bleach.
+                            Sans m’en rendre compte, je découvrais le pouvoir de la création : transformer une idée en
+                            projet concret à travers la technologie, simplement par passion et curiosité. Cette
+                            expérience m’a également révélé un domaine fascinant où mon perfectionnisme devenait un
+                            atout, me poussant à acquérir toujours plus de connaissances.
+                            Ce MOBA visionnaire deviendra le précurseur de ce qui sera, sans conteste, le jeu compétitif
+                            le plus joué et streamé au monde : League of Legends.
+                        </p>
+                        <div class="project-meta">
+                            <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+                            <span>Responsive Design</span><span>Gaming</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="project">
+                    <div class="project-thumb">
+                        <div class="mini"><img id="thumb-light" alt="Miniature thème clair" /></div>
+                        <div class="mini"><img id="thumb-dark" alt="Miniature thème sombre" /></div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Portfolio - Statique</h3>
+                        <p class="project-desc">Responsive design avec thème clair/sombre, animations fluides et
+                            navigation
+                            intuitive. Design moderne et performant, adapté à tous les écrans.</p>
+                        <div class="project-meta">
+                            <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+                            <span>Responsive Design</span><span>CSS Variables</span>
+                            <span>LocalStorage</span><span>API Web</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="project">
+                    <div class="project-thumb"><img src="assets/images/NeckBot-30.jpg"
+                            style="position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; z-index: 1000; animation: float 3s ease-in-out infinite;" />
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Composants UI</h3>
+                        <p class="project-desc">Bibliothèque de composants réutilisables (boutons, cartes, modales…).
+                        </p>
+                        <div class="project-meta">
+                            <span>Design system</span><span>Accessibilité</span><span>Docs</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="project">
+                    <div class="project-thumb"><img src="assets/images/NeckBot-30.jpg"
+                            style="position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; z-index: 1000; animation: float 3s ease-in-out infinite;" />
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">NeckBot, l'IA à votre service</h3>
+                        <p class="project-desc">Assistant IA personnel interactif avec traitement du langage naturel.
+                            Interface conversationnelle moderne, réponses intelligentes et expérience utilisateur
+                            immersive.</p>
+                        <div class="project-meta">
+                            <span>JavaScript</span><span>NLP</span><span>Real-time</span>
+                            <span>UI/UX</span><span>Interactive</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="project" onclick="window.open('https://www.youtube.com/watch?v=zlWEOxQrOrc', '_blank')"
+                    style="cursor: pointer;">
+                    <div class="project-thumb">
+                        <iframe
+                            src="https://www.youtube.com/embed/N3jkWM5zpN0?autoplay=1&mute=1&loop=1&playlist=N3jkWM5zpN0&controls=0&showinfo=0&rel=0&modestbranding=1"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Intro Créer avec After Effect pour ma chaine YouTube</p>
+                        <div class="project-meta">
+                            <span>React</span><span>Node.js</span><span>MongoDB</span>
+                            <span>WebSocket</span><span>PWA</span>
+                            <span>Drag & Drop</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Frontend</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">React</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-level">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">TypeScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-level">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                            <span class="skill-level">90%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">HTML/CSS</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                            <span class="skill-level">95%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Tailwind CSS</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                            <span class="skill-level">88%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Backend</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">Node.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                            <span class="skill-level">75%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Express</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                            <span class="skill-level">70%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 65%"></div>
+                            </div>
+                            <span class="skill-level">65%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">API REST</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-level">80%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Base de données</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">PostgreSQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                            <span class="skill-level">70%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MongoDB</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 65%"></div>
+                            </div>
+                            <span class="skill-level">65%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQLite</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                            <span class="skill-level">75%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Outils & Autres</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">Git</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-level">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Docker</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 60%"></div>
+                            </div>
+                            <span class="skill-level">60%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Figma</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                            <span class="skill-level">70%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">VS Code</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                            <span class="skill-level">90%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title title-accent">Contact</h2>
+            <form action="https://formspree.io/f/mpwydorr" method="POST">
+                <div class="form-row">
+
+                    <label for="name">Nom</label>
+                    <input id="name" name="name" type="text" required placeholder="Votre nom" />
+                </div>
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" required placeholder="vous@example.com" />
+                </div>
+                <div class="form-row">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required placeholder="Votre message..."></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+            </form>
+        </div>
+        <!-- Footer intégré à la page Contact pour qu'il s'affiche en bas de cette page -->
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <p>© <span id="year"></span> Portfolio de NeckTeck — Tous droits réservés</p>
+                <div class="socials">
+                    <a href="#" aria-label="GitHub">GitHub</a>
+                    <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                    <a href="#" aria-label="Email">Email</a>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <!-- Chatbot Interface will be dynamically added by main.js -->
+
+
+    <script>
+        // Mobile nav
+        const toggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('.nav');
+        toggle?.addEventListener('click', () => {
+            const isOpen = nav?.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', String(!!isOpen));
+        });
+
+        // Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme handling
+        const htmlEl = document.documentElement;
+        const btn = document.getElementById('themeToggle');
+
+        function systemPrefersLight() {
+            return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                // D'abord, mettre le fond sombre et préparer la transition sur l'élément html
+                htmlEl.classList.add('theme-transition');
+
+                // Forcer le reflow pour que la transition soit visible
+                htmlEl.offsetHeight;
+
+                // Appliquer le thème clair
+                htmlEl.setAttribute('data-theme', 'light');
+
+                // Activer la transition vers le blanc
+                setTimeout(() => {
+                    htmlEl.classList.add('active');
+                }, 50);
+
+                // Nettoyer après la transition
+                setTimeout(() => {
+                    htmlEl.classList.remove('theme-transition', 'active');
+                }, 2200);
+
+                if (btn) btn.textContent = '';
+            } else {
+                // Pour le thème sombre, transition douce
+                htmlEl.classList.remove('theme-transition', 'active');
+                htmlEl.style.transition = 'background-color 2s ease-in-out, color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out';
+                htmlEl.removeAttribute('data-theme');
+                if (btn) btn.textContent = '';
+
+                setTimeout(() => {
+                    htmlEl.style.transition = '';
+                }, 2000);
+            }
+        }
+
+        // Initialize theme from localStorage (default: dark, ignoring system)
+        (function initTheme() {
+            const saved = localStorage.getItem('theme');
+            const theme = saved || 'dark';
+            applyTheme(theme);
+        })();
+
+        // Do not auto-switch theme on system changes when no choice is saved
+        // (disabled listener to keep default dark unless user toggles explicitly)
+
+        // Toggle on click
+        btn?.addEventListener('click', () => {
+            const isLight = htmlEl.getAttribute('data-theme') === 'light';
+            const next = isLight ? 'dark' : 'light';
+            localStorage.setItem('theme', next);
+            applyTheme(next);
+        });
+
+        // Active nav link by section on scroll and click
+        const navLinks = Array.from(document.querySelectorAll('.nav a[href^="#"]'));
+        const sections = navLinks
+            .map(a => document.querySelector(a.getAttribute('href')))
+            .filter(Boolean);
+
+        function setActiveById(id) {
+            navLinks.forEach(a => {
+                if (a.getAttribute('href') === '#' + id) {
+                    a.classList.add('active');
+                } else {
+                    a.classList.remove('active');
+                }
+            });
+        }
+
+        // Observe sections to update active link when a section is 20% visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveById(entry.target.id);
+                }
+            });
+        }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
+
+        sections.forEach(sec => observer.observe(sec));
+
+        // Smooth scroll on click and update active immediately
+        navLinks.forEach(a => {
+            a.addEventListener('click', (e) => {
+                // Jouer le son de transition
+                playTransitionSound();
+
+                const hash = a.getAttribute('href');
+                if (hash && hash.startsWith('#')) {
+                    const target = document.querySelector(hash);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        setActiveById(target.id);
+                        // Close mobile nav if open
+                        nav?.classList.remove('open');
+                        toggle?.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        });
+
+        // Initialize active state on load based on hash, if present
+        if (location.hash) {
+            const initial = document.querySelector(location.hash);
+            if (initial) { setActiveById(initial.id); }
+        }
+
+        // ===== CARROUSEL VERTICAL DÉSACTIVÉ =====
+        // Ce code a été désactivé pour permettre un défilement naturel
+        /*
+        let currentSectionIndex = 0;
+        const carouselIds = ['hero', 'vision-motivation', 'projects', 'contact'];
+        let lastScrollTime = 0;
+    
+        // Fonction pour aller à une section (sans bloquer le scroll)
+        function goToSection(index) {
+          if (index < 0 || index >= carouselIds.length) return;
+        // ...
+    
+          const section = document.getElementById(carouselIds[index]);
+          if (section) {
+            currentSectionIndex = index;
+            // Utiliser le scroll natif avec snap
+            section.scrollIntoView({
+              behavior: 'auto',
+              block: 'start'
+            console.log('🎯 Navigation vers:', carouselIds[index]);
+          }
+        }
+    
+        /*
+        // Détecter les mouvements importants et aider le scroll-snap
+        // COMMENTÉ - Ce code interfère avec le scroll fluide de la molette
+        // window.addEventListener('wheel', (e) => {
+        //   const currentTime = Date.now();
+    
+        //   // Ne réagir qu'aux mouvements significatifs avec un délai équilibré
+        //   if (Math.abs(e.deltaY) > 10 && currentTime - lastScrollTime > 150) {
+        //     const scrollDirection = e.deltaY > 0 ? 1 : -1;
+    
+        //     if (scrollDirection === 1 && currentSectionIndex < carouselIds.length - 1) {
+        //       goToSection(currentSectionIndex + 1);
+        //       lastScrollTime = currentTime;
+        //     } else if (scrollDirection === -1 && currentSectionIndex > 0) {
+        //       goToSection(currentSectionIndex - 1);
+        //       lastScrollTime = currentTime;
+        //     }
+        //   }
+        // }, { passive: true });
+    
+          // Trouver la section la plus proche
+          let closestIndex = 0;
+          let closestDistance = Infinity;
+    
+          sections.forEach((section, index) => {
+            if (section) {
+              const distance = Math.abs(scrollPosition - (section.offsetTop - 70));
+              if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+              }
+            }
+          });
+    
+          currentSectionIndex = closestIndex;
+        }, { passive: true });
+    
+        console.log('🎯 Carrousel amélioré activé - Aide le CSS scroll-snap sans blocage');
+        */
+        console.log('🎯 Carrousel vertical désactivé - Défilement naturel activé');
+
+        // ===== ANIMATIONS D'APPARITION PROGRESSIVE AU SCROLL =====
+        const animationObserverOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Ajouter la classe visible quand l'élément entre dans le viewport
+                    entry.target.classList.add('visible');
+
+                    // Animer les éléments enfants avec des effets spéciaux pour la section projets
+                    const title = entry.target.querySelector('h1, h2, h3, .section-title');
+                    const paragraphs = entry.target.querySelectorAll('p, .text-content');
+                    const cards = entry.target.querySelectorAll('.project');
+                    const buttons = entry.target.querySelectorAll('.btn');
+
+                    // Animation du titre
+                    if (title) {
+                        setTimeout(() => {
+                            title.classList.add('visible');
+                            // Effet spécial pour le titre de section projets
+                            if (entry.target.id === 'projects') {
+                                title.style.transform = 'scale(1.05)';
+                                setTimeout(() => {
+                                    title.style.transform = 'scale(1)';
+                                }, 300);
+                            }
+                        }, 100);
+                    }
+
+                    // Animation des paragraphes
+                    paragraphs.forEach((p, index) => {
+                        setTimeout(() => {
+                            p.classList.add('visible');
+                            // Effet de vague pour les paragraphes
+                            p.style.transform = 'translateY(-10px)';
+                            setTimeout(() => {
+                                p.style.transform = 'translateY(0)';
+                            }, 200);
+                        }, 200 + (index * 100));
+                    });
+
+                    // Animation spéciale pour les cartes projets avec effet 3D
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.classList.add('visible');
+
+                            // Effet d'arrivée spectaculaire pour les cartes projets
+                            card.style.transform = 'perspective(1000px) rotateY(15deg) translateZ(50px)';
+                            card.style.opacity = '0';
+
+                            setTimeout(() => {
+                                card.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                                card.style.transform = 'perspective(1000px) rotateY(0deg) translateZ(0px)';
+                                card.style.opacity = '1';
+
+                                // Effet de rebond subtil
+                                setTimeout(() => {
+                                    card.style.transform = 'perspective(1000px) rotateY(-2deg) translateZ(10px)';
+                                    setTimeout(() => {
+                                        card.style.transform = 'perspective(1000px) rotateY(0deg) translateZ(0px)';
+                                    }, 150);
+                                }, 800);
+
+                                // Effet de brillance pour les cartes spéciales
+                                if (card.classList.contains('vitrine')) {
+                                    card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+                                    setTimeout(() => {
+                                        card.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+                                    }, 1000);
+                                }
+                            }, 50);
+                        }, 300 + (index * 200)); // Délai augmenté pour un effet plus spectaculaire
+                    });
+
+                    // Animation des boutons avec effet d'élasticité
+                    buttons.forEach((btn, index) => {
+                        setTimeout(() => {
+                            btn.classList.add('visible');
+                            btn.style.transform = 'scale(0)';
+                            setTimeout(() => {
+                                btn.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                                btn.style.transform = 'scale(1)';
+
+                                // Effet de pulsation
+                                setTimeout(() => {
+                                    btn.style.transform = 'scale(1.05)';
+                                    setTimeout(() => {
+                                        btn.style.transform = 'scale(1)';
+                                    }, 200);
+                                }, 600);
+                            }, 100);
+                        }, 600 + (index * 150));
+                    });
+                } else {
+                    // Retirer la classe visible quand l'élément sort du viewport
+                    entry.target.classList.remove('visible');
+
+                    // Retirer aussi les classes des éléments enfants
+                    const title = entry.target.querySelector('h1, h2, h3, .section-title');
+                    const paragraphs = entry.target.querySelectorAll('p, .text-content');
+                    const cards = entry.target.querySelectorAll('.project');
+                    const buttons = entry.target.querySelectorAll('.btn');
+
+                    if (title) {
+                        title.classList.remove('visible');
+                    }
+
+                    paragraphs.forEach(p => {
+                        p.classList.remove('visible');
+                    });
+
+                    cards.forEach(card => {
+                        card.classList.remove('visible');
+                    });
+
+                    buttons.forEach(btn => {
+                        btn.classList.remove('visible');
+                    });
+                }
+            });
+        }, animationObserverOptions);
+
+        // Observer toutes les sections pour les animations
+        const animatedSections = document.querySelectorAll('.hero, .section');
+
+        // Petit délai pour s'assurer que le DOM est complètement chargé
+        setTimeout(() => {
+            animatedSections.forEach(section => {
+                animationObserver.observe(section);
+            });
+        }, 100);
+
+        // La première section (hero) sera animée au chargement via l'observer
+        // Pas besoin d'ajouter la classe visible manuellement
+
+        console.log('✨ Animations d apparition progressive activées');
+
+        // ===== ANIMATIONS DE SCROLL HIGH-TECH =====
+        let isScrolling = false;
+        let scrollTimeout;
+        let particleCount = 0;
+        const maxParticles = 30;
+        let scrollEventCount = 0;
+
+        // Effet de motion blur pendant le scroll
+        window.addEventListener('scroll', () => {
+            scrollEventCount++;
+
+            if (!isScrolling) {
+                document.body.classList.add('scrolling');
+                isScrolling = true;
+                console.log('🚀 Scroll commencé - Effets high-tech activés');
+            }
+
+            // Créer des particules de scroll high-tech plus fréquemment
+            if (particleCount < maxParticles && Math.random() > 0.4) {
+                createScrollParticle();
+            }
+
+            // Réinitialiser le timeout
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                document.body.classList.remove('scrolling');
+                isScrolling = false;
+                console.log(`✨ Scroll terminé - ${scrollEventCount} événements traités`);
+                scrollEventCount = 0;
+            }, 200);
+        }, { passive: true });
+
+        // Fonction pour créer des particules de scroll
+        function createScrollParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'scroll-particle';
+
+            // Position aléatoire sur le côté droit de l'écran
+            const x = window.innerWidth - 30 + Math.random() * 20;
+            const y = Math.random() * window.innerHeight;
+
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.animation = 'scrollParticle 1.2s ease-out forwards';
+
+            document.body.appendChild(particle);
+            particleCount++;
+
+            console.log(`✨ Particule créée - Total: ${particleCount}`);
+
+            // Supprimer la particule après l'animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                    particleCount--;
+                    console.log(`🗑️ Particule supprimée - Restant: ${particleCount}`);
+                }
+            }, 1200);
+        }
+
+        // Effet de parallaxe pour les sections
+        const handleScroll = () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero, .section');
+
+            // Appliquer l'effet de parallaxe
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        };
+
+        // Ajouter l'écouteur de défilement avec l'option passive
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        console.log('🚀 Animations de scroll high-tech activées');
+
+        // ===== SCROLL LISSÉ SIMPLE =====
+        // Utilisation du scroll natif avec CSS seulement pour éviter les blocages
+        console.log('✅ Scroll natif avec animations CSS activé');
+
+        // ===== VRAIE MUSIQUE D'AMBIANCE =====
+        const backgroundMusic = document.getElementById('background-music');
+        const transitionSound = document.getElementById('transition-sound');
+        const scrollSound = document.getElementById('scroll-sound');
+        const animationSound = document.getElementById('animation-sound');
+        // Variables globales pour le contrôle du son
+        window.soundEnabled = true; // Rendre la variable globale
+        const musicToggle = document.getElementById('music-toggle');
+        let isMusicPlaying = false;
+        let userInteracted = false;
+
+        // Vérifier que les éléments audio sont bien chargés
+        console.log('🔍 Vérification des éléments audio :');
+        console.log('  - backgroundMusic:', backgroundMusic ? '✅ OK' : '❌ Manquant');
+        console.log('  - transitionSound:', transitionSound ? '✅ OK' : '❌ Manquant');
+        console.log('  - scrollSound:', scrollSound ? '✅ OK' : '❌ Manquant');
+        console.log('  - animationSound:', animationSound ? '✅ OK' : '❌ Manquant');
+        console.log('  - musicToggle:', musicToggle ? '✅ OK' : '❌ Manquant');
+
+        // Configurer le volume pour une ambiance ultra discrète
+        if (backgroundMusic) backgroundMusic.volume = 0.03; // Musique d'ambiance plus discrète
+        if (transitionSound) transitionSound.volume = 0.04;
+        if (scrollSound) scrollSound.volume = 0.02;
+        // Note: animationSound volume n'est plus utilisé - Web Audio API gère le volume directement
+
+        // Démarrer la musique
+        function startMusic() {
+            // Vérifier que l'audio est prêt
+            const backgroundMusic = document.getElementById('background-music');
+            if (!backgroundMusic) {
+                console.log('❌ Élément audio non trouvé');
+                return false;
+            }
+
+            console.log('🔊 Tentative de démarrage de la musique...');
+            console.log('   - État actuel:', {
+                paused: backgroundMusic.paused,
+                readyState: backgroundMusic.readyState,
+                error: backgroundMusic.error
+            });
+
+            // Ne pas démarrer si la musique est déjà en train de jouer
+            if (isMusicPlaying || !backgroundMusic.paused) {
+                console.log('🎵 Musique déjà en cours');
+                return true;
+            }
+
+            console.log('🔊 Tentative de lecture de la musique...');
+
+            // S'assurer que le volume est correctement défini
+            backgroundMusic.volume = 0.03;
+
+            // Essayer de jouer la musique
+            const playPromise = backgroundMusic.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isMusicPlaying = true;
+                    musicToggle.classList.add('playing');
+                    musicToggle.innerHTML = '<span class="music-icon">🎵</span>';
+                    console.log('✅ Musique démarrée avec succès');
+                    return true;
+                }).catch(error => {
+                    console.log('❌ Erreur lors du démarrage de la musique:', error);
+                    return false;
+                });
+            }
+            return false;
+        }
+
+        // Toggle la musique et les sons
+        function toggleMusic() {
+            console.log('🔊 toggleMusic - Ancien état:', window.soundEnabled, 'type:', typeof window.soundEnabled);
+
+            // Inverser l'état actuel de manière stricte
+            const newState = window.soundEnabled === true ? false : true;
+            window.soundEnabled = newState;
+
+            // Sauvegarder l'état dans localStorage
+            localStorage.setItem('soundEnabled', newState);
+
+            console.log('🔄 Nouvel état:', window.soundEnabled, '(type:', typeof window.soundEnabled, ')');
+
+            if (!window.soundEnabled) {
+                // Mettre en pause la musique de fond
+                if (backgroundMusic) {
+                    backgroundMusic.pause();
+                }
+                // Mettre en pause le son de frappe mécanique s'il existe
+                if (window.mechanicalSound) {
+                    window.mechanicalSound.pause();
+                    window.mechanicalSound.currentTime = 0;
+                }
+                // Arrêter complètement le son de frappe
+                if (typingAudio) {
+                    typingAudio.pause();
+                    typingAudio.currentTime = 0;
+                }
+
+                // Mettre à jour l'interface
+                musicToggle.classList.remove('playing');
+                musicToggle.innerHTML = '<span class="music-icon">🔇</span>';
+                musicToggle.title = 'Activer la musique';
+                console.log('🔇 Tous les sons ont été désactivés');
+            } else {
+                // Relancer la musique et réactiver les sons
+                startMusic();
+                if (window.mechanicalSound) {
+                    window.mechanicalSound.volume = 0.5; // Réinitialiser le volume
+                }
+                soundEnabled = true;
+                musicToggle.classList.add('playing');
+                musicToggle.innerHTML = '<span class="music-icon">🎵</span>';
+                musicToggle.title = 'Désactiver la musique';
+                console.log('🔊 Tous les sons ont été activés');
+            }
+        }
+
+        // Fonction pour jouer le son de transition
+        function playTransitionSound() {
+            console.log('🔊 Tentative de lecture du son de transition');
+            if (window.soundEnabled === true) {
+                transitionSound.currentTime = 0;
+                transitionSound.volume = 0.4; // Volume à 40%
+                transitionSound.play().catch(error => {
+                    console.log('Erreur son de transition:', error);
+                });
+            } else {
+                console.log('🔇 Son désactivé, son de transition ignoré');
+            }
+        }
+
+        // Écouteur d'événement pour le bouton de musique
+        if (musicToggle) {
+            musicToggle.addEventListener('click', toggleMusic);
+        } else {
+            console.warn('⚠️ Bouton de musique non trouvé');
+        }
+
+        // Initialiser le contexte audio dès la première interaction
+        function initAudioContext() {
+            if (!window.audioContext) {
+                try {
+                    window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    console.log('🎵 Contexte audio initialisé');
+
+                    // Créer un oscillateur silencieux pour "débloquer" l'audio
+                    const oscillator = window.audioContext.createOscillator();
+                    const gainNode = window.audioContext.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(window.audioContext.destination);
+
+                    gainNode.gain.setValueAtTime(0, window.audioContext.currentTime);
+                    oscillator.start();
+                    oscillator.stop(window.audioContext.currentTime + 0.001);
+
+                    console.log('🔓 Contexte audio débloqué');
+                } catch (error) {
+                    console.log('❌ Erreur lors de l\'initialisation du contexte audio:', error);
+                }
+            }
+        }
+
+        // Démarrer la musique au premier clic ou défilement utilisateur
+        function handleFirstUserInteraction() {
+            if (!userInteracted) {
+                console.log('👆 Première interaction utilisateur détectée');
+                userInteracted = true;
+
+                // Activer le son si ce n'est pas déjà fait
+                if (window.soundEnabled !== true) {
+                    console.log('🔊 Activation du son suite à l\'interaction utilisateur');
+                    window.soundEnabled = true;
+                    localStorage.setItem('soundEnabled', 'true');
+                }
+
+                // Tenter de démarrer la musique
+                console.log('🎵 Tentative de démarrage de la musique suite à l\'interaction...');
+                const result = startMusic();
+                console.log('   - Résultat du démarrage:', result ? 'succès' : 'échec');
+
+                // Mettre à jour l'interface
+                const musicToggle = document.getElementById('music-toggle');
+                if (musicToggle) {
+                    musicToggle.classList.add('playing');
+                    musicToggle.innerHTML = '<span class="music-icon">🎵</span>';
+                }
+
+                // Supprimer les écouteurs après la première interaction
+                document.removeEventListener('click', handleFirstUserInteraction);
+                window.removeEventListener('scroll', handleFirstScroll);
+            } else {
+                console.log('ℹ️ Interaction utilisateur déjà enregistrée');
+            }
+        }
+
+        // Écouter le premier clic
+        document.addEventListener('click', handleFirstUserInteraction);
+
+        // Gestionnaire du premier défilement
+        function handleFirstScroll() {
+            // Vérifier si c'est la première interaction
+            if (!window.userHasInteracted) {
+                window.userHasInteracted = true;
+                handleFirstUserInteraction();
+            }
+        }
+
+        // Gestionnaire de défilement pour la musique
+        let scrollTimer;
+        const handleScrollForMusic = () => {
+            console.log('🔄 Événement de défilement déclenché');
+
+            // Annuler le timer précédent s'il existe
+            if (scrollTimer) {
+                clearTimeout(scrollTimer);
+            }
+
+            // Définir un nouveau timer
+            scrollTimer = setTimeout(() => {
+                console.log('🔍 Analyse du défilement pour la musique...');
+                console.log('   - userInteracted:', userInteracted);
+                console.log('   - window.soundEnabled:', window.soundEnabled);
+
+                const backgroundMusic = document.getElementById('background-music');
+                console.log('   - Élément audio trouvé:', !!backgroundMusic);
+                if (backgroundMusic) {
+                    console.log('   - État de la musique:', {
+                        paused: backgroundMusic.paused,
+                        readyState: backgroundMusic.readyState,
+                        error: backgroundMusic.error
+                    });
+                }
+
+                if (!userInteracted) {
+                    console.log('🎵 Première interaction par défilement détectée');
+                    handleFirstUserInteraction();
+                } else if (window.soundEnabled === true) {
+                    console.log('🎵 Son activé, vérification de la lecture...');
+                    if (backgroundMusic && backgroundMusic.paused) {
+                        console.log('🎵 Tentative de démarrage de la musique...');
+                        startMusic();
+                    } else {
+                        console.log('⚠️ Musique déjà en cours ou élément audio non disponible');
+                    }
+                } else {
+                    console.log('🔇 Son désactivé, pas de démarrage de musique');
+                }
+            }, 100); // Délai de 100ms après la fin du défilement
+        };
+
+        // Ajouter l'écouteur pour le défilement
+        window.addEventListener('scroll', handleScrollForMusic, { passive: true });
+
+        // Initialiser le contexte audio immédiatement
+        initAudioContext();
+
+        // Essayer de démarrer la musique si le son est activé
+        if (window.soundEnabled === true) {
+            console.log('🔊 Tentative de démarrage automatique de la musique...');
+            startMusic();
+        }
+
+        // Ajouter l'écouteur pour la molette de la souris (wheel)
+        document.addEventListener('wheel', function startMusicOnFirstWheel() {
+            if (!userInteracted) {
+                // Marquer l'interaction utilisateur immédiatement pour permettre les sons
+                userInteracted = true;
+                console.log('👤 Première interaction utilisateur détectée (wheel) - TOUS les sons activés (frappe + navigation)');
+
+                // Initialiser le contexte audio immédiatement
+                initAudioContext();
+
+                // Tenter de démarrer la musique en arrière-plan
+                startMusic();
+
+                // Supprimer l'écouteur après la première interaction
+                document.removeEventListener('wheel', startMusicOnFirstWheel);
+            }
+        }, { once: true });
+
+        // Démarrer la musique au premier scroll
+        document.addEventListener('scroll', function startMusicOnFirstScroll() {
+            if (!userInteracted) {
+                // Marquer l'interaction utilisateur immédiatement pour permettre les sons
+                userInteracted = true;
+                console.log('👤 Première interaction utilisateur détectée (scroll) - TOUS les sons activés (frappe + navigation)');
+
+                // Initialiser le contexte audio immédiatement
+                initAudioContext();
+
+                // Tenter de démarrer la musique en arrière-plan
+                startMusic();
+
+                // Supprimer l'écouteur après la première interaction
+                document.removeEventListener('scroll', startMusicOnFirstScroll);
+            }
+        }, { once: true });
+
+
+        // Fonction pour activer l'audio manuellement
+        function activateAudio() {
+            console.log('👤 Activation audio manuelle');
+
+            // Forcer l'interaction utilisateur
+            userInteracted = true;
+
+            // Créer un contexte audio si nécessaire
+            if (!typingAudioContext) {
+                typingAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            // Réactiver le contexte audio si suspendu
+            if (typingAudioContext.state === 'suspended') {
+                typingAudioContext.resume().then(() => {
+                    console.log('✅ Contexte audio réactivé');
+                }).catch(err => {
+                    console.log('❌ Erreur réactivation contexte:', err);
+                });
+            }
+
+            // Initialiser le contexte audio principal
+            initAudioContext();
+
+            // Démarrer la musique
+            startMusic();
+
+            // Cacher le bouton d'activation
+            const activationDiv = document.getElementById('audio-activation');
+            if (activationDiv) {
+                activationDiv.style.display = 'none';
+            }
+
+            console.log('✅ Audio activé avec succès !');
+        }
+
+        // Variable pour suivre le son d'animation en cours
+        let currentAnimationSound = null;
+
+        // Protection contre les déclenchements multiples
+        let lastSoundTriggerTime = 0;
+        const MIN_TRIGGER_INTERVAL = 500; // 500ms minimum entre les déclenchements
+
+        // Jouer un son d'animation pour chaque section
+        function playAnimationSound() {
+            console.log('🔔 Tentative de jouer son d\'animation - soundEnabled:', window.soundEnabled, 'userInteracted:', userInteracted);
+
+            // Vérifier l'intervalle minimum entre les déclenchements
+            const now = Date.now();
+            if (now - lastSoundTriggerTime < MIN_TRIGGER_INTERVAL) {
+                console.log('⏱️ Déclenchement trop rapide - ignoré');
+                return;
+            }
+
+            if (soundEnabled && userInteracted) {
+                // Annuler le son précédent s'il est en cours
+                if (currentAnimationSound) {
+                    currentAnimationSound.pause();
+                    currentAnimationSound.currentTime = 0;
+                    console.log('⏹️ Son précédent annulé');
+                }
+
+                // Générer un son de bulle d'eau futuriste avec Web Audio API
+                console.log('🎵 Génération du son de bulle d\'eau futuriste');
+
+                // Enregistrer le temps de déclenchement
+                lastSoundTriggerTime = now;
+
+                try {
+                    // Créer le contexte audio
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+                    // Créer plusieurs oscillateurs pour un effet de bulle complexe
+                    const mainOscillator = audioContext.createOscillator();
+                    const bubbleOscillator = audioContext.createOscillator();
+                    const shimmerOscillator = audioContext.createOscillator();
+
+                    // Créer des noeuds de gain pour le contrôle du volume
+                    const mainGain = audioContext.createGain();
+                    const bubbleGain = audioContext.createGain();
+                    const shimmerGain = audioContext.createGain();
+
+                    // Créer un filtre pour l'effet bulle
+                    const filter = audioContext.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.setValueAtTime(1200, audioContext.currentTime);
+                    filter.Q.setValueAtTime(15, audioContext.currentTime);
+
+                    // Configuration des oscillateurs
+                    // Oscillateur principal - son de base
+                    mainOscillator.type = 'sine';
+                    mainOscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+                    mainOscillator.frequency.exponentialRampToValueAtTime(880, audioContext.currentTime + 0.15);
+
+                    // Oscillateur de bulle - effet de glissando
+                    bubbleOscillator.type = 'triangle';
+                    bubbleOscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                    bubbleOscillator.frequency.exponentialRampToValueAtTime(1600, audioContext.currentTime + 0.08);
+                    bubbleOscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.15);
+
+                    // Oscillateur de scintillement - effet futuriste
+                    shimmerOscillator.type = 'sine';
+                    shimmerOscillator.frequency.setValueAtTime(2400, audioContext.currentTime);
+
+                    // Configuration du volume
+                    mainGain.gain.setValueAtTime(0, audioContext.currentTime);
+                    mainGain.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.02);
+                    mainGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+                    bubbleGain.gain.setValueAtTime(0, audioContext.currentTime);
+                    bubbleGain.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.01);
+                    bubbleGain.gain.exponentialRampToValueAtTime(0.005, audioContext.currentTime + 0.12);
+
+                    shimmerGain.gain.setValueAtTime(0, audioContext.currentTime);
+                    shimmerGain.gain.linearRampToValueAtTime(0.08, audioContext.currentTime + 0.03);
+                    shimmerGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+
+                    // Connecter les noeuds
+                    mainOscillator.connect(mainGain);
+                    bubbleOscillator.connect(filter);
+                    filter.connect(bubbleGain);
+                    shimmerOscillator.connect(shimmerGain);
+
+                    // Mixer tous les sons
+                    mainGain.connect(audioContext.destination);
+                    bubbleGain.connect(audioContext.destination);
+                    shimmerGain.connect(audioContext.destination);
+
+                    // Jouer les sons
+                    mainOscillator.start();
+                    bubbleOscillator.start();
+                    shimmerOscillator.start();
+
+                    // Arrêter les sons
+                    mainOscillator.stop(audioContext.currentTime + 0.2);
+                    bubbleOscillator.stop(audioContext.currentTime + 0.15);
+                    shimmerOscillator.stop(audioContext.currentTime + 0.1);
+
+                    console.log('✅ Son de bulle d\'eau futuriste joué avec succès !');
+
+                    // Créer un objet son simulé pour la gestion
+                    currentAnimationSound = {
+                        pause: function () {
+                            console.log('⏸️ Son simulé arrêté');
+                        },
+                        currentTime: 0
+                    };
+
+                    // Libérer après un court délai
+                    setTimeout(() => {
+                        currentAnimationSound = null;
+                        console.log('🏁 Son de bulle d\'eau futuriste terminé');
+                    }, 250);
+
+                } catch (error) {
+                    console.log('❌ Erreur avec Web Audio API:', error);
+                    console.log('💡 Essayez de cliquer d\'abord sur la page pour débloquer l\'audio');
+                    currentAnimationSound = null;
+                }
+            } else {
+                console.log('⏸️ Son bloqué - en attente d\'interaction utilisateur');
+                currentAnimationSound = null;
+            }
+        }
+        // Tester le son manuellement après interaction
+        function testAnimationSound() {
+            console.log('🧪 Test manuel du son d\'animation');
+
+            // Forcer l\'interaction utilisateur pour le test
+            userInteracted = true;
+
+            playAnimationSound();
+            console.log('✅ Test son lancé !');
+        }
+
+        // Fonction de test complet pour l'audio
+        function testAudioSystem() {
+            console.log('🔧 Test complet du système audio');
+            console.log('================================');
+
+            // Vérifier les variables globales
+            console.log('📊 Variables globales:');
+            console.log('   soundEnabled:', window.soundEnabled);
+            console.log('   userInteracted:', userInteracted);
+            console.log('   MIN_TRIGGER_INTERVAL:', MIN_TRIGGER_INTERVAL);
+            console.log('   lastSoundTriggerTime:', lastSoundTriggerTime);
+
+            // Vérifier le support Web Audio API
+            console.log('🎵 Support Web Audio API:');
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                console.log('   ✅ Web Audio API supportée');
+                try {
+                    const testContext = new AudioContext();
+                    console.log('   ✅ Contexte audio créé avec succès');
+                    console.log('   État du contexte:', testContext.state);
+                    testContext.close();
+                } catch (error) {
+                    console.log('   ❌ Erreur création contexte:', error);
+                }
+            } else {
+                console.log('   ❌ Web Audio API non supportée');
+            }
+
+            // Vérifier les éléments audio
+            console.log('🎧 Éléments audio:');
+            const backgroundMusic = document.getElementById('background-music');
+            if (backgroundMusic) {
+                console.log('   ✅ Musique de fond trouvée');
+                console.log('   Sources:', backgroundMusic.children.length);
+                for (let i = 0; i < backgroundMusic.children.length; i++) {
+                    console.log(`      Source ${i + 1}:`, backgroundMusic.children[i].src);
+                }
+            } else {
+                console.log('   ❌ Musique de fond non trouvée');
+            }
+
+            const musicToggle = document.getElementById('music-toggle');
+            if (musicToggle) {
+                console.log('   ✅ Bouton musique trouvé');
+            } else {
+                console.log('   ❌ Bouton musique non trouvé');
+            }
+
+            // Test du son d'animation
+            console.log('🔊 Test du son d\'animation:');
+            userInteracted = true;
+            soundEnabled = true;
+
+            console.log('   📢 Lancement du test dans 1 seconde...');
+            setTimeout(() => {
+                playAnimationSound();
+                console.log('   ✅ Son d\'animation testé');
+            }, 1000);
+
+            console.log('================================');
+            console.log('💡 Utilisez testAnimationSound() pour tester à nouveau');
+            console.log('💡 Utilisez toggleMusic() pour tester la musique de fond');
+        }
+
+        // Fonction pour tester facilement des fichiers MP3
+        function testMP3Sound(filePath) {
+            console.log('🎵 Test du fichier MP3:', filePath);
+
+            // Forcer l'interaction utilisateur pour le test
+            userInteracted = true;
+
+            // Sauvegarder la configuration actuelle
+            const originalSource = 'webaudio';
+
+            // Créer un audio temporaire pour tester
+            try {
+                const audio = new Audio(filePath);
+                audio.volume = 0.7;
+
+                audio.play().then(() => {
+                    console.log('✅ Fichier MP3 joué avec succès !');
+                    console.log('💡 Pour utiliser ce son définitivement, modifiez la ligne :');
+                    console.log(`   const animationSoundSource = '${filePath}';`);
+                }).catch(e => {
+                    console.log('❌ Erreur de lecture:', e);
+                    console.log('💡 Vérifiez que le fichier existe au bon endroit');
+                });
+
+                // Arrêter le son après 3 secondes pour éviter les boucles infinies
+                setTimeout(() => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    console.log('⏹️ Test arrêté');
+                }, 3000);
+
+            } catch (error) {
+                console.log('❌ Erreur lors du test:', error);
+            }
+        }
+
+        // Fonction pour lister les fichiers MP3 suggérés
+        function listMP3Suggestions() {
+            console.log('📁 Suggestions de fichiers MP3 à tester :');
+            console.log('');
+            console.log('🎵 Exemples de chemins :');
+            console.log('   testMP3Sound("mon-son.mp3");');
+            console.log('   testMP3Sound("sounds/transition.mp3");');
+            console.log('   testMP3Sound("assets/click.mp3");');
+            console.log('   testMP3Sound("./assets/son.mp3");');
+            console.log('');
+            console.log('🎮 Comment tester :');
+            console.log('   1. Ouvrez la console (F12)');
+            console.log('   2. Tapez: testMP3Sound("votre-fichier.mp3")');
+            console.log('   3. Appuyez sur Entrée');
+            console.log('');
+            console.log('⚙️ Pour utiliser définitivement :');
+            console.log('   1. Trouvez la ligne: const animationSoundSource = \'webaudio\';');
+            console.log('   2. Remplacez \'webaudio\' par votre chemin de fichier');
+            console.log('   3. Rafraîchissez la page pour tester');
+        }
+
+        // Fonction pour tester toutes les variations de sons
+        function testAllSoundVariations() {
+            console.log('🎵 Test de toutes les variations de sons');
+
+            // Forcer l\'interaction utilisateur pour le test
+            userInteracted = true;
+
+            const variations = [
+                { name: 'Bleep futuriste', key: '1' },
+                { name: 'Whoosh de transition', key: '2' },
+                { name: 'Pop impactant', key: '3' },
+                { name: 'Chime cristallin', key: '4' }
+            ];
+
+            console.log('📋 Variations disponibles :');
+            variations.forEach(variation => {
+                console.log(`   ${variation.key} - ${variation.name}`);
+            });
+            console.log('💡 Appuyez sur T pour tester la variation actuelle');
+            console.log('💡 Changez la variation en modifiant la ligne : const soundVariation = X;');
+        }
+
+        // L'intervalle minimum pour les sons est maintenant géré par MIN_TRIGGER_INTERVAL
+
+        // Fonction pour faire défiler vers une section avec effet de roulement ultra-fluide
+        function scrollToSection(targetId) {
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                // Calcul de la position avec décalage pour le header fixe
+                const headerHeight = 70; // Hauteur approximative du header
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+
+                // Durée de l'animation proportionnelle à la distance
+                const duration = Math.min(Math.abs(distance) * 0.8, 1500); // max 1.5 secondes
+
+                // Animation de roulement fluide
+                let startTime = null;
+
+                function animateScroll(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+
+                    // Courbe d'accélération/décélération pour un effet de roulement naturel
+                    const easeInOutCubic = progress < 0.5
+                        ? 4 * progress * progress * progress
+                        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+                    // Position actuelle avec l'effet de roulement
+                    const currentPosition = startPosition + distance * easeInOutCubic;
+
+                    window.scrollTo(0, currentPosition);
+
+                    // Continuer l'animation jusqu'à la fin
+                    if (progress < 1) {
+                        requestAnimationFrame(animateScroll);
+                    } else {
+                        console.log(`🎯 Navigation vers ${targetId} terminée - Distance: ${Math.abs(distance)}px`);
+                    }
+                }
+
+                // Démarrer l'animation de roulement
+                requestAnimationFrame(animateScroll);
+                console.log(`🎯 Démarrage navigation vers ${targetId} - Distance: ${distance}px, Durée: ${duration}ms`);
+
+            } else {
+                console.error(`❌ Section non trouvée: ${targetId}`);
+            }
+        }
+
+        // Ajouter des sons d'animation et scroll fluide au clic sur les liens de navigation
+        const menuNavLinks = document.querySelectorAll('.nav a[href^="#"]');
+
+        menuNavLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                // Empêcher le comportement par défaut pour gérer nous-mêmes le scroll
+
+                const now = Date.now();
+                const targetId = link.getAttribute('href');
+
+                // Jouer le son si l'utilisateur a interagi ET si le délai minimum est respecté
+                if (userInteracted && (now - lastSoundTriggerTime) >= MIN_TRIGGER_INTERVAL) {
+                    console.log('🔔 Son déclenché par le clic sur le menu:', link.textContent);
+
+                    // Jouer le son immédiatement au clic
+                    playAnimationSound();
+                } else if (!userInteracted) {
+                    console.log('⏸️ Clic détecté mais en attente d\'interaction utilisateur pour le son');
+                } else if ((now - lastSoundTriggerTime) < MIN_TRIGGER_INTERVAL) {
+                    console.log('⏱️ Son trop récent - clic ignoré');
+                }
+
+                // Lancer le scroll ultra-fluide vers la section cible
+                scrollToSection(targetId);
+            });
+        });
+
+        console.log('🎵 Sons d\'animation configurés pour les clics sur le menu de navigation');
+
+
+        // Fonction pour vérifier que les liens de navigation sont bien détectés
+        function testMenuLinks() {
+            const links = document.querySelectorAll('.nav a[href^="#"]');
+            console.log('🔍 Liens de navigation détectés:', links.length);
+            links.forEach((link, index) => {
+                console.log(`   ${index + 1}. "${link.textContent}" -> ${link.getAttribute('href')}`);
+            });
+            return links;
+        }
+
+        // Tester la détection des liens au chargement
+        setTimeout(() => {
+            const detectedLinks = testMenuLinks();
+            if (detectedLinks.length === 0) {
+                console.log('⚠️ Aucun lien de navigation détecté - vérifiez le sélecteur CSS');
+            } else {
+                console.log('✅ Liens de navigation prêts pour les sons');
+            }
+        }, 500);
+
+        // Les raccourcis clavier pour tester les sons ont été supprimés pour éviter les interférences lors de la frappe
+
+        console.log('🎵 Système de son d\'animation prêt !');
+        console.log('🎮 Raccourcis clavier :');
+        console.log('   T - Tester le son actuel');
+        console.log('   A - Test complet du système audio');
+        console.log('   M - Afficher les suggestions MP3');
+        console.log('   L - Vérifier les liens de navigation');
+        console.log('💡 Pour tester vos fichiers MP3 : testMP3Sound("votre-fichier.mp3")');
+        console.log('💡 Pour test complet : testAudioSystem()');
+
+        // Note: Plus besoin de vérifier l'état du son - Web Audio API fonctionne immédiatement
+
+        // Son de scroll très subtil (limité pour ne pas être intrusif)
+        let lastSoundScrollTime = 0;
+        window.addEventListener('scroll', () => {
+            const now = Date.now();
+            if (now - lastSoundScrollTime > 2000 && userInteracted) { // Limiter à une fois toutes les 2 secondes
+                playScrollSound();
+                lastSoundScrollTime = now;
+            }
+        });
+
+        // Sauvegarder l'état de la musique dans localStorage
+        function saveMusicState() {
+            localStorage.setItem('musicPlaying', isMusicPlaying);
+            localStorage.setItem('soundEnabled', window.soundEnabled);
+        }
+
+        // Initialiser le contexte audio (pour compatibilité)
+        function initAudioContext() {
+            // Cette fonction est un placeholder pour la compatibilité
+            // Le contexte audio est initialisé directement dans playAnimationSound()
+            console.log('🎵 Contexte audio initialisé');
+        }
+
+        // Démarrer la musique de fond
+        function startBackgroundMusic() {
+            if (backgroundMusic && userInteracted) {
+                backgroundMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    console.log('🎵 Musique de fond démarrée');
+                }).catch(error => {
+                    console.log('❌ Erreur démarrage musique de fond:', error);
+                });
+            }
+        }
+
+        // Restaurer l'état de la musique
+        function restoreMusicState() {
+            const savedPlaying = localStorage.getItem('musicPlaying') === 'true';
+            const savedSoundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+
+            // Toujours utiliser window.soundEnabled pour la cohérence
+            window.soundEnabled = savedSoundEnabled;
+            console.log('🔄 Restauration de l\'état du son:', window.soundEnabled);
+
+            if (savedPlaying && userInteracted) {
+                initAudioContext();
+                startBackgroundMusic();
+                isMusicPlaying = true;
+                // Ne pas forcer soundEnabled à true ici
+                musicToggle.classList.add('playing');
+                musicToggle.innerHTML = window.soundEnabled ? '<span class="music-icon">🔊</span>' : '<span class="music-icon">🔇</span>';
+            } else {
+                // Mettre à jour l'icône même si la musique ne joue pas
+                musicToggle.innerHTML = window.soundEnabled ? '<span class="music-icon">🔊</span>' : '<span class="music-icon">🔇</span>';
+            }
+        }
+
+        // Sauvegarder l'état quand la musique change
+        window.addEventListener('beforeunload', saveMusicState);
+
+        // Restaurer l'état au chargement
+        window.addEventListener('load', restoreMusicState);
+
+        // Initialiser l'icône
+        musicToggle.innerHTML = '<span class="music-icon">🔊</span>';
+
+        // ===== FONCTIONS DE TEST AMÉLIORÉES =====
+
+        // Obtenir le nom de la variation actuelle
+        function getCurrentSoundVariation() {
+            const variations = [
+                { id: 1, name: 'Bleep futuriste' },
+                { id: 2, name: 'Whoosh de transition' },
+                { id: 3, name: 'Pop impactant' },
+                { id: 4, name: 'Chime cristallin' },
+                { id: 0, name: 'Version ultime (double oscillateur)' }
+            ];
+
+            // Trouver la ligne contenant soundVariation dans le code
+            const scripts = document.querySelectorAll('script');
+            let currentVariation = 1;
+
+            for (let script of scripts) {
+                const scriptContent = script.textContent;
+                const match = scriptContent.match(/const soundVariation = (\d+);/);
+                if (match) {
+                    currentVariation = parseInt(match[1]);
+                    break;
+                }
+            }
+
+            const variation = variations.find(v => v.id === currentVariation) || variations[0];
+            return `${variation.id} - ${variation.name}`;
+        }
+
+        // Tester une variation spécifique
+        function testVariation(variationNumber) {
+            console.log(`🧪 Test de la variation ${variationNumber}`);
+
+            // Forcer l'interaction utilisateur pour le test
+            userInteracted = true;
+
+            // Sauvegarder la variation actuelle
+            const originalVariation = soundVariation;
+
+            // Modifier temporairement la variable globale
+            window.soundVariation = variationNumber;
+
+            // Jouer le son avec la nouvelle variation
+            playAnimationSound();
+
+            // Restaurer la variation originale après un court délai
+            setTimeout(() => {
+                window.soundVariation = originalVariation;
+                console.log(`✅ Variation ${variationNumber} testée !`);
+                console.log('💡 Variation actuelle restaurée :', getCurrentSoundVariation());
+            }, 1000);
+        }
+
+        // Mettre à jour la fonction testAnimationSound pour afficher la variation
+        function testAnimationSound() {
+            console.log('🧪 Test manuel du son d\'animation');
+
+            // Forcer l\'interaction utilisateur pour le test
+            userInteracted = true;
+
+            playAnimationSound();
+            console.log('✅ Test son lancé !');
+            console.log('🎵 Variation actuelle :', getCurrentSoundVariation());
+        }
+
+        // Mettre à jour la fonction testAllSoundVariations
+        function testAllSoundVariations() {
+            console.log('🎵 Test de toutes les variations de sons');
+
+            // Forcer l\'interaction utilisateur pour le test
+            userInteracted = true;
+
+            const variations = [
+                { id: 1, name: 'Bleep futuriste', key: '1' },
+                { id: 2, name: 'Whoosh de transition', key: '2' },
+                { id: 3, name: 'Pop impactant', key: '3' },
+                { id: 4, name: 'Chime cristallin', key: '4' },
+                { id: 0, name: 'Version ultime (double oscillateur)', key: '0' }
+            ];
+
+            console.log('📋 Variations disponibles :');
+            variations.forEach(variation => {
+                console.log(`   ${variation.key} - ${variation.name}`);
+            });
+            console.log('💡 Appuyez sur T pour tester la variation actuelle');
+            console.log('💡 Changez la variation en modifiant la ligne : const soundVariation = X;');
+            console.log('💡 Variation actuelle :', getCurrentSoundVariation());
+            console.log('💡 Pour tester rapidement, tapez dans la console :');
+            console.log('   testVariation(1)  // Bleep futuriste');
+            console.log('   testVariation(2)  // Whoosh de transition');
+            console.log('   testVariation(3)  // Pop impactant');
+            console.log('   testVariation(4)  // Chime cristallin');
+            console.log('   testVariation(0)  // Version ultime');
+        }
+
+        // Fonction pour tester la musique de fond
+        function testBackgroundMusic() {
+            console.log('🎵 Test de la musique de fond');
+
+            // Forcer l'interaction utilisateur pour le test
+            userInteracted = true;
+
+            if (backgroundMusic) {
+                console.log('🎵 État actuel :', {
+                    readyState: backgroundMusic.readyState,
+                    paused: backgroundMusic.paused,
+                    ended: backgroundMusic.ended,
+                    currentTime: backgroundMusic.currentTime,
+                    duration: backgroundMusic.duration
+                });
+
+                startMusic();
+            } else {
+                console.error('❌ Élément background-music non trouvé !');
+            }
+        }
+
+        // Afficher les informations sur les variations au chargement
+        console.log('🎵 Système de sons avec variations prêt !');
+        console.log('🎮 Raccourcis clavier :');
+        console.log('   T - Tester le son actuel');
+        console.log('   B - Tester la musique de fond');
+        console.log('   M - Afficher les suggestions MP3');
+        console.log('   L - Vérifier les liens de navigation');
+        console.log('💡 Pour tester vos fichiers MP3 : testMP3Sound("votre-fichier.mp3")');
+        console.log('💡 Pour tester les variations : testAllSoundVariations()');
+        console.log('💡 Variation actuelle :', getCurrentSoundVariation());
+
+        // Le raccourci clavier pour la musique de fond a été supprimé pour éviter les interférences
+
+        // Animation des barres de progression des compétences
+        function animateSkillBars() {
+            console.log('🎯 Animation des barres de progression des compétences');
+
+            const skillProgressBars = document.querySelectorAll('.skill-progress');
+
+            skillProgressBars.forEach((bar, index) => {
+                // Récupérer la largeur cible depuis le style inline
+                const targetWidth = bar.style.width;
+
+                if (targetWidth && targetWidth !== '0%') {
+                    // Stocker la largeur cible dans une variable CSS
+                    bar.style.setProperty('--target-width', targetWidth);
+
+                    // Réinitialiser à 0 pour l'animation
+                    bar.style.width = '0%';
+
+                    // Animer avec un délai pour chaque barre
+                    setTimeout(() => {
+                        bar.style.width = targetWidth;
+                        console.log(`📊 Barre ${index + 1} animée à ${targetWidth}`);
+                    }, 100 + (index * 100)); // Délai progressif
+                }
+            });
+        }
+
+        // Lancer l'animation des compétences quand la section est visible
+        const skillsSection = document.getElementById('skills');
+        if (skillsSection) {
+            // Observer la section compétences pour lancer l'animation quand elle devient visible
+            const skillsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        console.log('👀 Section compétences visible - lancement de l\'animation');
+                        animateSkillBars();
+                        skillsObserver.unobserve(entry.target); // Arrêter d'observer après l'animation
+                    }
+                });
+            }, { threshold: 0.3 }); // Lancer l'animation quand 30% de la section est visible
+
+            skillsObserver.observe(skillsSection);
+            console.log('🎯 Observateur configuré pour la section compétences');
+        } else {
+            console.log('❌ Section compétences non trouvée');
+        }
+
+        // Exporter les fonctions de son globalement pour compatibilité
+        window.stopTypingSound = stopTypingSound;
+        window.playTypingSound = playTypingSound;
+        window.pauseTypingSound = pauseTypingSound;
+        window.resumeTypingSound = resumeTypingSound;
+        window.restartTypingSound = restartTypingSound;
+
+        console.log('🔧 Fonctions audio exportées globalement');
+
+        // Fonction de test pour les effets de survol des projets
+        function testProjectHoverEffects() {
+            console.log('🧪 Test des effets de survol des projets');
+
+            const projects = document.querySelectorAll('.project[onclick]');
+            console.log(`📋 Trouvé ${projects.length} projets avec onclick`);
+
+            projects.forEach((project, index) => {
+                console.log(`🔍 Projet ${index + 1}:`);
+                console.log(`  - Classes: ${project.className}`);
+                console.log(`  - Attribut onclick: ${project.getAttribute('onclick')}`);
+                console.log(`  - Style computed transform: ${window.getComputedStyle(project).transform}`);
+                console.log(`  - Style computed box-shadow: ${window.getComputedStyle(project).boxShadow}`);
+                console.log(`  - Style computed transition: ${window.getComputedStyle(project).transition}`);
+            });
+
+            // Vérifier les pseudo-éléments
+            const firstProject = projects[0];
+            if (firstProject) {
+                const beforeStyle = window.getComputedStyle(firstProject, '::before');
+                const afterStyle = window.getComputedStyle(firstProject, '::after');
+                console.log('🎨 Pseudo-éléments du premier projet:');
+                console.log(`  - ::before content: ${beforeStyle.content}`);
+                console.log(`  - ::before opacity: ${beforeStyle.opacity}`);
+                console.log(`  - ::after content: ${afterStyle.content}`);
+                console.log(`  - ::after opacity: ${afterStyle.opacity}`);
+            }
+        }
+
+        // Lancer le test automatiquement au chargement
+        setTimeout(testProjectHoverEffects, 1000);
+
+        // Variable pour suivre l'initialisation des boutons
+        let readMoreButtonsInitialized = false;
+
+        // Créer l'overlay une seule fois
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        document.body.appendChild(overlay);
+
+        // Fonction pour fermer toutes les cartes sauf celle spécifiée
+        function closeOtherExpandedCards(currentCard) {
+            const expandedCards = document.querySelectorAll('.project.expanded');
+            expandedCards.forEach(card => {
+                if (card !== currentCard) {
+                    const desc = card.querySelector('.project-desc.expanded');
+                    const button = card.querySelector('.read-more-btn');
+                    if (desc && button) {
+                        // Fermer la carte
+                        button.setAttribute('aria-expanded', 'false');
+                        desc.classList.remove('expanded');
+                        button.textContent = 'Voir plus';
+
+                        // Restaurer la position d'origine
+                        restoreCardPosition(card);
+                    }
+                    card.classList.remove('expanded');
+
+                    // Réinitialiser les styles
+                    card.style.position = '';
+                    card.style.top = '';
+                    card.style.left = '';
+                    card.style.width = '';
+                    card.style.height = '';
+                    card.style.transform = '';
+                    card.style.zIndex = '';
+                    card.style.maxWidth = '';
+                    card.style.maxHeight = '';
+                }
+            });
+
+            // Gérer l'overlay
+            overlay.classList.remove('visible');
+
+            // Réactiver le défilement uniquement si aucune carte n'est ouverte
+            if (!currentCard) {
+                document.body.style.overflow = '';
+            }
+
+            // Recalculer la position après la fermeture
+            if (currentCard) {
+                currentCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Fonction pour sauvegarder la position d'une carte
+        function saveCardPosition(card) {
+            const rect = card.getBoundingClientRect();
+            card._originalPosition = {
+                top: rect.top + window.scrollY,
+                left: rect.left + window.scrollX,
+                width: rect.width,
+                height: rect.height
+            };
+        }
+
+        // Fonction pour restaurer la position d'une carte
+        function restoreCardPosition(card) {
+            if (!card._originalPosition) return;
+
+            card.style.position = '';
+            card.style.top = '';
+            card.style.left = '';
+            card.style.width = '';
+            card.style.height = '';
+            card.style.transform = '';
+
+            // Faire défiler jusqu'à la position d'origine
+            window.scrollTo({
+                top: card._originalPosition.top - (window.innerHeight / 2 - card._originalPosition.height / 2),
+                behavior: 'smooth'
+            });
+        }
+
+        // Fonction pour initialiser les boutons "Voir plus"
+        function initReadMoreButtons() {
+            // Vérifier si les boutons sont déjà initialisés
+            if (readMoreButtonsInitialized) {
+                return;
+            }
+
+            // Sélectionner toutes les descriptions de projets
+            const projectDescriptions = document.querySelectorAll('.project-desc:not(.read-more-initialized)');
+
+            if (projectDescriptions.length === 0) {
+                return;
+            }
+
+            projectDescriptions.forEach(desc => {
+                // Marquer comme initialisé
+                desc.classList.add('read-more-initialized');
+
+                // Vérifier si le contenu dépasse 3 lignes (1.5em * 3 = 4.5em = 72px)
+                if (desc.scrollHeight > 72) {
+                    // Vérifier si un bouton existe déjà
+                    if (desc.nextElementSibling && desc.nextElementSibling.classList.contains('read-more-btn')) {
+                        return; // Ne pas ajouter de bouton s'il en existe déjà un
+                    }
+
+                    // Créer le bouton "Voir plus"
+                    const button = document.createElement('button');
+                    button.className = 'read-more-btn';
+                    button.textContent = 'Voir plus';
+                    button.setAttribute('aria-expanded', 'false');
+
+                    // Ajouter le bouton après la description
+                    desc.parentNode.insertBefore(button, desc.nextSibling);
+
+                    // Gérer le clic sur le bouton
+                    button.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        const projectCard = this.closest('.project');
+                        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                        if (!isExpanded) {
+                            // Sauvegarder la position actuelle
+                            saveCardPosition(projectCard);
+
+                            // Fermer les autres cartes et ouvrir celle-ci
+                            closeOtherExpandedCards(projectCard);
+
+                            // Mettre à jour l'état de la carte actuelle
+                            this.setAttribute('aria-expanded', 'true');
+                            desc.classList.add('expanded');
+                            projectCard.classList.add('expanded');
+                            this.textContent = 'Voir moins';
+
+                            // Désactiver le défilement du body
+                            document.body.style.overflow = 'hidden';
+
+                            // Positionner la carte au centre
+                            projectCard.style.position = 'fixed';
+                            projectCard.style.top = '20px';
+                            projectCard.style.left = '50%';
+                            projectCard.style.transform = 'translateX(-50%)';
+                            projectCard.style.width = '80%';
+                            projectCard.style.maxWidth = '800px';
+                            projectCard.style.maxHeight = 'calc(100vh - 40px)';
+                            projectCard.style.zIndex = '9999';
+
+                        } else {
+                            // Fermer la carte
+                            this.setAttribute('aria-expanded', 'false');
+                            desc.classList.remove('expanded');
+                            projectCard.classList.remove('expanded');
+                            this.textContent = 'Voir plus';
+
+                            // Réactiver le défilement
+                            document.body.style.overflow = '';
+
+                            // Restaurer la position d'origine
+                            restoreCardPosition(projectCard);
+
+                            // Réinitialiser les styles
+                            projectCard.style.position = '';
+                            projectCard.style.top = '';
+                            projectCard.style.left = '';
+                            projectCard.style.width = '';
+                            projectCard.style.height = '';
+                            projectCard.style.transform = '';
+                            projectCard.style.zIndex = '';
+                            projectCard.style.maxWidth = '';
+                            projectCard.style.maxHeight = '';
+                        }
+                    });
+                }
+            });
+
+            // Gestion du clic en dehors de la carte pour la fermer
+            document.addEventListener('click', function (e) {
+                const expandedCard = document.querySelector('.project.expanded');
+                const isClickInsideCard = expandedCard && (expandedCard === e.target || expandedCard.contains(e.target));
+                const isClickOnButton = e.target.classList.contains('read-more-btn');
+
+                if (expandedCard && !isClickInsideCard && !isClickOnButton) {
+                    const button = expandedCard.querySelector('.read-more-btn');
+                    const desc = expandedCard.querySelector('.project-desc');
+
+                    if (button && desc) {
+                        // Fermer la carte
+                        button.setAttribute('aria-expanded', 'false');
+                        button.textContent = 'Voir plus';
+                        desc.classList.remove('expanded');
+
+                        // Restaurer la position d'origine
+                        restoreCardPosition(expandedCard);
+
+                        // Retirer la classe expanded
+                        expandedCard.classList.remove('expanded');
+
+                        // Réactiver le défilement
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+
+            readMoreButtonsInitialized = true;
+        }
+
+        // Initialiser les boutons "Voir plus" après le chargement du DOM
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(initReadMoreButtons, 500);
+        });
+    </script>
+    <script src="js/main.js" defer></script>
+</body>
+
+</html>

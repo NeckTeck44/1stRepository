@@ -1,0 +1,4621 @@
+:root {
+  /* Valeurs par défaut pour le thème */
+  --primary: 221 83% 53%;
+  --accent: 262 83% 58%;
+  --fg: 210 40% 98%;
+  --muted-foreground: 215 16% 47%;
+  --border: 214 32% 91%;
+  --bg: 220 40% 6%;
+  --muted: 220 15% 15%;
+  --muted-foreground: 215 16% 75%;
+  --accent: 268 85% 65%; /* purple - moins flashing */
+  --accent-contrast: 260 15% 10%;
+  --primary: var(--accent);
+  /* Texte des boutons primaires en blanc pour un meilleur contraste */
+  --primary-foreground: 0 0% 100%;
+  --card: 220 35% 10%;
+  --border: 220 16% 20%;
+  --ring: var(--accent);
+  /* Avatar crop defaults */
+  --avatar-x: 88%;
+  --avatar-y: -50%;
+  --avatar-scale: 1.9;
+}
+
+/* Light theme palette */
+html[data-theme="light"] {
+  --bg: 0 0% 100%; /* Blanc pur qui arrivera progressivement en fondu */
+  --fg: 222 47% 11%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 221 15% 35%;
+  --card: 0 0% 100%; /* Cartes blanches qui arriveront progressivement en fondu */
+  --border: 220 13% 91%;
+  --ring: var(--accent);
+}
+
+/* Transition synchronisée pour tous les éléments du thème */
+.theme-transition body,
+.theme-transition .site-header,
+.theme-transition .header-inner,
+.theme-transition .nav-menu,
+.theme-transition .card,
+.theme-transition .project-card,
+.theme-transition /* Bloquer complètement toute transition sur les éléments textuels spécifiques */
+.theme-transition .profile-name,
+.theme-transition .profile-meta,
+.theme-transition .btn-outline,
+.theme-transition .bot-message p,
+.theme-transition .hero-title {
+  transition: none !important;
+  color: inherit !important;
+}
+
+/* Bloquer toutes les transitions de couleur sur TOUS les éléments textuels */
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition-property: background-color, border-color, box-shadow !important;
+  transition-duration: 2s !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Garantir un contraste élevé pendant la transition */
+.theme-transition body {
+  color: hsl(
+    0,
+    0%,
+    100%
+  ) !important; /* Forcer blanc absolu pendant la transition */
+}
+
+.theme-transition .site-header,
+.theme-transition .header-inner,
+.theme-transition .nav-menu {
+  color: hsl(
+    0,
+    0%,
+    100%
+  ) !important; /* Forcer blanc absolu pendant la transition */
+}
+
+.theme-transition .card,
+.theme-transition .project-card {
+  color: hsl(
+    0,
+    0%,
+    100%
+  ) !important; /* Forcer blanc absolu pendant la transition */
+}
+
+/* Forcer les couleurs fixes pour les éléments spécifiques */
+.theme-transition .profile-name {
+  color: hsl(210, 40%, 98%) !important;
+}
+
+.theme-transition .profile-meta {
+  color: hsl(215, 16%, 75%) !important;
+}
+
+.theme-transition .btn-outline {
+  color: hsl(210, 40%, 98%) !important;
+  border-color: hsl(268, 92%, 74%) !important;
+}
+
+.theme-transition .bot-message p {
+  color: hsl(210, 40%, 98%) !important;
+}
+
+.theme-transition .hero-title {
+  color: hsl(210, 40%, 98%) !important;
+}
+
+.theme-transition .title-accent {
+  color: hsl(268, 92%, 74%) !important;
+}
+
+.theme-transition body {
+  background-color: hsl(220, 20%, 8%) !important;
+}
+
+.theme-transition.active body {
+  background-color: hsl(0, 0%, 100%) !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  color: hsl(var(--fg));
+  background: hsl(var(--bg));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-top: 60px; /* espace réservé pour l'en-tête fixé */
+  overflow-y: auto;
+}
+
+/* Défilement ultra-fluide avec effet de roulement progressif */
+html {
+  /* scroll-behavior: smooth; - D�sactiv� pour laisser JavaScript g�rer le scroll fluide */
+  scroll-snap-type: none;
+  scroll-snap-points-y: none;
+  scroll-padding-top: 70px;
+
+  /* Animation high-tech pour la scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--accent)) transparent;
+
+  /* Effet de parallaxe subtil pour le background */
+  background-attachment: fixed;
+
+  /* Optimisation pour le scroll fluide */
+  scroll-snap-stop: always;
+  scroll-padding: 70px 0 0 0;
+}
+
+/* Scroll ultra-fluide pour tous les éléments */
+/* Scroll ultra-fluide pour tous les �l�ments - g�r� par JavaScript */
+
+/* Animation de transition fluide pour les sections */
+.hero,
+.section,
+section#vision-motivation,
+section#contact {
+  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+
+  /* Effet de parallaxe fluide */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Configuration du body pour un scroll de roulement */
+body {
+  scroll-snap-type: none;
+  overflow-y: scroll;
+  scroll-snap-stop: normal;
+
+  /* Effet de motion blur subtil pendant le scroll */
+  transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Optimisation pour le scroll fluide */
+  -webkit-overflow-scrolling: touch;
+  /* overscroll-behavior: contain; */ /* Commenté pour ne pas bloquer le scroll natif */
+}
+
+/* Effet de roulement pour le contenu */
+.content-wrapper {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Scrollbar personnalisée high-tech */
+html::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--accent)), hsl(268, 92%, 60%));
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+  transition: all 0.3s ease;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(268, 92%, 80%), hsl(var(--accent)));
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  transform: scale(1.1);
+}
+
+/* Animation de scroll fluide avec effet d'inertie */
+body {
+  scroll-snap-type: none;
+  overflow-y: scroll;
+  scroll-snap-stop: normal;
+
+  /* Effet de motion blur plus visible pendant le scroll */
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+body.scrolling {
+  filter: blur(1px) brightness(1.05);
+  transform: scale(1.001);
+}
+
+/* Effet de particules de scroll high-tech */
+.scroll-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(45deg, hsl(var(--accent)), hsl(268, 92%, 80%));
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9999;
+  box-shadow: 0 0 8px hsl(var(--accent));
+}
+
+@keyframes scrollParticle {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.2) rotate(90deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-25px) scale(1) rotate(180deg);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateY(-35px) scale(0.8) rotate(270deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0) rotate(360deg);
+  }
+}
+
+/* Ajuster les hauteurs sur mobile pour éviter les débordements */
+@media (max-width: 640px) {
+  .hero,
+  .section,
+  section#vision-motivation,
+  section#contact {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+/* Augmente légèrement la taille de base de la typo sur grands écrans */
+@media (min-width: 1280px) {
+  html {
+    font-size: 17px;
+  }
+}
+@media (min-width: 1440px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+.serif {
+  font-family: "Playfair Display", Georgia, serif;
+}
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 2vw, 2rem);
+}
+
+/* Étend le conteneur sur très grands écrans tout en restant centré */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+@media (min-width: 1800px) {
+  .container {
+    max-width: 1600px;
+  }
+}
+
+/* Header */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  backdrop-filter: saturate(1.2) blur(10px);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, hsl(var(--bg)), transparent 0%) 0%,
+    color-mix(in oklab, hsl(var(--bg)), transparent 0%) 50%,
+    color-mix(in oklab, hsl(var(--bg)), transparent 100%) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 50%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+  height: 60px; /* Hauteur fixe pour le header */
+  display: flex;
+  align-items: center;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2rem;
+}
+.brand {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: hsl(var(--fg));
+}
+.nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.nav a {
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav a {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted-foreground)) 0%,
+    hsl(var(--muted-foreground)) 50%,
+    hsl(var(--muted-foreground)) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform, color, text-shadow;
+}
+
+.nav a:hover,
+.nav a.active {
+  background: linear-gradient(
+    90deg,
+    hsl(280, 79%, 70%) 0%,
+    hsl(268, 85%, 75%) 50%,
+    hsl(280, 79%, 70%) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes textShine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.nav a:not(.theme-dot):hover,
+.nav a:not(.theme-dot).active {
+  color: hsl(280, 79%, 70%);
+  transform: translateY(3px);
+  text-shadow: 2px 2px 4px rgba(128, 0, 255, 0.6),
+    0 0 8px rgba(128, 0, 255, 0.4), 0 0 12px rgba(128, 0, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes menuGlow {
+  0%,
+  100% {
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15),
+      0 4px 15px rgba(0, 0, 0, 0.08), 0 0 20px rgba(59, 130, 246, 0.06);
+  }
+  50% {
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2),
+      0 6px 20px rgba(0, 0, 0, 0.15), 0 0 30px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.nav .theme-dot {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid hsl(var(--border));
+  background: hsl(var(--background));
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform, border-color, color;
+}
+
+.nav .theme-dot:hover {
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+  transform: scale(1.1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.nav.open {
+  display: block;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 2px solid hsl(var(--border));
+  color: hsl(var(--fg));
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.nav-toggle:hover {
+  border-color: hsl(var(--primary));
+  background: hsl(var(--muted));
+}
+
+.nav-toggle:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 60px;
+    flex-direction: column;
+    background: hsl(var(--bg));
+    padding: 0.75rem;
+    border: 1px solid hsl(var(--border));
+    border-radius: 10px;
+  }
+  .nav-toggle {
+    display: block;
+  }
+}
+
+/* Hero */
+.hero {
+  padding-block: 120px 60px;
+  border-bottom: 1px solid hsl(var(--border));
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  justify-items: center; /* centre horizontalement les colonnes */
+  gap: 3rem;
+}
+.hero-eyebrow {
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+  margin: 0 0 6px;
+}
+.hero-title {
+  font-size: clamp(36px, 6vw, 72px);
+  margin: 0 0 14px;
+  line-height: 1.05;
+}
+.title-accent {
+  color: hsl(var(--accent));
+}
+.hero-subtitle {
+  color: hsl(var(--muted-foreground));
+  max-width: 65ch;
+  margin-inline: auto; /* centre le paragraphe sous le titre */
+}
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 18px;
+  justify-content: center; /* centre les boutons */
+}
+.hero-card {
+  display: flex;
+  justify-content: center;
+}
+.card {
+  position: relative;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 16px;
+  padding: 28.8px;
+  max-width: 432px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideInFade 0.8s ease-out;
+}
+
+#projects .project:not(.expanded):hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  opacity: 1 !important;
+}
+.resize-handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid #00ff41;
+  opacity: 0;
+  z-index: 1000;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+}
+
+.chatbot-container:hover .resize-handle {
+  opacity: 1;
+}
+
+.resize-handle.top-left {
+  top: 0;
+  left: 0;
+  cursor: nwse-resize;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 4px;
+}
+
+.resize-handle.top-right {
+  top: 0;
+  right: 0;
+  cursor: nesw-resize;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 4px;
+}
+
+.resize-handle.bottom-left {
+  bottom: 0;
+  left: 0;
+  cursor: nesw-resize;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 4px;
+}
+
+.resize-handle.bottom-right {
+  bottom: 0;
+  right: 0;
+  cursor: nwse-resize;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 4px;
+}
+
+.resize-handle:hover {
+  background: rgba(0, 255, 65, 0.3);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+/* Animation de pulsation pour les poignées */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.7);
+  }
+}
+
+.chatbot-container.resizing .resize-handle {
+  animation: pulse-glow 1s infinite;
+}
+
+.card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: hsl(142, 76%, 36%);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  animation: subtlePulse 2s infinite;
+}
+.card-title {
+  margin: 4px 0 8px;
+  font-weight: 600;
+}
+.card-text {
+  color: hsl(var(--muted-foreground));
+}
+.avatar-wrap {
+  width: 240px;
+  height: 240px;
+  border-radius: 999px;
+  display: block;
+  margin-inline: auto;
+  overflow: hidden;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.08),
+    0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.avatar-wrap:hover {
+  transform: scale(1.05);
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.442) translateY(-3%);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.avatar-wrap:hover .avatar {
+  transform: scale(1.52) translateY(-3%);
+}
+.profile-name {
+  text-align: center;
+  font-weight: 600;
+  margin: 16.8px 0 4.8px;
+}
+.profile-meta {
+  text-align: center;
+  color: hsl(var(--muted-foreground));
+  font-size: 1.08rem;
+}
+
+@media (max-width: 768px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sur mobile/tablette: avatar (carte) au-dessus du texte dans le hero */
+@media (max-width: 768px) {
+  .hero-card {
+    order: -1;
+    margin-bottom: 16px;
+  }
+  .hero-content {
+    order: 0;
+  }
+}
+
+/* Styles pour l'animation du texte dans Vision & Motivation */
+.char {
+  opacity: 0;
+  animation: fadeInChar 0.3s ease forwards;
+}
+
+.word {
+  display: inline-block;
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: currentColor;
+  animation: blink 1s infinite;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+}
+
+@keyframes fadeInChar {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Sections */
+.section {
+  padding-block: 64px;
+}
+.section .container {
+  text-align: center; /* contenu centré par défaut dans chaque page */
+}
+
+/* Centre le bloc texte de la hero */
+.hero-content {
+  text-align: center;
+}
+
+/* Animations uniques pour chaque section */
+.hero,
+.section {
+  min-height: calc(100vh - 60px); /* Compense le padding-top du body */
+  scroll-margin-top: 80px;
+  scroll-snap-align: none;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centre aussi horizontalement le bloc interne */
+}
+
+/* ===== ANIMATION HERO - ACCUEIL : FADE IN ZOOM FLUIDE ===== */
+#hero {
+  opacity: 0;
+  transform: scale(0.8) translateY(50px);
+  transition: all 1.2s ease;
+}
+
+#hero.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* ===== ANIMATION VISION - DIAPORAMA LATÉRAL FLUIDE ===== */
+#vision-motivation {
+  opacity: 0;
+  transform: translateX(-150px);
+  transition: all 1s ease;
+}
+
+#vision-motivation.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== ANIMATION PROJETS - EFFET DE RÉVÉLATION SPECTACULAIRE ===== */
+#projects {
+  opacity: 0;
+  transform: translateY(50px) scale(0.9);
+  transform-origin: center bottom;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+#projects::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.08) 0%,
+    rgba(59, 130, 246, 0.04) 30%,
+    rgba(59, 130, 246, 0.02) 60%,
+    transparent 100%
+  );
+  animation: rotateGlow 8s linear infinite;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+#projects.visible::before {
+  opacity: 1;
+}
+
+#projects.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Particules flottantes pour l'arrière-plan */
+#projects::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      2px 2px at 20px 30px,
+      rgba(59, 130, 246, 0.2),
+      transparent
+    ),
+    radial-gradient(2px 2px at 40px 70px, rgba(59, 130, 246, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(147, 51, 234, 0.3), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(99, 102, 241, 0.3), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(168, 85, 247, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: floatParticles 20s linear infinite;
+  opacity: 0;
+  transition: opacity 1.5s ease 0.5s;
+  pointer-events: none;
+}
+
+#projects.visible::after {
+  opacity: 1;
+}
+
+/* Effet de brillance sur les bords */
+#projects .edge-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-image: linear-gradient(
+      45deg,
+      rgba(59, 130, 246, 0.6),
+      rgba(59, 130, 246, 0.6),
+      rgba(147, 51, 234, 0.8),
+      rgba(59, 130, 246, 0.6)
+    )
+    1;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 1s ease 1s;
+  pointer-events: none;
+  animation: edgePulse 2s ease-in-out infinite;
+}
+
+#projects.visible .edge-glow {
+  opacity: 1;
+}
+
+/* Cercles concentriques qui apparaissent en cascade */
+#projects .concentric-circles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  pointer-events: none;
+}
+
+#projects .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+#projects .circle:nth-child(1) {
+  width: 100px;
+  height: 100px;
+  border-color: rgba(59, 130, 246, 0.6);
+  animation: expandCircle 2s ease-out 0.3s forwards;
+}
+
+#projects .circle:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  border-color: rgba(59, 130, 246, 0.6);
+  animation: expandCircle 2s ease-out 0.6s forwards;
+}
+
+#projects .circle:nth-child(3) {
+  width: 300px;
+  height: 300px;
+  border-color: rgba(147, 51, 234, 0.4);
+  animation: expandCircle 2s ease-out 0.9s forwards;
+}
+
+#projects .circle:nth-child(4) {
+  width: 400px;
+  height: 400px;
+  border-color: rgba(99, 102, 241, 0.3);
+  animation: expandCircle 2s ease-out 1.2s forwards;
+}
+
+#projects .circle:nth-child(5) {
+  width: 500px;
+  height: 500px;
+  border-color: rgba(168, 85, 247, 0.2);
+  animation: expandCircle 2s ease-out 1.5s forwards;
+}
+
+#projects.visible .circle {
+  opacity: 1;
+}
+
+/* Étoiles scintillantes aléatoires */
+#projects .stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#projects .star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+#projects .star:nth-child(1) {
+  top: 10%;
+  left: 15%;
+  animation-delay: 0s;
+}
+#projects .star:nth-child(2) {
+  top: 20%;
+  left: 80%;
+  animation-delay: 0.5s;
+}
+#projects .star:nth-child(3) {
+  top: 35%;
+  left: 25%;
+  animation-delay: 1s;
+}
+#projects .star:nth-child(4) {
+  top: 45%;
+  left: 70%;
+  animation-delay: 1.5s;
+}
+#projects .star:nth-child(5) {
+  top: 60%;
+  left: 10%;
+  animation-delay: 2s;
+}
+#projects .star:nth-child(6) {
+  top: 75%;
+  left: 85%;
+  animation-delay: 2.5s;
+}
+#projects .star:nth-child(7) {
+  top: 85%;
+  left: 40%;
+  animation-delay: 0.8s;
+}
+#projects .star:nth-child(8) {
+  top: 15%;
+  left: 55%;
+  animation-delay: 1.8s;
+}
+#projects .star:nth-child(9) {
+  top: 50%;
+  left: 90%;
+  animation-delay: 1.2s;
+}
+#projects .star:nth-child(10) {
+  top: 90%;
+  left: 20%;
+  animation-delay: 2.2s;
+}
+
+#projects.visible .star {
+  opacity: 1;
+}
+
+/* Animation de scintillement pour les étoiles */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Animation de pulsation des bords */
+@keyframes edgePulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* Animation d'expansion des cercles concentriques */
+@keyframes expandCircle {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ===== ANIMATION CONTACT - EFFET VAGUE FLUIDE ===== */
+#contact {
+  opacity: 0;
+  transform: translateY(100px) skewY(-2deg);
+  transition: all 0.9s ease;
+}
+
+#contact.visible {
+  opacity: 1;
+  transform: translateY(0) skewY(0deg);
+}
+
+/* Animations pour les titres - différentes par section */
+.section-title,
+h1,
+h2,
+h3 {
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+/* Hero - Titre avec fade fluide */
+#hero h1 {
+  transform: translateY(-30px) scale(0.9);
+  transition: all 0.8s ease;
+}
+
+#hero.visible h1 {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Vision - Titre avec slide gauche */
+#vision-motivation h2 {
+  transform: translateX(-50px);
+  transition: all 0.7s ease 0.2s;
+}
+
+#vision-motivation.visible h2 {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/*Projets - Titre avec effet de révélation dynamique */
+#projects h2 {
+  transform: translateY(-20px) scale(0.95);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: hsl(var(--fg));
+  position: relative;
+  z-index: 10;
+  margin: -0.3em 0 0.6em 0;
+  padding-top: 0;
+  padding-bottom: 0.2em;
+}
+
+#projects h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.03),
+    rgba(59, 130, 246, 0.02),
+    rgba(139, 92, 246, 0.03)
+  );
+  border-radius: 8px;
+  opacity: 0.4;
+  z-index: -1;
+  filter: blur(8px);
+  animation: subtleGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes subtleGlow {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.99);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1.01);
+  }
+}
+
+#projects.visible h2 {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  color: hsl(var(--fg));
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact - Titre avec effet vague */
+#contact h2 {
+  transform: translateY(20px) rotate(2deg);
+  transition: all 0.7s ease 0.2s;
+}
+
+#contact.visible h2 {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+/* Animations pour les paragraphes */
+.section p,
+.section .text-content {
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+/* Hero - Texte avec fade delay */
+#hero p,
+#hero .text-content {
+  transform: translateY(20px);
+  transition: all 0.8s ease 0.3s;
+}
+
+#hero.visible p,
+#hero.visible .text-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#vision-motivation.visible p,
+#vision-motivation.visible .text-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Projets - Texte avec fade simple */
+#projects p,
+#projects .text-content {
+  transform: translateY(15px);
+  transition: all 0.6s ease 0.5s;
+}
+
+#projects.visible p,
+#projects.visible .text-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Contact - Texte avec skew */
+#contact p,
+#contact .text-content {
+  transform: skewY(1deg) translateY(15px);
+  transition: all 0.7s ease 0.4s;
+}
+
+#contact.visible p,
+#contact.visible .text-content {
+  opacity: 1;
+  transform: skewY(0deg) translateY(0);
+}
+
+/* Styles pour la fonctionnalité 'Voir plus' des cartes de projet */
+.project-desc {
+  position: relative;
+  max-height: 3.5em; /* Hauteur pour environ 2 lignes de texte */
+  overflow: hidden;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0.25rem 0 0.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: max-height, padding, margin;
+}
+
+.project-desc::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2em;
+  background: linear-gradient(
+    to bottom,
+    rgba(23, 23, 23, 0) 0%,
+    rgba(23, 23, 23, 0.9) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.project-desc.expanded {
+  max-height: 500px; /* Hauteur maximale pour le contenu étendu */
+  overflow-y: auto;
+  padding-right: 4px;
+  margin-bottom: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* Style de la barre de défilement pour le contenu étendu */
+.project-desc.expanded::-webkit-scrollbar {
+  width: 4px;
+}
+
+.project-desc.expanded::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Style pour la carte sélectionnée */
+.project.expanded {
+  position: relative;
+  z-index: 10002 !important; /* Augmenté pour être cohérent avec la version fixe */
+  transform: scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.project-desc.expanded::after {
+  opacity: 0;
+}
+
+.read-more-btn {
+  background: none;
+  border: none;
+  color: #8b5cf6;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9em;
+  padding: 0.25em 0.5em;
+  margin-top: 0.5em;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.read-more-btn:hover {
+  color: #a78bfa;
+  text-decoration: underline;
+}
+
+.read-more-btn::after {
+  content: "▼";
+  font-size: 0.7em;
+  margin-left: 0.5em;
+  transition: transform 0.2s ease;
+}
+
+.read-more-btn[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+/* Animation pour les cartes de projets - effet simple et élégant */
+.project {
+  opacity: 1; /* Changé de 0 à 1 pour que les cartes soient visibles par défaut */
+  transform: translateY(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suppression de la transition d'opacité */
+  background: hsl(var(--card)) !important; /* Force un fond opaque */
+}
+
+/* Règles pour forcer l'opacité des cartes */
+.project,
+.project *,
+#projects .project,
+#projects .project * {
+  opacity: 1 !important;
+  background-color: transparent !important;
+}
+
+/* Désactive toute transparence au survol */
+.project:hover,
+.project:focus,
+.project:active,
+.project:hover *,
+.project:focus *,
+.project:active *,
+#projects .project:hover,
+#projects .project:focus,
+#projects .project:active,
+#projects .project:hover *,
+#projects .project:focus *,
+#projects .project:active * {
+  opacity: 1 !important;
+  background-color: transparent !important;
+}
+
+#projects.visible .project:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+#projects.visible .project:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+#projects.visible .project:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+#projects.visible .project:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+#projects.visible .project {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation pour les boutons - effet très fluide */
+.btn {
+  opacity: 0;
+  transform: translateY(15px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#hero.visible .btn {
+  transition-delay: 0.4s;
+}
+
+#vision-motivation.visible .btn {
+  transition-delay: 0.6s;
+}
+
+#projects.visible .btn {
+  transition-delay: 0.5s;
+}
+
+#contact.visible .btn {
+  transition-delay: 0.3s;
+}
+
+.btn.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Contrôle de musique discret */
+.music-control {
+  position: fixed;
+  top: 20px;
+  right: 80px;
+  z-index: 1000;
+  background: hsla(var(--muted), 0.3);
+  border: 1px solid hsla(var(--border), 0.3);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px hsla(var(--muted), 0.2);
+  backdrop-filter: blur(5px);
+  opacity: 0.6;
+}
+
+.music-control:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px hsla(var(--muted), 0.4);
+  background: hsla(var(--muted), 0.5);
+  opacity: 0.8;
+}
+
+.music-control:active {
+  transform: scale(0.9);
+}
+
+.music-icon {
+  font-size: 16px;
+  transition: all 0.3s ease;
+  filter: none;
+  color: hsl(var(--muted-foreground));
+}
+
+.music-control.playing .music-icon {
+  animation: subtlePulse 3s infinite;
+  color: hsl(var(--accent));
+  opacity: 0.8;
+}
+
+@keyframes subtlePulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideInFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Adaptation pour mobile */
+@media (max-width: 768px) {
+  .music-control {
+    top: 15px;
+    right: 60px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .music-icon {
+    font-size: 14px;
+  }
+}
+
+/* À propos: pleine hauteur avec texte centré (page complète) */
+section#vision-motivation {
+  min-height: calc(100vh - 60px); /* Compense le padding-top du body */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 64px;
+  text-align: center; /* Centrage horizontal du texte */
+  scroll-snap-align: none;
+}
+
+section#vision-motivation .container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Small-height viewports: compress spacing to avoid scroll */
+@media (max-height: 740px) {
+  section#vision-motivation {
+    padding-block: 36px;
+    min-height: calc(100vh - 60px); /* S'assurer que la hauteur est correcte */
+  }
+  section#vision-motivation .section-title {
+    margin-bottom: 8px;
+  }
+  section#vision-motivation #animated-text {
+    line-height: 1.5;
+  }
+  section#vision-motivation .tags {
+    margin-top: 10px;
+  }
+  section#vision-motivation .tags li {
+    font-size: 0.8rem;
+  }
+  /* Ajuster aussi les autres sections pour les petits écrans */
+  .hero,
+  .section {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+/* Very small widths: tighten measure for readability */
+@media (max-width: 400px) {
+  section#vision-motivation #animated-text {
+    max-width: 60ch;
+    line-height: 1.5;
+  }
+}
+@media (max-width: 340px) {
+  section#vision-motivation #animated-text {
+    max-width: 56ch;
+    line-height: 1.45;
+  }
+}
+
+/* Contact: contenu + footer dans la même page, footer collé en bas */
+section#contact {
+  min-height: calc(100vh - 60px); /* Compense le padding-top du body */
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: stretch;
+  justify-items: center;
+  padding-block: 12px;
+  scroll-snap-align: none;
+}
+
+section#contact .container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* centre verticalement le contenu de contact */
+  gap: 8px;
+}
+/* Footer intégré: réduire les espacements pour tenir dans la même page */
+section#contact .site-footer {
+  margin-top: 8px; /* au lieu de 40px globalement */
+  padding-block: 10px; /* au lieu de 22px */
+}
+/* Compactage du contenu de Contact pour garantir la présence du footer sans scroll */
+section#contact .section-title {
+  margin-bottom: 6px;
+  font-size: clamp(20px, 2.5vw, 28px);
+}
+section#contact .contact-form {
+  margin-top: 8px;
+}
+section#contact .contact-form .form-row {
+  margin: 8px 0;
+}
+section#contact .contact-form button {
+  margin-top: 8px;
+}
+section#contact label {
+  font-size: 0.9rem;
+}
+section#contact .contact-form {
+  max-width: 560px;
+  width: 100%;
+}
+section#contact .contact-form input,
+section#contact .contact-form textarea {
+  padding: 0.55rem 0.7rem;
+}
+
+/* Écrans plus courts: compresser davantage la mise en page de Contact */
+@media (max-height: 740px) {
+  section#contact {
+    padding-block: 12px;
+    min-height: calc(100vh - 60px); /* S'assurer que la hauteur est correcte */
+  }
+  section#contact .site-footer {
+    padding-block: 8px;
+  }
+  section#contact .contact-form input,
+  section#contact .contact-form textarea {
+    padding: 0.55rem 0.7rem;
+  }
+}
+
+/* Dans la page Contact, empiler le contenu du footer pour tout voir sans scroll */
+section#contact .footer-inner {
+  flex-direction: column;
+  gap: 6px;
+}
+section#contact .footer-inner p {
+  margin: 0;
+}
+.section-title {
+  font-size: clamp(24px, 3vw, 40px);
+  margin: 0 0 12px;
+}
+.muted {
+  color: hsl(var(--muted-foreground));
+  max-width: 75ch;
+}
+
+.tags {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 16px 0 0;
+  flex-wrap: wrap;
+}
+.tags li {
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--muted-foreground));
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+/* Projects */
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+.project {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  height: 100%;
+  will-change: transform, box-shadow, width, height;
+  position: relative;
+  z-index: 1;
+}
+
+/* Style pour la carte étendue avec animation de centrage */
+.project.expanded {
+  position: fixed !important;
+  top: 100px !important;
+  bottom: 100px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 10002 !important;
+  width: 90% !important;
+  width: 90% !important;
+  max-width: 800px !important;
+  max-height: calc(100vh - 200px) !important; /* 100px en haut + 100px en bas */
+  margin: 0 auto;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35),
+    0 8px 16px -8px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  will-change: transform;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0a0f1a !important; /* Bleu nuit très foncé */
+  background-image: linear-gradient(
+    145deg,
+    #1a202c,
+    #0a0f1a
+  ) !important; /* Dégradé plus foncé */
+  padding: 30px;
+  box-sizing: border-box;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  opacity: 1 !important; /* Force l'opacité à 1 */
+}
+
+/* Effet de lueur subtile */
+.project.expanded::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  z-index: 1;
+}
+
+/* Bordure intérieure subtile */
+.project.expanded::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.1)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Ajustement pour les petits écrans */
+@media (max-width: 768px) {
+  .project.expanded {
+    width: 95% !important;
+    top: 80px !important; /* Ajusté pour le header sur mobile */
+    bottom: 80px !important; /* Marge inférieure égale sur mobile */
+    max-height: calc(
+      100vh - 160px
+    ) !important; /* 80px en haut + 80px en bas sur mobile */
+    padding: 15px;
+  }
+}
+
+/* Overlay pour la fermeture avec effet de flou doux */
+.project-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  z-index: 10001 !important;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.project.expanded + .project-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Ajustement de la miniature pour la carte étendue */
+.project.expanded .project-thumb {
+  height: 180px;
+  max-height: 30vh;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+/* Ajustement du contenu pour le défilement */
+.project.expanded .project-body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 15px 20px 20px;
+  flex: 1;
+  min-height: 0; /* Permet le défilement interne */
+}
+
+/* Ajustement du titre pour la carte étendue */
+.project.expanded .project-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Ajustement de la description pour la carte étendue */
+.project.expanded .project-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  max-height: none !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+  display: block !important;
+}
+
+/* Masquer le bouton Voir plus/voir moins en mode étendu */
+.project.expanded .read-more-btn {
+  display: none;
+}
+
+/* Ajustement des tags pour la carte étendue */
+.project.expanded .tags {
+  margin-top: 1.5rem;
+}
+
+.project.expanded .tags li {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+}
+
+/* Style de survol simple supprimé - remplacé par l'effet avancé ci-dessous */
+.project-thumb {
+  height: 100px;
+  background: hsl(var(--muted));
+  border-bottom: 1px solid hsl(var(--border));
+  position: relative;
+}
+
+/* Mise en page spéciale pour la carte "Site vitrine créatif" avec 2 miniatures incrustées */
+.project.vitrine .project-thumb {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px;
+}
+.project.vitrine .project-thumb .mini {
+  border-radius: 10px;
+  border: 1px solid hsl(var(--border));
+  background: linear-gradient(
+    135deg,
+    rgba(96, 165, 250, 0.2),
+    rgba(96, 165, 250, 0.04)
+  );
+}
+
+/* Miniatures en image: remplissage et cadre */
+.project.vitrine .project-thumb .mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.project-body {
+  padding: 6px 8px 8px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style de base pour les titres de projet */
+#projects .project .project-body h3,
+#projects .project .project-body .project-title,
+.project .project-body h3,
+.project-title {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  margin: 0.2rem 0 0.3rem;
+  font-weight: 600; /* Graisse légèrement réduite */
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.3;
+  letter-spacing: 0; /* Espacement des lettres normal */
+  text-shadow: none; /* Suppression de l'ombre du texte */
+  margin: 0.5rem 0; /* Marge réduite */
+  transition: color 0.2s ease; /* Transition plus subtile */
+  display: block;
+  position: relative;
+
+  /* Bordures et fond */
+  background: rgba(30, 41, 59, 0.6);
+  border: none;
+  border-left: 4px solid #3b82f6;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  /* Effets visuels */
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Style pour les titres des cartes vitrines */
+#projects .project.vitrine .project-body h3,
+#projects .project.vitrine .project-body .project-title,
+.project.vitrine .project-title {
+  color: #c4b5fd !important;
+  border-left-color: #8b5cf6 !important;
+  background: rgba(30, 41, 59, 0.6) !important;
+  border-left: 4px solid #8b5cf6 !important;
+}
+
+/* Effet de survol */
+#projects .project:hover .project-body h3,
+#projects .project:hover .project-body .project-title,
+.project:hover .project-title {
+  background: rgba(30, 41, 59, 0.8) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  padding-left: 1.4rem !important;
+}
+
+/* Effet de survol pour les cartes vitrines */
+#projects .project.vitrine:hover .project-body h3,
+#projects .project.vitrine:hover .project-body .project-title,
+.project.vitrine:hover .project-title {
+  color: #c4b5fd !important;
+  background: linear-gradient(
+    90deg,
+    rgba(139, 92, 246, 0.2),
+    rgba(167, 139, 250, 0.3)
+  ) !important;
+}
+#projects .project.vitrine:hover .project-body .project-title,
+.project.vitrine:hover .project-title {
+  color: #c4b5fd !important;
+}
+
+/* Ligne de séparation élégante sous les titres */
+#projects .project .project-body h3::after,
+#projects .project .project-body .project-title::after,
+.project .project-body h3::after,
+.project-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.5rem;
+  width: 2.5rem;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+/* Style de la ligne pour les cartes vitrines */
+#projects .project.vitrine .project-body h3::after,
+#projects .project.vitrine .project-body .project-title::after,
+.project.vitrine .project-title::after {
+  background: rgba(167, 139, 250, 0.5);
+}
+
+/* Effet de survol */
+#projects .project:hover .project-body h3,
+#projects .project:hover .project-body .project-title,
+.project:hover .project-title {
+  color: #ffffff !important;
+}
+
+#projects .project:hover .project-body h3::after,
+#projects .project:hover .project-body .project-title::after,
+.project:hover .project-title::after {
+  width: 4rem;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+#projects .project.vitrine:hover .project-body h3,
+#projects .project.vitrine:hover .project-body .project-title,
+.project.vitrine:hover .project-title {
+  color: #c4b5fd !important;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#projects .project.vitrine:hover .project-body h3::after,
+#projects .project.vitrine:hover .project-body .project-title::after,
+.project.vitrine:hover .project-title::after {
+  width: 4rem;
+  background: rgba(167, 139, 250, 0.8);
+}
+
+/* Ligne de séparation sous les titres */
+#projects .project .project-body h3::after,
+#projects .project .project-body .project-title::after,
+.project .project-body h3::after,
+.project-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background: #64748b;
+  transition: all 0.3s ease;
+}
+
+/* Style pour les cartes vitrines */
+#projects .project.vitrine .project-body h3::after,
+#projects .project.vitrine .project-body .project-title::after,
+.project.vitrine .project-title::after {
+  background: #8b5cf6;
+}
+
+/* Effets de survol */
+#projects .project:hover .project-body h3::after,
+#projects .project:hover .project-body .project-title::after,
+.project:hover .project-title::after {
+  width: 100%;
+}
+
+#projects .project.vitrine:hover .project-body h3,
+#projects .project.vitrine:hover .project-body .project-title,
+.project.vitrine:hover .project-title {
+  color: #c4b5fd !important;
+}
+
+/* Suppression des numéros */
+#projects .project .project-body h3::before,
+#projects .project .project-body .project-title::before,
+.project .project-body h3::before,
+.project-title::before {
+  display: none !important;
+}
+
+/* Style pour les titres des cartes vitrines */
+#projects .project.vitrine .project-body h3,
+#projects .project.vitrine .project-body .project-title,
+.project.vitrine .project-title {
+  color: #a78bfa !important;
+}
+
+#projects .project.vitrine .project-body h3::after,
+#projects .project.vitrine .project-body .project-title::after,
+.project.vitrine .project-title::after {
+  background: rgba(167, 139, 250, 0.5);
+}
+
+/* Effets de survol */
+#projects .project:hover .project-body h3,
+#projects .project:hover .project-body .project-title,
+.project:hover .project-title {
+  color: #ffffff !important;
+}
+
+#projects .project:hover .project-body h3::after,
+#projects .project:hover .project-body .project-title::after,
+.project:hover .project-title::after {
+  width: 4rem;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+#projects .project.vitrine:hover .project-body h3,
+#projects .project.vitrine:hover .project-body .project-title,
+.project.vitrine:hover .project-title {
+  color: #c4b5fd !important;
+}
+
+#projects .project.vitrine:hover .project-body h3::after,
+#projects .project.vitrine:hover .project-body .project-title::after,
+.project.vitrine:hover .project-title::after {
+  width: 4rem;
+  background: rgba(167, 139, 250, 0.8);
+}
+
+/* Suppression des numéros */
+#projects .project .project-body h3::before,
+#projects .project .project-body .project-title::before,
+.project .project-body h3::before,
+.project-title::before {
+  display: none !important;
+}
+
+/* Ligne de soulignement subtile */
+#projects .project .project-body h3::after,
+#projects .project .project-body .project-title::after,
+.project .project-body h3::after,
+.project-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background: #64748b;
+  transition: all 0.3s ease;
+}
+
+/* Style pour les cartes vitrines */
+#projects .project.vitrine .project-body h3,
+#projects .project.vitrine .project-body .project-title,
+.project.vitrine .project-title {
+  color: #c4b5fd;
+}
+
+#projects .project.vitrine .project-body h3::after,
+#projects .project.vitrine .project-body .project-title::after,
+.project.vitrine .project-title::after {
+  background: #8b5cf6;
+}
+
+/* Effets de survol */
+#projects .project:hover .project-body h3,
+#projects .project:hover .project-body .project-title,
+.project:hover .project-title {
+  color: #ffffff;
+}
+
+#projects .project:hover .project-body h3::after,
+#projects .project:hover .project-body .project-title::after,
+.project:hover .project-title::after {
+  width: 100%;
+  background: #94a3b8;
+}
+
+#projects .project.vitrine:hover .project-body h3,
+#projects .project.vitrine:hover .project-body .project-title,
+.project.vitrine:hover .project-title {
+  color: #e9d5ff;
+}
+
+#projects .project.vitrine:hover .project-body h3::after,
+#projects .project.vitrine:hover .project-body .project-title::after,
+.project.vitrine:hover .project-title::after {
+  background: #a78bfa;
+  width: 100%;
+}
+
+/* Numérotation des titres */
+#projects .project .project-body h3::before,
+#projects .project .project-body h3.project-title::before {
+  content: attr(data-number) ". ";
+  color: #8b5cf6;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+/* Style spécifique pour les cartes vitrines */
+#projects .project.vitrine .project-body h3::before,
+#projects .project.vitrine .project-body h3.project-title::before {
+  color: #60a5fa;
+}
+
+/* Style pour les cartes vitrines */
+#projects .project.vitrine .project-body h3,
+#projects .project.vitrine .project-body h3.project-title {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6) !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  border: 1px solid rgba(139, 92, 246, 0.5) !important;
+  padding: 10px 15px !important;
+  font-weight: 600 !important;
+  color: #e2e8f0 !important;
+  background-color: transparent !important;
+}
+
+/* Effet de survol pour les titres */
+#projects .project:hover .project-body h3.project-title {
+  color: #ffffff !important;
+  border-bottom-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Effet de survol pour les cartes vitrines */
+#projects .project.vitrine:hover .project-body h3.project-title {
+  background: linear-gradient(135deg, #a78bfa, #60a5fa) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  border-bottom-color: rgba(139, 92, 246, 0.5) !important;
+}
+
+/* Numérotation des titres */
+#projects .project .project-body h3.project-title::before {
+  content: attr(data-number) ". " !important;
+  color: #8b5cf6 !important;
+  font-weight: 700 !important;
+  margin-right: 4px !important;
+}
+
+/* Style spécifique pour les cartes vitrines */
+#projects .project.vitrine .project-body h3.project-title::before {
+  color: #60a5fa !important;
+}
+.project-desc {
+  margin: 0.25rem 0 0.5rem;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.project-meta {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  flex-wrap: wrap;
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(203, 213, 225, 0.05);
+}
+.project-meta span {
+  font-size: 0.7rem;
+  color: hsl(var(--muted-foreground));
+  border: 1px solid hsl(var(--border));
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+}
+
+/* Réglages pour tablettes */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.8rem;
+    padding: 0 0.5rem;
+  }
+
+  .project-thumb {
+    height: 90px;
+  }
+
+  .project-title {
+    font-size: 0.9rem;
+  }
+
+  .project-desc {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+}
+
+/* Réglages pour tablettes en mode portrait */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.7rem;
+  }
+
+  .project-thumb {
+    height: 85px;
+  }
+
+  .project-meta span {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.35rem;
+  }
+}
+
+/* Réglages pour mobiles */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    gap: 0.8rem;
+  }
+
+  .project {
+    max-width: 100%;
+  }
+
+  .project-thumb {
+    height: 120px;
+  }
+
+  .project-title {
+    font-size: 1rem;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    line-clamp: 3;
+  }
+
+  .project-meta {
+    gap: 0.4rem;
+  }
+}
+
+/* Contact */
+.contact-form {
+  max-width: 640px;
+  margin-inline: auto; /* centre le formulaire */
+}
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 12px 0;
+}
+label {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.95rem;
+}
+input,
+textarea {
+  background: hsl(var(--card));
+  color: hsl(var(--fg));
+  border: 1px solid hsl(var(--border));
+  border-radius: 10px;
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+}
+input::placeholder,
+textarea::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+button,
+input[type="submit"] {
+  font: inherit;
+}
+
+/* Boutons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--fg));
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.btn:hover {
+  background: color-mix(in oklab, hsl(var(--muted)), transparent 75%);
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--ring));
+}
+.btn-primary:hover {
+  /* Transition fluide avec léger effet de profondeur */
+  background: color-mix(in oklab, hsl(var(--primary)), black 12%);
+  color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--ring));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 1px hsl(var(--ring) / 0.3);
+  transform: translateY(-1px) scale(1.02);
+}
+/* Prend en compte l’accessibilité (réduction des animations) */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover {
+    transform: none;
+  }
+}
+/* État focus visible clavier: anneau net d’accessibilité */
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px hsl(var(--bg)), 0 0 0 5px hsl(var(--ring));
+}
+/* État actif fluide */
+.btn-primary:active {
+  background: color-mix(in oklab, hsl(var(--primary)), black 18%);
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.btn-outline {
+  background: transparent;
+  border-color: hsl(var(--border));
+  color: hsl(var(--fg));
+}
+.btn-ghost {
+  background: transparent;
+}
+.btn-caret::after {
+  content: "\25BE"; /* small down triangle */
+  font-size: 0.9em;
+}
+
+/* Style pour le bouton Découvrir mes projets */
+.hero-actions .btn-primary.btn-caret {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)),
+    hsl(268, 85%, 65%)
+  ) !important;
+  animation: pulseGentle 3s ease-in-out infinite;
+}
+
+/* Animation de pulsation douce pour attirer l'attention */
+@keyframes pulseGentle {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3),
+      0 0 30px rgba(139, 92, 246, 0.2);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5),
+      0 8px 25px rgba(139, 92, 246, 0.3), 0 0 50px rgba(139, 92, 246, 0.4);
+  }
+}
+
+/* Effet de rayonnement de lumière de gauche à droite */
+.hero-actions .btn-primary.btn-caret::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.3) 40%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.3) 60%,
+    rgba(255, 255, 255, 0.1) 80%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+  filter: blur(1px);
+}
+
+/* Animation au chargement */
+.hero-actions .btn-primary.btn-caret.visible::before {
+  left: 150%;
+}
+
+/* Animation continue de rayonnement avec la pulsation */
+.hero-actions .btn-primary.btn-caret::before {
+  animation: lightRayonnementContinuous 3s ease-in-out infinite;
+}
+
+@keyframes lightRayonnementContinuous {
+  0%,
+  100% {
+    left: -150%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+/* Effet de survol avec rayonnement continu */
+.hero-actions .btn-primary.btn-caret:hover {
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4),
+    0 4px 15px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Animation de rayonnement continu au survol */
+.hero-actions .btn-primary.btn-caret:hover::before {
+  animation: lightRayonnementFast 1.2s ease-in-out infinite;
+}
+
+@keyframes lightRayonnementFast {
+  0% {
+    left: -150%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+@keyframes lightRayonnement {
+  0% {
+    left: -150%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+/* Effet de lueur subtile */
+.hero-actions .btn-primary.btn-caret::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(139, 92, 246, 0.3),
+    transparent
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: blur(8px);
+}
+
+.hero-actions .btn-primary.btn-caret:hover::after {
+  opacity: 1;
+  animation: glowPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* Style pour le bouton Me contacter */
+.hero-actions .btn-outline {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-actions .btn-outline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.1),
+    transparent
+  );
+  transition: left 0.6s ease;
+  z-index: 0;
+}
+
+.hero-actions .btn-outline:hover::before {
+  left: 100%;
+}
+
+.hero-actions .btn-outline:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  background: transparent;
+  color: hsl(var(--accent));
+  border-color: hsl(var(--accent));
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid hsl(var(--border));
+  padding-block: 22px;
+  margin-top: 40px;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap; /* permet d'afficher tous les éléments sans déborder */
+  text-align: center;
+}
+.footer-inner a {
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+}
+.footer-inner a:hover {
+  color: hsl(var(--fg));
+}
+
+/* Compatibilité: propriétés standard + prefixées */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  appearance: button;
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+[type="search"] {
+  appearance: textfield;
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+/* Clamp utilitaire si besoin dans du contenu */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+/* Animation de lueur pour les éléments */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Styles pour l'avatar professionnel du chatbot */
+/* Animation de pulsation pour le statut */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(0, 255, 136, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
+  }
+}
+
+/* Animation de rebond pour l'emoji */
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: hsl(var(--accent-contrast));
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn:active {
+  transform: scale(0.95) rotate(90deg);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-height: 0;
+  /* Forcer le défilement */
+  max-height: calc(500px - 120px);
+  /* Enlever le scroll-behavior qui peut causer des problèmes */
+  /* Enlever le scroll-snap-type */
+  background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.02));
+  position: relative;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: rgba(59, 130, 246, 0.08);
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--accent)), hsl(var(--primary)));
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--accent)));
+}
+
+.message {
+  max-width: 85%;
+  padding: 14px 18px;
+  border-radius: 20px;
+  margin: 5px 0;
+  word-wrap: break-word;
+  line-height: 1.5;
+  animation: messageSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.message p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.bot-message {
+  background: color-mix(in oklab, hsl(var(--muted)), transparent 10%);
+  color: hsl(var(--muted-foreground));
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid hsl(var(--border));
+}
+
+.bot-message::before {
+  content: "🤖";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  font-size: 16px;
+  background: hsl(var(--card));
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid hsl(var(--border));
+}
+
+.bot-message p {
+  font-weight: 500;
+}
+
+.user-message {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  color: hsl(var(--primary-contrast));
+  align-self: flex-end;
+  border-bottom-right-radius: 6px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-message::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.user-message p {
+  font-weight: 600;
+}
+
+.chat-input {
+  padding: 16px 20px;
+  border-top: 1px solid hsl(var(--border));
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.015));
+  position: relative;
+}
+
+.chat-input::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--border)),
+    transparent
+  );
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 2px solid hsl(var(--border));
+  border-radius: 25px;
+  background: color-mix(in oklab, hsl(var(--bg)), transparent 20%);
+  color: hsl(var(--fg));
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+.chat-input input::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.7;
+}
+
+.chat-input input:focus {
+  border-color: hsl(var(--accent));
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08),
+    0 4px 20px rgba(59, 130, 246, 0.12);
+  background: color-mix(in oklab, hsl(var(--bg)), transparent 10%);
+  transform: translateY(-1px);
+}
+
+.send-btn {
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+  color: hsl(var(--accent-contrast));
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.send-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.send-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.3), 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.send-btn:hover::before {
+  opacity: 1;
+}
+
+.send-btn:active {
+  transform: scale(0.98) translateY(0);
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive chatbot */
+@media (max-width: 768px) {
+}
+
+/* Add cursor pointer to chatbot project */
+.project[onclick] {
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Système de pulsation holographique pour les projets cliquables - Option 2 */
+.project[onclick]::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  border: 2px solid hsl(var(--accent));
+  box-shadow: 0 0 20px hsl(var(--accent)), inset 0 0 20px hsl(var(--accent));
+  animation: holographicPulse 2.5s ease-out infinite;
+}
+
+/* Deuxième anneau pour effet 3D plus profond */
+.project[onclick]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid hsl(var(--primary));
+  box-shadow: 0 0 15px hsl(var(--primary)), inset 0 0 15px hsl(var(--primary));
+  animation: holographicPulse2 2.5s ease-out infinite 0.3s;
+}
+
+/* Troisième anneau pour effet holographique complet */
+.project[onclick] .holographic-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -3;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(96, 165, 250, 0.8);
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.8),
+    inset 0 0 10px rgba(96, 165, 250, 0.8);
+  animation: holographicPulse3 2.5s ease-out infinite 0.6s;
+}
+
+/* Animation principale de pulsation holographique */
+@keyframes holographicPulse {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border-width: 3px;
+  }
+  20% {
+    opacity: 1;
+    border-width: 3px;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+/* Animation secondaire décalée */
+@keyframes holographicPulse2 {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border-width: 2px;
+  }
+  20% {
+    opacity: 0.8;
+    border-width: 2px;
+  }
+  100% {
+    width: 250px;
+    height: 250px;
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+/* Animation tertiaire pour effet 3D */
+@keyframes holographicPulse3 {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border-width: 1px;
+  }
+  20% {
+    opacity: 0.6;
+    border-width: 1px;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    border-width: 0.5px;
+  }
+}
+
+.project[onclick]:hover {
+  transform: translateY(-20px) scale(1.02) rotateX(2deg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+    0 15px 35px rgba(139, 92, 246, 0.2), 0 0 50px rgba(139, 92, 246, 0.15);
+  border-color: hsl(var(--accent));
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Déclenchement de la pulsation holographique au hover */
+.project[onclick]:hover::before,
+.project[onclick]:hover::after,
+.project[onclick]:hover .holographic-ring {
+  opacity: 1;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.25),
+      0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 20px 50px rgba(59, 130, 246, 0.35),
+      0 15px 40px rgba(0, 0, 0, 0.25), 0 0 60px rgba(59, 130, 246, 0.2);
+  }
+}
+
+.project[onclick]:hover::before {
+  opacity: 0.15;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(59, 130, 246, 0.05) 100%
+  );
+}
+
+.project[onclick]:active {
+  transform: translateY(-1px) scale(0.99) rotateX(1deg);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15),
+    0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Style spécial pour le projet Assistant IA */
+.project.vitrine {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, hsl(var(--card)), transparent 5%),
+    color-mix(in oklab, hsl(var(--card)), transparent 10%)
+  );
+  border: 2px solid hsl(var(--border));
+  position: relative;
+}
+
+.project.vitrine::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background-image: url("../images/NeckBot-30.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+  z-index: 1000;
+  border: 2px solid white;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.project.vitrine .project-title {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #3b82f6; /* Couleur de secours */
+  font-weight: 700;
+  text-shadow: none;
+  padding: 4px 0;
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  display: block;
+  font-size: 1.1rem;
+}
+
+.project.vitrine .project-thumb {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, hsl(var(--accent)), transparent 30%),
+    color-mix(in oklab, hsl(var(--primary)), transparent 30%)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.project.vitrine .project-thumb::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Indicateur de chargement animé pour le chatbot */
+.typing {
+  background: color-mix(
+    in oklab,
+    hsl(var(--muted)),
+    transparent 10%
+  ) !important;
+  color: hsl(var(--muted-foreground)) !important;
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid hsl(var(--border));
+  backdrop-filter: blur(10px);
+  animation: typingPulse 2s ease-in-out infinite;
+  padding: 12px 16px;
+  position: relative;
+  max-width: 80%;
+  margin: 8px 0;
+}
+
+@keyframes typingPulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15),
+      0 1px 8px rgba(59, 130, 246, 0.08);
+  }
+}
+
+.typing::before {
+  content: "🤖";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  font-size: 16px;
+  background: hsl(var(--card));
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid hsl(var(--border));
+}
+
+.typing-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+  border-radius: 50%;
+  animation: typingWave 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingWave {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.typing-text {
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+/* Animation de clignotement pour le texte */
+@keyframes textFade {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Animation d'apparition des messages */
+.message {
+  animation: messageSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: bottom left;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Effet de lueur subtile pour les messages du bot */
+.bot-message {
+  position: relative;
+}
+
+.bot-message::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.08) 0%,
+    transparent 70%
+  );
+  border-radius: inherit;
+  pointer-events: none;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 0.6;
+  }
+}
+
+/* Animation pour le curseur de frappe */
+.message p::after {
+  content: "|";
+  color: hsl(var(--accent));
+  animation: blink 1s infinite;
+  font-weight: bold;
+}
+
+.message p.typing-complete::after {
+  display: none;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Animations d'ouverture et de fermeture du chatbot */
+@keyframes chatOpen {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes chatClose {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Animation de l'header à l'ouverture */
+@keyframes headerSlideIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animation des messages à l'ouverture */
+.chat-messages {
+  animation: messagesFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+@keyframes messagesFadeIn {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animation de l'input à l'ouverture */
+.chat-input {
+  animation: inputSlideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+@keyframes inputSlideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Effet de particules à l'ouverture */
+@keyframes particleBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+/* Styles pour la section Compétences */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.skill-category {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-category:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.12);
+  border-color: hsl(var(--accent));
+}
+
+.skill-category-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: hsl(var(--fg));
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skill-category-title::before {
+  content: "💡";
+  font-size: 1.1rem;
+}
+
+.skill-category:nth-child(1) .skill-category-title::before {
+  content: "🎨";
+}
+
+.skill-category:nth-child(2) .skill-category-title::before {
+  content: "⚙️";
+}
+
+.skill-category:nth-child(3) .skill-category-title::before {
+  content: "🗄️";
+}
+
+.skill-category:nth-child(4) .skill-category-title::before {
+  content: "🛠️";
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skill-name {
+  flex: 1;
+  font-weight: 500;
+  color: hsl(var(--fg));
+  min-width: 120px;
+}
+
+.skill-bar {
+  flex: 2;
+  height: 8px;
+  background: hsl(var(--muted));
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-progress {
+  height: 100%;
+  background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)));
+  border-radius: 4px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-progress::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+.skill-level {
+  font-weight: 600;
+  color: hsl(var(--accent));
+  min-width: 45px;
+  text-align: right;
+}
+
+/* Animation pour les barres de progression */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Animation d'apparition des compétences */
+.skill-category {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: skillFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.skill-category:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.skill-category:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.skill-category:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.skill-category:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes skillFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design pour les compétences */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .skill-category {
+    padding: 1.25rem;
+  }
+
+  .skill-name {
+    min-width: 100px;
+    font-size: 0.9rem;
+  }
+
+  .skill-bar {
+    height: 6px;
+  }
+
+  .skill-level {
+    font-size: 0.85rem;
+    min-width: 40px;
+  }
+}
+
+/* Animation des barres de progression au scroll */
+.skill-progress {
+  width: 0%;
+}
+
+.skill-category.visible .skill-progress {
+  width: var(--target-width, 0%);
+}
+
+/* Thème clair pour les compétences */
+html[data-theme="light"] .skill-category {
+  background: hsl(var(--card));
+  border-color: hsl(var(--border));
+}
+
+html[data-theme="light"] .skill-category:hover {
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.08);
+}
+
+/* Styles pour le chatbot */
+.chatbot-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 70px;
+  height: 70px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  z-index: 9999;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+/* Ajustement de la position de la bulle de pensée */
+@keyframes bubblePulse {
+  0%,
+  100% {
+    transform: translateY(-50%) scale(-1, 1) translateX(0);
+    filter: drop-shadow(2px 0 0 rgba(0, 0, 0, 0.05));
+  }
+  50% {
+    transform: translateY(-50%) scale(-1.05, 1.05) translateX(3px);
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.15));
+  }
+}
+
+.chatbot-toggle::after {
+  content: "💭";
+  position: absolute;
+  top: 35%;
+  left: -10px;
+  transform: translateY(-50%) scale(-1, 1);
+  font-size: 24px;
+  opacity: 0.9;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  filter: drop-shadow(2px 0 0 rgba(0, 0, 0, 0.05));
+  animation: bubblePulse 2.5s infinite ease-in-out;
+  margin-top: -25px;
+  will-change: transform, filter;
+}
+
+.chatbot-toggle.bubble-hidden::after,
+.chatbot-toggle.bubble-hidden .chatbot-avatar {
+  display: none;
+}
+
+.chatbot-toggle.bubble-hidden {
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chatbot-toggle:not(.bubble-hidden) {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chatbot-toggle:hover::after {
+  left: -10px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+  animation-duration: 2.2s;
+}
+
+.chatbot-toggle .chatbot-avatar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: none;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    inset 0 -1px 0 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.chatbot-toggle .chatbot-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  filter: none;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.chatbot-toggle:hover .chatbot-avatar {
+  transform: scale(1.03);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06), inset 0 -1px 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-toggle:active .chatbot-avatar {
+  transform: scale(0.98);
+}
+
+.chatbot-toggle .chatbot-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  filter: contrast(1.1) saturate(1.1);
+}
+
+.chatbot-toggle .avatar-status {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: #4ade80;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+
+.chatbot-toggle:hover {
+  transform: translateY(-5px) scale(1.05);
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
+}
+
+.chatbot-toggle:hover .chatbot-avatar {
+  transform: rotate(5deg) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.chatbot-toggle:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.chatbot-toggle:active .chatbot-avatar {
+  transform: rotate(-2deg) scale(0.98);
+}
+
+/* Effet de bulle de pensée */
+@keyframes bubblePulse {
+  0%,
+  100% {
+    transform: translateY(-50%) scale(-1, 1) translateX(0);
+    filter: drop-shadow(2px 0 0 rgba(0, 0, 0, 0.1));
+  }
+  50% {
+    transform: translateY(-50%) scale(-1.05, 1.05) translateX(3px);
+    filter: drop-shadow(3px 2px 4px rgba(0, 0, 0, 0.15));
+  }
+}
+
+/* Styles pour le conteneur du chatbot */
+.chatbot-container {
+  --chatbot-width: 100%;
+  width: var(--chatbot-width);
+  height: 100%;
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles pour l'en-tête du chatbot */
+.chatbot-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--muted)),
+    hsl(var(--muted) / 0.9)
+  );
+  border-bottom: 1px solid hsl(var(--border));
+  border-radius: 12px 12px 0 0;
+  user-select: none;
+  min-height: 64px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.chatbot-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Styles pour la zone d'information du chatbot */
+.chatbot-info {
+  flex: 1;
+  margin-left: 12px;
+  overflow: hidden;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Styles pour le titre du chatbot - Thème Matrix */
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+.chatbot-header .chatbot-info h3 {
+  margin: 0 !important;
+  font-family: "Share Tech Mono", "Courier New", monospace !important;
+  font-weight: 400 !important;
+  color: #00cc33 !important;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: clip;
+  max-width: 100%;
+  line-height: 1.4 !important;
+  font-size: 1.2rem !important;
+  text-shadow: 0 0 2px rgba(0, 255, 65, 0.3);
+  letter-spacing: 1.5px;
+  position: relative !important;
+  padding: 0 5px !important;
+  box-sizing: border-box;
+  background: none !important;
+  -webkit-text-fill-color: #00cc33 !important;
+  text-transform: uppercase;
+  opacity: 0.9 !important;
+  display: block !important;
+  visibility: visible !important;
+  z-index: 10;
+  transition: all 0.3s ease;
+  word-spacing: 2px;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* Permet au texte de réduire automatiquement pour s'adapter */
+@supports (-webkit-hyphens: none) {
+  .chatbot-header .chatbot-info h3 {
+    font-size: calc(1.2rem - 0.2vw) !important;
+    letter-spacing: calc(1.5px - 0.1vw);
+    word-spacing: calc(2px - 0.1vw);
+  }
+}
+
+/* Légère lueur au survol */
+.chatbot-header .chatbot-info h3:hover {
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.7);
+  opacity: 1 !important;
+}
+
+.chatbot-header .chatbot-info h3::before,
+.chatbot-header .chatbot-info h3::after {
+  display: none !important;
+}
+
+@keyframes textGlow {
+  from {
+    text-shadow: 0 0 2px #00ff41, 0 0 4px #00ff41;
+  }
+  to {
+    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41;
+  }
+}
+
+/* Styles pour le sous-titre du chatbot - Thème Matrix */
+.chatbot-subtitle {
+  margin: 4px 0 0 0;
+  color: #00ff41 !important;
+  font-family: "Courier New", monospace !important;
+  white-space: nowrap;
+  overflow: visible !important; /* Changé pour permettre le débordement contrôlé */
+  text-overflow: clip;
+  width: auto;
+  min-width: 100%;
+  line-height: 1.3;
+  font-weight: 400;
+  font-size: 0.72rem !important; /* Légère augmentation */
+  text-shadow: 0 0 2px #00ff41;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  position: relative;
+  padding: 0 10px 0 18px !important; /* Augmentation du padding */
+  box-sizing: content-box; /* Changé pour une meilleure gestion de la largeur */
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  transform-origin: left center;
+  display: inline-block;
+}
+
+/* Ajustement du curseur > */
+.chatbot-subtitle::before {
+  left: 4px; /* Ajustement de la position */
+}
+
+/* Permet au sous-titre de réduire automatiquement pour s'adapter */
+@supports (-webkit-hyphens: none) {
+  .chatbot-subtitle {
+    font-size: calc(
+      0.68rem - 0.05vw
+    ) !important; /* Taille légèrement réduite */
+    letter-spacing: calc(0.4px - 0.05vw); /* Espacement réduit */
+  }
+}
+
+.chatbot-subtitle::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: #00ff41;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Styles pour l'avatar du chatbot */
+.chatbot-avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid hsl(var(--accent));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chatbot-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Styles pour le statut en ligne */
+.avatar-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #4ade80;
+  border: 2px solid hsl(var(--muted));
+}
+
+.avatar-status.online {
+  background-color: #4ade80;
+  box-shadow: 0 0 5px #4ade80;
+}
+
+/* Bouton de fermeture */
+.close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+  margin-left: 8px;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Styles pour les différentes tailles du chatbot */
+.chatbot-small .chatbot-info h3 {
+  font-size: 1rem;
+}
+
+.chatbot-small .chatbot-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.chatbot-medium .chatbot-info h3 {
+  font-size: 1.2rem;
+}
+
+.chatbot-medium .chatbot-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.chatbot-large .chatbot-info h3 {
+  font-size: 1.4rem;
+}
+
+.chatbot-large .chatbot-subtitle {
+  font-size: 1rem;
+  opacity: 1;
+}
+
+/* Animation de survol subtile pour le header */
+.chatbot-header:hover {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--muted) / 0.95),
+    hsl(var(--muted) / 0.85)
+  );
+}
+
+.chatbot-header:hover .chatbot-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Media queries pour les différentes tailles */
+@media (max-width: 300px) {
+  .chatbot-header {
+    padding: 8px 12px;
+    min-height: 56px;
+  }
+
+  .chatbot-info h3 {
+    font-size: 14px;
+  }
+
+  .chatbot-subtitle {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 301px) and (max-width: 500px) {
+  .chatbot-info h3 {
+    font-size: 15px;
+  }
+
+  .chatbot-subtitle {
+    font-size: 12px;
+  }
+}
+
+/* Indicateur de statut vert */
+.chatbot-toggle .avatar-status {
+  bottom: 4px;
+  right: 4px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes matrixRain {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 -100%, 0 0;
+  }
+}
+
+.chatbot-container {
+  position: fixed !important;
+  right: 20px !important;
+  bottom: 100px !important;
+  left: auto !important;
+  top: auto !important;
+  width: auto;
+  min-width: 280px;
+  max-width: 400px;
+  height: 500px;
+  min-height: 400px;
+  max-height: calc(100vh - 120px);
+  background: linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+    linear-gradient(135deg, #0a1f12 0%, #0a2e1a 100%) !important;
+  background-size: 10px 10px, 10px 10px, 100% 100%;
+  border: 1px solid #00ff41 !important;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5),
+    inset 0 0 15px rgba(0, 255, 65, 0.2) !important;
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease-out;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: "Courier New", monospace;
+  position: relative;
+}
+
+.chatbot-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+        transparent 90%,
+        rgba(0, 255, 65, 0.03) 90.1%,
+        transparent 92%
+      )
+      0 0,
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 65, 0.03) 50%,
+      transparent 100%
+    );
+  background-size: 100% 20px, 100% 100%;
+  animation: matrixRain 1s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.chatbot-container * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Assure que le chatbot est toujours visible à l'écran */
+@media (max-height: 600px) {
+  .chatbot-container {
+    height: 90vh;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+/* Assure que le chatbot ne dépasse pas de l'écran sur mobile */
+@media (max-width: 400px) {
+  .chatbot-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px 12px 0 0;
+  }
+}
+
+.chatbot-container.visible {
+  display: flex !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  visibility: visible !important;
+  animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3), 0 0 30px rgba(0, 255, 65, 0.1),
+      0 0 45px rgba(0, 255, 65, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4), 0 0 40px rgba(0, 255, 65, 0.2),
+      0 0 60px rgba(0, 255, 65, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3), 0 0 30px rgba(0, 255, 65, 0.1),
+      0 0 45px rgba(0, 255, 65, 0.05);
+  }
+}
+
+/* Style pour le texte du chatbot */
+.chat-messages {
+  color: #00ff41;
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  padding: 12px 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.chat-messages p {
+  margin: 0.4em 0;
+}
+
+/* Style pour les messages du bot */
+.bot-message {
+  background: rgba(0, 30, 15, 0.3);
+  border-left: 2px solid #00ff41;
+  padding: 8px 12px;
+  margin: 4px 0;
+  border-radius: 0 6px 6px 0;
+  position: relative;
+  animation: messageAppear 0.3s ease-out;
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.chatbot-header {
+  position: relative;
+  padding: 12px 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 30, 20, 0.9),
+    rgba(10, 40, 25, 0.95)
+  ) !important;
+  border-bottom: 1px solid #00ff41 !important;
+  color: #00ff41;
+  display: flex;
+  align-items: center;
+  gap: 0rem;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+  overflow: hidden;
+  z-index: 3;
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.7);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.chatbot-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00ff41, transparent);
+  animation: scanline 2s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.chatbot-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    transparent 100%
+  );
+  z-index: -1;
+}
+
+.chatbot-avatar {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+  padding: 2px;
+}
+
+.chatbot-avatar:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Structure principale du chatbot */
+.chatbot-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Conteneur des messages avec défilement */
+.chat-messages {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 15px;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: calc(100vh - 200px);
+}
+
+/* Conteneur de la zone de saisie fixe en bas */
+.chat-input-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--muted);
+  border-top: 1px solid var(--border);
+  padding: 15px;
+  z-index: 10;
+  flex-shrink: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustement pour le conteneur principal */
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+/* Style de la zone de saisie */
+.chat-input {
+  display: flex;
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--fg);
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* Style du conteneur principal du chatbot */
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 400px;
+  height: 600px;
+  min-height: 500px;
+  max-height: 90vh;
+  min-width: 350px;
+  background: var(--bg);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1000;
+  resize: both;
+}
+
+/* Style pour les petits écrans */
+@media (max-width: 480px) {
+  .chatbot-container {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    border-radius: 0;
+    right: 0 !important;
+    bottom: 0 !important;
+  }
+
+  .chat-input-container {
+    padding: 10px;
+  }
+}
+
+.chatbot-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.chatbot-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.chatbot-name {
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+  display: block;
+}
+
+.chatbot-subtitle {
+  font-size: 1.5rem;
+  opacity: 0.9;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  margin-top: 0.2rem;
+  display: block;
+  opacity: 0.9;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.message {
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  line-height: 1.4;
+  position: relative;
+  animation: messageIn 0.3s ease-out;
+}
+
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bot-message {
+  align-self: flex-start;
+  background: var(--muted);
+  color: var(--fg);
+  border-top-left-radius: 0.25rem;
+}
+
+.user-message {
+  align-self: flex-end;
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+  color: white;
+  border-top-right-radius: 0.25rem;
+}
+
+.typing-indicator {
+  display: none;
+  align-self: flex-start;
+  padding: 0.75rem 1rem;
+  background: var(--muted);
+  border-radius: 1rem;
+  border-top-left-radius: 0.25rem;
+  width: fit-content;
+}
+
+.typing-indicator span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--muted-foreground);
+  border-radius: 50%;
+  margin: 0 2px;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+.chat-input {
+  display: flex;
+  padding: 1rem;
+  background: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #00ff41 !important;
+  border-radius: 2rem;
+  background: rgba(0, 20, 0, 0.8) !important;
+  color: #00ff41 !important;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.chat-input input::placeholder {
+  color: #008f11 !important;
+  opacity: 0.7 !important;
+}
+
+.chat-input input:focus {
+  border-color: #00ff41 !important;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5) !important;
+  outline: none !important;
+}
+
+.send-btn {
+  margin-left: 0.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.send-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Appliquer aussi au chatbot pour cohérence visuelle */
